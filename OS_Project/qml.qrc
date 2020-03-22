@@ -3,4 +3,10 @@
         <file>main.qml</file>
         <file>Simulation.qml</file>
     </qresource>
+    <qresource prefix="/imgs">
+        <file>../../../Pictures/mountain.jpg</file>
+        <file>../../../Pictures/user-male.png</file>
+        <file>../../../Pictures/SetOper.png</file>
+    </qresource>
+
 </RCC>

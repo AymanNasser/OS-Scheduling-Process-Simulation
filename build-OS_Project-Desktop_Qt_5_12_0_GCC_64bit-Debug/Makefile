@@ -700,7 +700,10 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../OS_Project/qml.qrc \
 		../../../Qt5.12.0/5.12.0/gcc_64/bin/rcc \
 		../OS_Project/Simulation.qml \
-		../OS_Project/main.qml
+		../OS_Project/main.qml \
+		../../../Pictures/user-male.png \
+		../../../Pictures/mountain.jpg \
+		../../../Pictures/SetOper.png
 	/home/an/Qt5.12.0/5.12.0/gcc_64/bin/rcc -name qml ../OS_Project/qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
