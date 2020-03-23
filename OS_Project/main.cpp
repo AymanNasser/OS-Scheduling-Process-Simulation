@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "process.h"
 
 int main(int argc, char *argv[])
 {
