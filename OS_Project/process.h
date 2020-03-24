@@ -21,9 +21,9 @@ private:
     QList <unsigned int> burstTime = {3,4,2,4,1};
     QList <unsigned int> arrivalTime = {3,1,6,5,5};
     QList <unsigned int> priority;
-    QMap <QString, unsigned int> scheduledProcesses;
     QList <QString> processName;
     QList <unsigned int> index;
+    QList <unsigned int> waitingTimePerProcess;
 
     Q_OBJECT
 public:

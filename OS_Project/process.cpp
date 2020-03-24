@@ -9,6 +9,7 @@ Process::Process(unsigned int a_processesNum, QString a_type)
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         processName.append(QString("P" + QString(var)));
         index.append(var);
+        waitingTimePerProcess.append(0);
     }
     this->preemptive = 0;
 
@@ -53,15 +54,22 @@ void Process::handleSJF()
 {
     if(! (this->preemptive) )
     {
+        /* Calculating processes finishing time == > overAllBurstTime then
+         * sorting the processes burst time in ascending order according to
+         * SJF algorithm
+        */
         unsigned int overAllBurstTime = 0;
         for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
             overAllBurstTime+= burstTime[var];
         }
-        QList <unsigned int > temp = burstTime;
+
+
+
         for (unsigned int i = 0; i < this->numOfProcesses -1 ; ++i) {
             for (unsigned int j = 0 ; j < this->numOfProcesses -1 - i; ++j) {
                 if(burstTime[j] > burstTime[j+1])
                 {
+                    qSwap(arrivalTime[j],arrivalTime[j+1]);
                     qSwap(burstTime[j],burstTime[j+1]);
                     qSwap(processName[j],processName[j+1]);
                     qSwap(index[j],index[j+1]);
@@ -69,31 +77,51 @@ void Process::handleSJF()
                 }
             }
         }
+
+
+
         unsigned int tick = 0 ,var;
-        bool flag = false;
-        for (; tick < overAllBurstTime; ) {
+        bool unMatchedProcessPerTick = true;
+        QList <unsigned int > temp;
+        QList <QString> orderedProc;
+
+        /* Didn't support if the arrival time is more than the total processes burst time*/
+        while(tick < overAllBurstTime){
             for (var = 0; var < this->numOfProcesses ; ++var) {
-                if(arrivalTime[index[var]] <= tick && burstTime[index[var]] !=0 )
+                if(arrivalTime[var] <= tick && burstTime[var] !=0 )
                 {
-                   // qDebug() << "P" <<index[var] << arrivalTime[index[var]] <<  burstTime[index[var]] << '\n';
-                    tick+= burstTime[index[var]] -1;
-                    burstTime[index[var]] = 0;
-                    flag = true;
-                    this->scheduledProcesses.insert(QString("P"+ QString(index[var])),tick);
+                    orderedProc.append(QString("P" + QString(index[var])));
+                    qDebug() << processName[var] << arrivalTime[var] <<  burstTime[var] << '\n';
+                    tick+= burstTime[var];
+                    burstTime[var] = 0;
+                    temp.append(tick-1);
+                    unMatchedProcessPerTick = false;
                     break;
                 }
                 else
                 {
-                    flag = false;
+                    unMatchedProcessPerTick = true;
                 }
 
             }
-            if(!flag)
+
+            if(unMatchedProcessPerTick)
+            {
                 tick++;
+                orderedProc.append("IDEAL");
+                temp.append(tick);
+                for (unsigned int var = 0; var < numOfProcesses; ++var) {
+                    //waitingTimePerProcess[var]++;
+                }
+            }
         }
-        qDebug() << tick << '\n' ;
-        for (unsigned int var = 0; var < numOfProcesses; ++var) {
-           // qDebug() << index[var] << '\n' ;
+
+
+
+
+        qDebug() << tick -1  << '\n' ;
+        for (unsigned int var = 0; var < temp.size(); ++var) {
+           qDebug() << temp[var] << '\n' ;
         }
 
     }
