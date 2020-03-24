@@ -13,54 +13,54 @@ Window {
     title: qsTr("Simulation")
     color: "white"
 
-    function draw(idd){
-        idd.sourceComponent = rect
-        idd.active = true
-    }
+//    function draw(idd){
+//        idd.sourceComponent = rect
+//        idd.active = true
+//    }
 
-    Timer{
-           id: timerId
-           repeat: true
-           interval: 1000
-           property int i: 0
-           running: true
-           onTriggered: {
-           // draw(load)
-             rep.itemAt(i).sourceComponent = rect
-            i++
+//    Timer{
+//           id: timerId
+//           repeat: true
+//           interval: 1000
+//           property int i: 0
+//           running: true
+//           onTriggered: {
+//           // draw(load)
+//             rep.itemAt(i).sourceComponent = rect
+//            i++
 
-           }
-       }
-    Repeater
-    {
-     id: rep
-     model: 4
-     anchors.centerIn: parent
-       Loader{
-           id: load
-           anchors.centerIn: parent
+//           }
+//       }
+//    Repeater
+//    {
+//     id: rep
+//     model: 4
+//     anchors.centerIn: parent
+//       Loader{
+//           id: load
+//           anchors.centerIn: parent
 
 
-           //sourceComponent: rect
+//           //sourceComponent: rect
 
-       }
-    }
+//       }
+//    }
 
-        Row{
-            id: re
-            anchors.centerIn: parent
-           Component {
-                id: rect
-                    Rectangle {
-                        anchors.left: root.right
-                        anchors.bottom: root.bottom
+//        Row{
+//            id: re
+//            anchors.centerIn: parent
+//           Component {
+//                id: rect
+//                    Rectangle {
+//                        anchors.left: root.right
+//                        anchors.bottom: root.bottom
 
-                        width: 100
-                        height: 150
-                        color:"blue"
-                    }
-                }
-    }
+//                        width: 100
+//                        height: 150
+//                        color:"blue"
+//                    }
+//                }
+//    }
 
 
 

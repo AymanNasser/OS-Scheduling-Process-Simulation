@@ -4,9 +4,12 @@
 
 #include <QObject>
 #include <QQuickItem>
-#include <bits/stdc++.h>
 #include <QString>
 #include <QList>
+
+#include <QtAlgorithms>
+#include <QVector>
+
 class Process : public QObject
 {
 
@@ -15,12 +18,12 @@ private:
     QString algorithmType;
     bool preemptive;
     QList <qreal> averageWaitingTime;
-    QList <unsigned int> burstTime;
-    QList <unsigned int> arrivalTime;
+    QList <unsigned int> burstTime = {3,4,2,4,1};
+    QList <unsigned int> arrivalTime = {3,1,6,5,5};
     QList <unsigned int> priority;
-
-
-
+    QMap <QString, unsigned int> scheduledProcesses;
+    QList <QString> processName;
+    QList <unsigned int> index;
 
     Q_OBJECT
 public:
@@ -36,7 +39,7 @@ public:
     void handleSJF();
     void handleRoundRobin();
     void handlePriority();
-    float calcOverAllAverageWaitingTime();
+    qreal calcOverAllAverageWaitingTime();
 
 
 
