@@ -17,28 +17,43 @@ private:
     unsigned int numOfProcesses;
     QString algorithmType;
     bool preemptive;
-    QList <qreal> averageWaitingTime;
+
     QList <unsigned int> burstTime = {3,4,2,4,1};
     QList <unsigned int> arrivalTime = {3,1,6,5,5};
     QList <unsigned int> priority;
-    QList <QString> processName;
+
+    /* Temp list for SJF algorithm processes indexing */
     QList <unsigned int> index;
-    QList <unsigned int> waitingTimePerProcess;
+
+
+    /* QML simulation lists */
+    QList <QString> toQmlScheduledId;
+    QList <unsigned int> toQmlScheduledTime;
+    QList <unsigned int> toQmlwaitingTimePerProcess;
+
 
     Q_OBJECT
-public:
-    Process(unsigned int a_processesNum, QString a_type);
 
-    QString getAlgorithmType();
-    QList <unsigned int> getBurstTime();
-    QList <unsigned int> getArrivalTime();
-    QList <unsigned int> getPriority();
-    void handleScheduling();
-
+private:
     void handleFCFS();
     void handleSJF();
     void handleRoundRobin();
     void handlePriority();
+    void SJF_swapLists();
+    void handleScheduling();
+    void SJF_nonPreemptiveOperation();
+
+
+public:
+    Process(unsigned int a_processesNum, QString a_type);
+
+    QString getAlgorithmType();
+
+    QList <QString> getScheduledProcessId();
+    QList <unsigned int> getScheduledProcessBurstTime();
+    QList <unsigned int> getSchduledProcessWaitingTime();
+
+
     qreal calcOverAllAverageWaitingTime();
 
 
