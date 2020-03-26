@@ -1,7 +1,6 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-
 #include <QObject>
 #include <QString>
 #include <QList>
@@ -23,6 +22,7 @@ private:
     QList <QString> processName;
     QMap <QString, unsigned int> scheduledProcesses;
     void prioritySorting();
+    unsigned int sumBusttime();
 
 public:
     Process(unsigned int a_processesNum, QString a_type);
