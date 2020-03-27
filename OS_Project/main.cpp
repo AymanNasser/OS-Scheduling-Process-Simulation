@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    Process p(4,"SJF");
+    Process p(3,"RR");
 
     if (engine.rootObjects().isEmpty())
         return -1;
