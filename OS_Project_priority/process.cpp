@@ -18,19 +18,19 @@ Process::Process(unsigned int a_processesNum, QString a_type)
         burstTime.append(rand()%20);
         priority.append(rand()%20);
     }
-    arrivalTime[0] = 2;
-    arrivalTime[1] = 3;
-    arrivalTime[2] = 10;
-    arrivalTime[3] = 10;
+    arrivalTime[0] = 0;
+    arrivalTime[1] = 0;
+    arrivalTime[2] = 5;
+    arrivalTime[3] = 12;
     burstTime[0] = 5;
-    burstTime[1] = 1;
-    burstTime[2] = 2;
-    burstTime[3] = 8;
+    burstTime[1] = 10;
+    burstTime[2] = 3;
+    burstTime[3] = 7;
     priority[0] = 1;
-    priority[1] = 0;
-    priority[2] = 3;
-    priority[3] = 2;
-    preemptive = false;
+    priority[1] = 2;
+    priority[2] = 0;
+    priority[3] = 3;
+    preemptive = true;
     //Just for Test Print The Arrival List to check the Behavior
     qDebug()<<"print Arrival List";
     for (unsigned int i=0; i < this->numOfProcesses; i++)
@@ -64,6 +64,18 @@ unsigned int Process::sumBusttime()
         Totalburstsum += burstTime[i];
     }
     return Totalburstsum;
+}
+
+int Process::processTakePriority(unsigned int index, unsigned int currentProcess)
+{
+    for(int i = currentProcess + 1; i < arrivalTime.size();i++)
+    {
+        if(index == arrivalTime[i] && priority[currentProcess] > priority[i])
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void Process::handlePriority()
@@ -101,19 +113,105 @@ void Process::handlePriority()
     }
     else
     {
-        unsigned int Totalburstsum = sumBusttime();
+        // handling preemptive priority
+        unsigned int Totalgaintcharttime = sumBusttime();
+        unsigned int noOfProcess = numOfProcesses;
         prioritySorting();
-        bool processINprogress = false;
-        for(unsigned int i = 0 ; i < Totalburstsum ; i++)
+        unsigned int currentProcess = 0;
+        int waitingProcess = -1;
+        unsigned int idleNumber = 0;
+        unsigned int units = 0;
+        QString processInexecution = "NULL";
+        for(unsigned int i = 0 ; i < Totalgaintcharttime; i++)
         {
-            if(i == arrivalTime[i])
+            //  handling idle process
+            if(arrivalTime[currentProcess] > i && processInexecution == "NULL")
             {
-                processINprogress = true;
-                for(unsigned j = 0; j < numOfProcesses ; j++)
+                time.append(arrivalTime[currentProcess] - i);
+                process_name.append("idle "+QString::number(idleNumber));
+                Totalgaintcharttime += arrivalTime[currentProcess] - i;
+                i += arrivalTime[currentProcess] - i - 1;
+                idleNumber++;
+                units++;
+            }
+            // handling normal process
+            else
+            {
+                // check if it in first time in the schedual
+                if(processInexecution == "NULL")
                 {
-                    
+                    if(noOfProcess > 1 && i == arrivalTime[currentProcess + 1] && arrivalTime[currentProcess + 1] != arrivalTime[currentProcess])
+                    {
+                        currentProcess++;
+                        time.append(1);
+                        process_name.append(processName[currentProcess]);
+                        burstTime[currentProcess]--;
+                        processInexecution = processName[currentProcess];
+                        units++;
+                    }
+                    else
+                    {
+                        time.append(1);
+                        process_name.append(processName[currentProcess]);
+                        burstTime[currentProcess]--;
+                        processInexecution = processName[currentProcess];
+                        units++;
+                        if(burstTime[currentProcess] == 0)
+                        {
+                            burstTime.removeAt(currentProcess);
+                            processName.removeAt(currentProcess);
+                            arrivalTime.removeAt(currentProcess);
+                            processInexecution = "NULL";
+                            currentProcess = 0;
+                            noOfProcess--;
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    if(noOfProcess > 1 && processTakePriority(i,currentProcess) != -1)//arrivalTime[currentProcess + 1] && priority[currentProcess] > priority[currentProcess + 1])
+                    {
+                        waitingProcess = currentProcess;
+                        currentProcess = processTakePriority(i,currentProcess);
+                        time.append(1);
+                        process_name.append(processName[currentProcess]);
+                        burstTime[currentProcess]--;
+                        processInexecution = processName[currentProcess];
+                        units++;
+                        if(burstTime[currentProcess] == 0)
+                        {
+                            burstTime.removeAt(currentProcess);
+                            processName.removeAt(currentProcess);
+                            arrivalTime.removeAt(currentProcess);
+                            currentProcess = waitingProcess;
+                            processInexecution = "NULL";
+                            waitingProcess = -1;
+                            noOfProcess--;
+                        }
+                    }
+                    else
+                    {
+                        processInexecution = processName[currentProcess];
+                        time[units - 1]++;
+                        burstTime[currentProcess]--;
+                        if(burstTime[currentProcess] == 0)
+                        {
+                            burstTime.removeAt(currentProcess);
+                            processName.removeAt(currentProcess);
+                            arrivalTime.removeAt(currentProcess);
+                            processInexecution = "NULL";
+                            currentProcess = 0;
+                            noOfProcess--;
+                            continue;
+                        }
+                    }
                 }
             }
+        }
+        for (unsigned int i=0; i < units; i++)
+        {
+            qDebug() << process_name[i] << time[i] ;
         }
     }
 }

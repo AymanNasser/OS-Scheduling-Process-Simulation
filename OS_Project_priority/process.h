@@ -19,10 +19,13 @@ private:
     QList <unsigned int> burstTime;
     QList <unsigned int> arrivalTime;
     QList <unsigned int> priority;
+    QList <unsigned int> time;
+    QList <QString> process_name;
     QList <QString> processName;
     QMap <QString, unsigned int> scheduledProcesses;
     void prioritySorting();
     unsigned int sumBusttime();
+    int processTakePriority(unsigned int,unsigned int);
 
 public:
     Process(unsigned int a_processesNum, QString a_type);
