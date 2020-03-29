@@ -1,7 +1,6 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-
 #include <QObject>
 #include <QQuickItem>
 #include <QString>
@@ -15,11 +14,12 @@ class Process : public QObject
 
 private:
     unsigned int numOfProcesses;
+    unsigned int timeQuantum;
     QString algorithmType;
     bool preemptive;
 
-    QList <unsigned int> burstTime = {3,4,2,4,1};
-    QList <unsigned int> arrivalTime = {3,1,6,5,5};
+    QList <unsigned int> burstTime = {24,3,3};
+    QList <unsigned int> arrivalTime = {1,0,0};
     QList <unsigned int> priority;
 
     /* Temp list for SJF algorithm processes indexing */
@@ -42,6 +42,8 @@ private:
     void SJF_swapLists();
     void handleScheduling();
     void SJF_nonPreemptiveOperation();
+    void SJF_preemptiveOperation();
+    void RR_operation();
 
 
 public:
@@ -55,10 +57,6 @@ public:
 
 
     qreal calcOverAllAverageWaitingTime();
-
-
-
-
 
 
 
