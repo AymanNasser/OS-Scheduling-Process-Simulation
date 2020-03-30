@@ -18,8 +18,9 @@ private:
     QString algorithmType;
     bool preemptive;
 
-    QList <unsigned int> burstTime = {24,3,3};
-    QList <unsigned int> arrivalTime = {1,0,0};
+    QList <unsigned int> burstTime = {3,1,1,3,2};
+    QList <unsigned int> arrivalTime = {1,3,5,6,7};
+
     QList <unsigned int> priority;
 
     /* Temp list for SJF algorithm processes indexing */

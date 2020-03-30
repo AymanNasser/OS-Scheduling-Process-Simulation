@@ -92,29 +92,31 @@ void Process::SJF_preemptiveOperation()
      * sorting the processes burst time in ascending order according to
      * SJF algorithm
     */
-    unsigned int tick = 0 ,ite,minJobArrivedInQueue,nextJobCounter = 0;
+    unsigned int tick = 0 ,ite,minJobArrivedInQueue,unMatchedProccessPerTick = 0;
     unsigned int overAllBurstTime = 0;
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
     }
-    minJobArrivedInQueue = burstTime[nextJobCounter] ;
+    minJobArrivedInQueue = burstTime[0] ;
 
-    /* Didn't support if the arrival time is more than the total processes burst time
-    *  problem in ideal case & incrementation of nextJobCounter when input is
-    *  arrival time ==> {0,3,5,6,7}
-    *  burst time ==> {4,1,1,3,2}
-    */
+    /* Didn't support if the arrival time is more than the total processes burst time */
     while(tick < overAllBurstTime){
-        for (ite = 0; ite < this->numOfProcesses ; ++ite) {
+        for (ite = 0; ite < this->burstTime.size() ; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] <= minJobArrivedInQueue)
             {
                 toQmlScheduledId.append(QString("P" + QString(index[ite])));
-                minJobArrivedInQueue = burstTime[nextJobCounter == this->numOfProcesses -1 ? nextJobCounter :++nextJobCounter] ;
+
                 tick += burstTime[ite];
                 toQmlScheduledTime.append(tick);
 
-                burstTime[ite] = 0;
+                burstTime.removeAt(ite);
+                arrivalTime.removeAt(ite);
+                index.removeAt(ite);
+
+                if(burstTime.size() != 0)
+                    minJobArrivedInQueue = burstTime[0];
+                break;
             }
 
             else if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
@@ -124,13 +126,23 @@ void Process::SJF_preemptiveOperation()
                 tick++;
                 toQmlScheduledTime.append(tick);
 
+                if(burstTime[ite] == 0)
+                {
+                    arrivalTime.removeAt(ite);
+                    burstTime.removeAt(ite);
+                    index.removeAt(ite);
+                }
             }
-            else if(arrivalTime[ite] > tick && burstTime[ite] == 0 && burstTime[ite] > minJobArrivedInQueue)
-            {
-                tick++;
-                toQmlScheduledId.append("IDEAL");
-                toQmlScheduledTime.append(tick);
-            }
+        }
+        if(unMatchedProccessPerTick == toQmlScheduledId.size())
+        {
+            tick++;
+            toQmlScheduledId.append("IDEAL");
+            toQmlScheduledTime.append(tick);
+        }
+        else
+        {
+            unMatchedProccessPerTick = toQmlScheduledId.size();
         }
     }
 
