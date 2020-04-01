@@ -173,6 +173,7 @@ Window {
             model: processlist
             Layout.column: 1
             Layout.row: 0
+            focus: true
         }
         CustomizingSpinBox {
             id: bursttime
@@ -245,7 +246,7 @@ Window {
             color: {
                 if(processdata.get(styleData.row)["Initial"] === "Inialized")
                 {
-                    return "blue"
+                    return "white"
                 }
                 else
                 {
