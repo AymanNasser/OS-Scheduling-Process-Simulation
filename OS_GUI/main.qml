@@ -2,12 +2,13 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 Window {
     id: gui
     visible: true
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     title: qsTr("OS GUI")
     color: "black"
 
@@ -157,6 +158,16 @@ Window {
             visible: processtype.currentText == "Priority" ? true : false
             color: "orange"
         }
+        Text {
+            id: warning
+            text: "Please select a process !"
+            font.bold: true
+            font.family: "Comic Sans MS"
+            Layout.row: 4
+            Layout.column: 1
+            visible: false
+            color: "orange"
+        }
         CustomizingComboBox {
             id: processnumbers
             model: processlist
@@ -185,15 +196,23 @@ Window {
             Layout.column: 0
             Layout.row: 4
             onClicked: {
-                processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
-                                    "ArrivalTime":arrivaltime.value,
-                                    "BurstTime":bursttime.value,
-                                    "Priority":priority.value})
-                gui.processName[processnumbers.currentIndex] = processnumbers.currentText
-                gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
-                gui.burstTime[processnumbers.currentIndex] = bursttime.value
-                gui.priority[processnumbers.currentIndex] = priority.value
-
+                if(processnumbers.currentIndex >= 0)
+                {
+                    warning.visible = false
+                    processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
+                                        "ArrivalTime":arrivaltime.value,
+                                        "BurstTime":bursttime.value,
+                                        "Priority":priority.value,
+                                        "Initial":"Inialized"})
+                    gui.processName[processnumbers.currentIndex] = processnumbers.currentText
+                    gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
+                    gui.burstTime[processnumbers.currentIndex] = bursttime.value
+                    gui.priority[processnumbers.currentIndex] = priority.value
+                }
+                else
+                {
+                    warning.visible = true
+                }
             }
         }
     }
@@ -203,22 +222,84 @@ Window {
             for(var i = 0;i<lastconfigration.processnumber;i++)
             {
                 processdata.append({"ProcessName":"P"+i,
-                                    "ArrivalTime":0,
-                                    "BurstTime":0,
-                                    "Priority":0})
+                                       "ArrivalTime":0,
+                                       "BurstTime":0,
+                                       "Priority":0,
+                                       "Initial":"Not Inialized"})
             }
         }
     }
     TableView {
         id:id_table
-        width: parent.width/2
+        width: parent.width/2.5
         height: parent.height/2
         anchors.top: lastconfigration.bottom
         anchors.left: lastconfigration.left
-        anchors.topMargin: 50
+        anchors.topMargin: parent.height/15
         focus: true
         model: processdata
         visible: false
+        rowDelegate: Rectangle {
+            height: textrow.implicitHeight * 1.2
+            width: textrow.implicitWidth
+            color: {
+                if(processdata.get(styleData.row)["Initial"] === "Inialized")
+                {
+                    return "blue"
+                }
+                else
+                {
+                    return "orange"
+                }
+            }
+            border.color: "black"
+            Text {
+                id: textrow
+                anchors.fill: parent
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: styleData.textAlignment
+                anchors.leftMargin: 12
+                text: styleData.value
+                elide: Text.ElideRight
+                color: "black"
+                renderType: Text.NativeRendering
+            }
+            Rectangle {
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 1
+                anchors.topMargin: 1
+                width: 1
+                color: "orange"
+            }
+        }
+        headerDelegate: Rectangle {
+            height: textItem.implicitHeight * 1.2
+            width: textItem.implicitWidth
+            color: "black"
+            border.color: "orange"
+            Text {
+                id: textItem
+                anchors.fill: parent
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: styleData.textAlignment
+                anchors.leftMargin: 12
+                text: styleData.value
+                elide: Text.ElideRight
+                color: "orange"
+                renderType: Text.NativeRendering
+            }
+            Rectangle {
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 1
+                anchors.topMargin: 1
+                width: 1
+                color: "black"
+            }
+        }
         TableViewColumn {
             role: "ProcessName"
             title: "Process"
@@ -234,6 +315,11 @@ Window {
         TableViewColumn{
             role: "Priority"
             title: "Priority"
+            visible: lastconfigration.processtype == "Priority" ? true : false
+        }
+        TableViewColumn{
+            role: "Initial"
+            title: "Initialization"
         }
     }
     CustomizingButton {
@@ -243,37 +329,32 @@ Window {
         anchors.horizontalCenter: processname.horizontalCenter
         text: "Start scheduling"
         visible: false
-        onClicked: {
-
-        }
     }
     Rectangle{
         id: processname
         color: "black"
-        width: 150
-        height: 50
-        anchors.bottom: scheduling.bottom
-        anchors.bottomMargin: 100
-        anchors.left: noofprocess.right
-
+        width: parent.width/8
+        height: parent.height/15
+        anchors.right: ispreemptive.left
+        anchors.verticalCenter: ispreemptive.verticalCenter
         radius: width/10
         border.color: "orange"
         border.width: 2
         visible: false
         Text {
             anchors.centerIn: parent
-            text: "Process Type: " + lastconfigration.processtype
+            text: "Type: " + lastconfigration.processtype
+            font.pixelSize: parent.width*0.09
             color: "orange"
         }
     }
     Rectangle{
         id: noofprocess
         color: "black"
-        width: 150
-        height: 50
-        anchors.left: id_table.right
-        anchors.verticalCenter: processname.verticalCenter
-        anchors.leftMargin: 50
+        width: parent.width/8
+        height: parent.height/15
+        anchors.right: processname.left
+        anchors.verticalCenter: ispreemptive.verticalCenter
         radius: width/10
         border.color: "orange"
         border.width: 2
@@ -281,16 +362,19 @@ Window {
         Text {
             anchors.centerIn: parent
             text: "Number of process: " + lastconfigration.processnumber
+            font.pixelSize: parent.width*0.09
             color: "orange"
         }
     }
     Rectangle{
         id: ispreemptive
         color: "black"
-        width: 150
-        height: 50
-        anchors.left: processname.right
-        anchors.verticalCenter: processname.verticalCenter
+        width: parent.width/8
+        height: parent.height/15
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.bottom: scheduling.bottom
+        anchors.bottomMargin: 100
         radius: width/10
         border.color: "orange"
         border.width: 2
@@ -298,6 +382,7 @@ Window {
         Text {
             anchors.centerIn: parent
             text: lastconfigration.ispreemptive ? "Preemptive" : "Non-Preemptive"
+            font.pixelSize: parent.width*0.1
             color: "orange"
         }
     }

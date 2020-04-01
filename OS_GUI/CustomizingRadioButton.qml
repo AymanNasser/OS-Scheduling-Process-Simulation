@@ -9,7 +9,7 @@ RadioButton {
         x: control.leftPadding
         y: parent.height / 2 - height / 2
         radius: 13
-        border.color: control.down ? "#17a81a" : "#21be2b"
+        border.color: control.down ? "yellow" : "orange"
 
         Rectangle {
             width: 14
@@ -17,7 +17,7 @@ RadioButton {
             x: 6
             y: 6
             radius: 7
-            color: control.down ? "#17a81a" : "#21be2b"
+            color: control.down ? "yellow" : "orange"
             visible: control.checked
         }
     }
@@ -26,7 +26,7 @@ RadioButton {
         text: control.text
         font: control.font
         opacity: enabled ? 1.0 : 0.3
-        color: control.down ? "#17a81a" : "#21be2b"
+        color: control.down ? "yellow" : "orange"
         verticalAlignment: Text.AlignVCenter
         leftPadding: control.indicator.width + control.spacing
     }

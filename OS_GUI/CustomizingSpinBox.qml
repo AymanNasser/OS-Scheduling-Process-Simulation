@@ -6,6 +6,7 @@ SpinBox {
     id: control
     value: 50
     editable: true
+    from: 1
     contentItem: TextInput {
         z: 2
         text: control.textFromValue(control.value, control.locale)
@@ -27,14 +28,14 @@ SpinBox {
         height: parent.height
         implicitWidth: 40
         implicitHeight: 40
-        //radius: width/10
-        color: control.up.pressed ? "white" : "black"
-        border.color: enabled ? "orange" : "white"
+        radius: 3
+        color: control.up.pressed ? "white" : "orange"
+        border.color: enabled ? "black" : "white"
 
         Text {
             text: "+"
             font.pixelSize: control.font.pixelSize * 2
-            color: "orange"
+            color: "dark red"
             anchors.fill: parent
             fontSizeMode: Text.Fit
             horizontalAlignment: Text.AlignHCenter
@@ -47,14 +48,14 @@ SpinBox {
         height: parent.height
         implicitWidth: 40
         implicitHeight: 40
-        //radius: width/10
-        color: control.down.pressed ? "white" : "black"
-        border.color: enabled ? "orange" : "white"
+        radius: 3
+        color: control.down.pressed ? "white" : "orange"
+        border.color: enabled ? "black" : "white"
 
         Text {
             text: "-"
             font.pixelSize: control.font.pixelSize * 2
-            color: "orange"
+            color: "dark red"
             anchors.fill: parent
             fontSizeMode: Text.Fit
             horizontalAlignment: Text.AlignHCenter
@@ -64,6 +65,8 @@ SpinBox {
 
     background: Rectangle {
         implicitWidth: 150
+        radius: 3
+        border.color: "orange"
         color: "black"
     }
 }

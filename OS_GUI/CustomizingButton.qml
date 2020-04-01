@@ -3,13 +3,12 @@ import QtQuick.Controls 2.12
 
 Button {
     id: control
-    text: qsTr("Submit process")
 
     contentItem: Text {
         text: control.text
         font: control.font
         opacity: enabled ? 1.0 : 0.3
-        color: control.down ? "orange" : "black"
+        color:  "black"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
