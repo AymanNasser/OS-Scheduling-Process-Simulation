@@ -4,11 +4,18 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 
 Window {
+    id: gui
     visible: true
     width: 640
     height: 480
     title: qsTr("OS GUI")
-    property var processmap: {{}}
+    color: "black"
+
+    property var processName: []
+    property var arrivalTime: []
+    property var burstTime: []
+    property var priority: []
+
     ListModel {
         id: processlist
     }
@@ -28,6 +35,7 @@ Window {
             font.family: "Comic Sans MS"
             Layout.row: 0
             Layout.column: 0
+            color: "orange"
         }
         Text {
             text: "Number of process: "
@@ -35,6 +43,7 @@ Window {
             font.family: "Comic Sans MS"
             Layout.row: 1
             Layout.column: 0
+            color: "orange"
         }
         CustomizingComboBox {
             id: processtype
@@ -85,6 +94,7 @@ Window {
                 lastconfigration.processtype = processtype.currentText
                 lastconfigration.processnumber = processnumber.value
                 lastconfigration.ispreemptive = preemptive.checked ? true : false
+                id_table.visible= true
                 for(var i = 0;i < processnumber.value;i++)
                 {
                     processlist.append({"name":"P"+i})
@@ -120,6 +130,7 @@ Window {
             font.family: "Comic Sans MS"
             Layout.row: 0
             Layout.column: 0
+            color: "orange"
         }
         Text {
             text: "Busrt Time: "
@@ -127,6 +138,7 @@ Window {
             font.family: "Comic Sans MS"
             Layout.row: 1
             Layout.column: 0
+            color: "orange"
         }
         Text {
             text: "Arrival Time: "
@@ -134,6 +146,7 @@ Window {
             font.family: "Comic Sans MS"
             Layout.row: 2
             Layout.column: 0
+            color: "orange"
         }
         Text {
             text: "Priority: "
@@ -142,6 +155,7 @@ Window {
             Layout.row: 3
             Layout.column: 0
             visible: processtype.currentText == "Priority" ? true : false
+            color: "orange"
         }
         CustomizingComboBox {
             id: processnumbers
@@ -175,6 +189,10 @@ Window {
                                     "ArrivalTime":arrivaltime.value,
                                     "BurstTime":bursttime.value,
                                     "Priority":priority.value})
+                gui.processName[processnumbers.currentIndex] = processnumbers.currentText
+                gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
+                gui.burstTime[processnumbers.currentIndex] = bursttime.value
+                gui.priority[processnumbers.currentIndex] = priority.value
 
             }
         }
@@ -195,10 +213,12 @@ Window {
         id:id_table
         width: parent.width/2
         height: parent.height/2
-        anchors.left: lastconfigration.right
-        anchors.leftMargin: 100
+        anchors.top: lastconfigration.bottom
+        anchors.left: lastconfigration.left
+        anchors.topMargin: 50
         focus: true
         model: processdata
+        visible: false
         TableViewColumn {
             role: "ProcessName"
             title: "Process"
@@ -220,7 +240,7 @@ Window {
         id: scheduling
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.horizontalCenter: processname.horizontalCenter
         text: "Start scheduling"
         visible: false
         onClicked: {
@@ -230,11 +250,12 @@ Window {
     Rectangle{
         id: processname
         color: "black"
-        width: 200
+        width: 150
         height: 50
         anchors.bottom: scheduling.bottom
         anchors.bottomMargin: 100
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: noofprocess.right
+
         radius: width/10
         border.color: "orange"
         border.width: 2
@@ -248,10 +269,11 @@ Window {
     Rectangle{
         id: noofprocess
         color: "black"
-        width: 200
+        width: 150
         height: 50
-        anchors.right: processname.left
+        anchors.left: id_table.right
         anchors.verticalCenter: processname.verticalCenter
+        anchors.leftMargin: 50
         radius: width/10
         border.color: "orange"
         border.width: 2
@@ -265,7 +287,7 @@ Window {
     Rectangle{
         id: ispreemptive
         color: "black"
-        width: 200
+        width: 150
         height: 50
         anchors.left: processname.right
         anchors.verticalCenter: processname.verticalCenter
