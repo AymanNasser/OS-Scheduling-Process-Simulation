@@ -109,7 +109,7 @@ void Process::SJF_preemptiveOperation()
 
                 tick += burstTime[ite];
                 toQmlScheduledTime.append(tick);
-
+                toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
                 burstTime.removeAt(ite);
                 arrivalTime.removeAt(ite);
                 index.removeAt(ite);
@@ -125,6 +125,7 @@ void Process::SJF_preemptiveOperation()
                 toQmlScheduledId.append(QString("P" + QString(index[ite])));
                 tick++;
                 toQmlScheduledTime.append(tick);
+                toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
 
                 if(burstTime[ite] == 0)
                 {
@@ -162,6 +163,7 @@ void Process::RR_operation()
                 tick += this->timeQuantum;
                 toQmlScheduledId.append(QString("P" + QString(index[ite])));
                 toQmlScheduledTime.append(tick);
+
                 burstTime[ite] -= this->timeQuantum;
 
 
@@ -253,7 +255,7 @@ void Process::handleSJF()
 //        }
 
         for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
+           // qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
         }
 
     }
@@ -264,7 +266,7 @@ void Process::handleRoundRobin()
    RR_operation();
 
    for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-       qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
+      // qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
    }
 }
 

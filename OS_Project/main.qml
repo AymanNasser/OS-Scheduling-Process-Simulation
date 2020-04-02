@@ -13,6 +13,20 @@ Window {
     title: qsTr("Simulation")
     color: "white"
 
+
+    Simulation{
+    scheduledId: ["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3"]
+    ganttChart: [1,2,3,4,5,6,7,9,11]
+
+    }
+
+
+
+
+
+
+
+
 //    function draw(idd){
 //        idd.sourceComponent = rect
 //        idd.active = true
@@ -63,20 +77,6 @@ Window {
 //    }
 
 
-
-
-
-
-
-
-
-//    Simulation{
-//        processNum: 3
-//        anchors.centerIn: parent
-//        burstTime: [2,8,3]
-//        arrivalTime: [0,2,1]
-//        //processPriority: [0,2,1]
-//     }
 
 
 
