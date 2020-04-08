@@ -29,7 +29,6 @@ void Process::SJF_swapLists(){
                 qSwap(arrivalTime[j],arrivalTime[j+1]);
                 qSwap(burstTime[j],burstTime[j+1]);
                 qSwap(index[j],index[j+1]);
-
             }
         }
     }
