@@ -244,9 +244,9 @@ Window {
             height: textrow.implicitHeight * 1.2
             width: textrow.implicitWidth
             color: {
-                if(processdata.get(styleData.row)["Initial"] === "Inialized")
+                if(processdata.get(styleData.row)["Initial"] === "Inialized" && (styleData.row)< lastconfigration.processnumber)
                 {
-                    return "white"
+                    return "gray"
                 }
                 else
                 {
@@ -338,6 +338,7 @@ Window {
         height: parent.height/15
         anchors.right: ispreemptive.left
         anchors.verticalCenter: ispreemptive.verticalCenter
+        anchors.rightMargin: 10
         radius: width/10
         border.color: "orange"
         border.width: 2
@@ -356,6 +357,7 @@ Window {
         height: parent.height/15
         anchors.right: processname.left
         anchors.verticalCenter: ispreemptive.verticalCenter
+        anchors.rightMargin: 10
         radius: width/10
         border.color: "orange"
         border.width: 2

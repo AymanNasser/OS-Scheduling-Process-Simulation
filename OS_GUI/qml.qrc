@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CustomizingComboBox.qml</file>
+        <file>CustomizingSpinBox.qml</file>
+        <file>CustomizingButton.qml</file>
+        <file>CustomizingRadioButton.qml</file>
+    </qresource>
+</RCC>
