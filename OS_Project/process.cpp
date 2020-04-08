@@ -221,6 +221,10 @@ void Process::handleScheduling()
     if(this-> algorithmType == "FCFS")
     {
          handleFCFS();
+
+         for (int var = 0; var < toQmlScheduledId.size(); ++var) {
+            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] << toQmlwaitingTimePerProcess[var];
+         }
     }
     else if(this-> algorithmType == "SJF")
     {
@@ -241,6 +245,56 @@ void Process::handleScheduling()
 
 void Process::handleFCFS()
 {
+    //1. Selection Sorting The List According To Arrival Time
+    unsigned int i=0 , j=0 ,min_idx, overAllBurstTime = 0,tick = 0;
+    bool unMatchedProcessPerTick = false;
+    for (i=0; i < this->numOfProcesses-1; i++)
+    {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (j=i+1; j < this->numOfProcesses; j++)
+        {
+            if(arrivalTime[j]<arrivalTime[min_idx])
+            {
+                // update The Minmum index
+                min_idx = j;
+            }
+        }
+        // Making The Swap for 3 lists ("ArrivalTime,burstTime.)
+        qSwap(arrivalTime[i],arrivalTime[min_idx]);
+        qSwap(burstTime[i],burstTime[min_idx]);
+        qSwap(index[i],index[min_idx]);
+    }
+
+    for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
+        overAllBurstTime+= burstTime[var];
+    }
+
+    while(tick < overAllBurstTime){
+        for (unsigned int ite = 0; ite < this->numOfProcesses; ++ite) {
+            if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
+            {
+                toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
+                tick += burstTime[ite];
+                burstTime[ite] = 0;
+                toQmlScheduledId.append("P" + QString(index[ite]));
+                toQmlScheduledTime.append(tick);
+
+                unMatchedProcessPerTick = false;
+
+            }
+            else
+            {
+                unMatchedProcessPerTick = true;
+            }
+        }
+        if(unMatchedProcessPerTick)
+        {
+            tick++;
+            toQmlScheduledId.append("ideal");
+            toQmlScheduledTime.append(tick);
+        }
+    }
 
 }
 
@@ -259,14 +313,6 @@ void Process::handleSJF()
         SJF_preemptiveOperation();
 
 
-//        for (int var = 0; var < numOfProcesses ;++var) {
-//            qDebug() << index[var];
-//        }
-
-        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
-        }
-
     }
 }
 
@@ -274,9 +320,6 @@ void Process::handleRoundRobin()
 {
    RR_operation();
 
-   for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-      // qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
-   }
 }
 
 void Process::handlePriority()

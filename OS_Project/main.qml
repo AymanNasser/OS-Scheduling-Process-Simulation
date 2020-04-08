@@ -13,11 +13,13 @@ Window {
     title: qsTr("Simulation")
     color: "white"
 
+
     Simulation{
-    scheduledId: ["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3"]
+    scheduledId: ["ideal","P0","P0","P1","P0","P2","P3","P4","P3"]
     ganttChart: [1,2,3,4,5,6,7,9,11]
     width: parent.width
-
+    anchors.horizontalCenter: root.horizontalCenter
+    anchors.verticalCenter:  root.bottom
     }
 
 
