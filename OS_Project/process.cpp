@@ -1,6 +1,5 @@
 #include "process.h"
-
-
+#include <QDebug>
 
 
 Process::Process(unsigned int a_processesNum, QString a_type)
@@ -10,6 +9,7 @@ Process::Process(unsigned int a_processesNum, QString a_type)
 
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
+        processName.append("P"+QString::number(var));
         index.append(var);
         toQmlwaitingTimePerProcess.append(0);
     }
@@ -279,9 +279,138 @@ void Process::handleRoundRobin()
    }
 }
 
+void Process::prioritySorting()
+{
+    for(unsigned int i = 0; i < numOfProcesses - 1; i++)
+    {
+        for(unsigned int j = 0; j < numOfProcesses - i - 1; j++)
+        {
+            if((arrivalTime[j] > arrivalTime[j+1]) || (arrivalTime[j] == arrivalTime[j+1] && priority[j] > priority[j+1]))
+            {
+                qSwap(arrivalTime[j],arrivalTime[j+1]);
+                qSwap(burstTime[j],burstTime[j+1]);
+                qSwap(priority[j],priority[j+1]);
+                qSwap(processName[j],processName[j+1]);
+            }
+        }
+    }
+}
+
+float Process::sumBusttime()
+{
+    float Totalburstsum = 0;
+    for(unsigned int i = 0 ; i < numOfProcesses ; i++)
+    {
+        Totalburstsum += burstTime[i];
+    }
+    return Totalburstsum;
+}
+
+int Process::processTakePriority(float time, unsigned int currentProcess)
+{
+    for(int i = currentProcess + 1; i < arrivalTime.size();i++)
+    {
+        if(time >= arrivalTime[i] && priority[currentProcess] > priority[i])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void Process::handlePriority()
 {
-
+    float Totalgaintcharttime = sumBusttime();
+    prioritySorting();
+    unsigned int currentProcess = 0;
+    unsigned int units = 0;
+    // handling non-preemptive priority
+    if(!preemptive)
+    {
+        float i = 0;
+        while(i < Totalgaintcharttime)
+        {
+            //  handling idle process
+            if(arrivalTime[currentProcess] > i)
+            {
+                toQmlScheduledTime.append(arrivalTime[currentProcess]);
+                toQmlScheduledId.append("idle");
+                Totalgaintcharttime += arrivalTime[currentProcess] - i;
+                i = arrivalTime[currentProcess];
+                units++;
+            }
+            // handling normal process
+            else
+            {
+                toQmlScheduledTime.append(burstTime[currentProcess] + i);
+                toQmlScheduledId.append(processName[currentProcess]);
+                i += burstTime[currentProcess];
+                currentProcess++;
+                units++;
+            }
+        }
+        for (unsigned int i=0; i < units; i++)
+        {
+            qDebug() << toQmlScheduledId[i] << toQmlScheduledTime[i] ;
+        }
+    }
+    else
+    {
+        // handling preemptive priority
+        unsigned int noOfProcess = numOfProcesses;
+        QString processInexecution = "NULL";
+        float i = 0;
+        while(i < Totalgaintcharttime)
+        {
+            //  handling idle process
+            if(arrivalTime[currentProcess] > i && processInexecution == "NULL")
+            {
+                toQmlScheduledTime.append(arrivalTime[currentProcess]);
+                toQmlScheduledId.append("idle");
+                Totalgaintcharttime += arrivalTime[currentProcess] - i;
+                i = arrivalTime[currentProcess];
+                units++;
+            }
+            // handling normal process
+            else
+            {
+                int processTakes = processTakePriority(i + burstTime[currentProcess],currentProcess);
+                if(noOfProcess > 0 && processTakes != -1)
+                {
+                   float process_space = arrivalTime[processTakes] - i;
+                   if(process_space > 0)
+                   {
+                       toQmlScheduledTime.append(process_space + i);
+                       toQmlScheduledId.append(processName[currentProcess]);
+                       burstTime[currentProcess] -= process_space;
+                       i += process_space;
+                       units++;
+                   }
+                   currentProcess = processTakes;
+                   processInexecution = processName[currentProcess];
+                }
+                else
+                {
+                    toQmlScheduledTime.append(burstTime[currentProcess] + i);
+                    toQmlScheduledId.append(processName[currentProcess]);
+                    i += burstTime[currentProcess];
+                    units++;
+                    burstTime.removeAt(currentProcess);
+                    processName.removeAt(currentProcess);
+                    arrivalTime.removeAt(currentProcess);
+                    priority.removeAt(currentProcess);
+                    currentProcess = 0;
+                    processInexecution = "NUll";
+                    noOfProcess--;
+                }
+            }
+        }
+        for (unsigned int i=0; i < units; i++)
+        {
+            qDebug() << toQmlScheduledId[i] << toQmlScheduledTime[i] ;
+        }
+    }
+    //for(int i = 0 ; i < no)
 }
 
 qreal Process::calcOverAllAverageWaitingTime()

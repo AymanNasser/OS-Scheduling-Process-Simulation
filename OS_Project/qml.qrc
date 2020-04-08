@@ -1,6 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>main_simulator.qml</file>
         <file>Simulation.qml</file>
+        <file>CustomizingComboBox.qml</file>
+        <file>CustomizingRadioButton.qml</file>
+        <file>CustomizingSpinBox.qml</file>
+        <file>CustomizingButton.qml</file>
+        <file>main_interface.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>icons/back.png</file>
     </qresource>
 </RCC>

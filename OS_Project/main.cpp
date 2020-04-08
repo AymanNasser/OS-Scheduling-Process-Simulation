@@ -1,20 +1,27 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "process.h"
+#include <QList>
+#include "listreader.h"
+#include "notifier.h"
+#include "ide.h"
+
+Notifier notify;
+
+QList<float> BurstTime;
+QList<float> ArrivalTime;
+QList<float> Priority;
+QString ProcessType;
+bool isPreemptive;
+int NUmberOfProcess;
+int TimeQuantum;
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+        QGuiApplication app(argc,argv);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+        IDE ide(&app,argc,argv);
 
-    Process p(4,"SJF");
-
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
-    return app.exec();
+        return app.exec();
 }
