@@ -5,41 +5,34 @@ Process::Process(unsigned int a_processesNum, QString a_type)
 {
     this->numOfProcesses = a_processesNum;
     this->algorithmType = a_type;
-    //    for(unsigned int i = 0;i<numOfProcesses;i++)
-    //    {
-    //        processName.append("P"+QString(i));
-    //    }
+
     //Just for Test Print The Arrival List to check the Behavior
     for(unsigned int i = 0;i<numOfProcesses;i++)
     {
         processName.append("P"+QString::number(i));
-        // just for Test
         arrivalTime.append(rand()%20);
         burstTime.append(rand()%20);
         priority.append(rand()%20);
     }
-    arrivalTime[0] = 0;
-    arrivalTime[1] = 0;
+    arrivalTime[0] = 3;
+    arrivalTime[1] = 3;
     arrivalTime[2] = 4;
-    arrivalTime[3] = 12;
-    //arrivalTime[4] = 0;
-    burstTime[0] = 5;
-    burstTime[1] = 10;
-    burstTime[2] = 3;
-    burstTime[3] = 7;
-    //burstTime[4] = 5;
-    priority[0] = 1;
-    priority[1] = 2;
+    arrivalTime[3] = 8;
+    arrivalTime[4] = 9;
+    arrivalTime[5] = 9;
+    burstTime[0] = 3;
+    burstTime[1] = 2;
+    burstTime[2] = 2;
+    burstTime[3] = 3;
+    burstTime[4] = 2;
+    burstTime[5] = 3;
+    priority[0] = 4;
+    priority[1] = 1;
     priority[2] = 0;
     priority[3] = 3;
-    //priority[4] = 2;
+    priority[4] = 5;
+    priority[5] = 2;
     preemptive = true;
-    //Just for Test Print The Arrival List to check the Behavior
-    qDebug()<<"print Arrival List";
-    for (unsigned int i=0; i < this->numOfProcesses; i++)
-    {
-        qDebug() << arrivalTime[i];
-    }
 }
 
 void Process::prioritySorting()
@@ -59,9 +52,9 @@ void Process::prioritySorting()
     }
 }
 
-unsigned int Process::sumBusttime()
+float Process::sumBusttime()
 {
-    unsigned int Totalburstsum = 0;
+    float Totalburstsum = 0;
     for(unsigned int i = 0 ; i < numOfProcesses ; i++)
     {
         Totalburstsum += burstTime[i];
@@ -69,11 +62,11 @@ unsigned int Process::sumBusttime()
     return Totalburstsum;
 }
 
-int Process::processTakePriority(unsigned int index, unsigned int currentProcess)
+int Process::processTakePriority(float time, unsigned int currentProcess)
 {
     for(int i = currentProcess + 1; i < arrivalTime.size();i++)
     {
-        if(index == arrivalTime[i] && priority[currentProcess] > priority[i])
+        if(time >= arrivalTime[i] && priority[currentProcess] > priority[i])
         {
             return i;
         }
@@ -83,34 +76,31 @@ int Process::processTakePriority(unsigned int index, unsigned int currentProcess
 
 void Process::handlePriority()
 {
-    unsigned int Totalgaintcharttime = sumBusttime();
+    float Totalgaintcharttime = sumBusttime();
     prioritySorting();
     unsigned int currentProcess = 0;
-    unsigned int idleNumber = 0;
     unsigned int units = 0;
     // handling non-preemptive priority
     if(!preemptive)
     {
-        for(unsigned int i = 0 ; i < Totalgaintcharttime; i++)
+        float i = 0;
+        while(i < Totalgaintcharttime)
         {
             //  handling idle process
             if(arrivalTime[currentProcess] > i)
             {
-                scheduledProcesses.insert("idle "+QString::number(idleNumber),arrivalTime[currentProcess] - i);
-                time.append(arrivalTime[currentProcess] - i);
-                process_name.append("idle "+QString::number(idleNumber));
+                time.append(arrivalTime[currentProcess]);
+                process_name.append("idle");
                 Totalgaintcharttime += arrivalTime[currentProcess] - i;
-                i += arrivalTime[currentProcess] - i - 1;
-                idleNumber++;
+                i = arrivalTime[currentProcess];
                 units++;
             }
             // handling normal process
             else
             {
-                scheduledProcesses.insert(processName[currentProcess],burstTime[currentProcess]);
-                time.append(burstTime[currentProcess]);
+                time.append(burstTime[currentProcess] + i);
                 process_name.append(processName[currentProcess]);
-                i += burstTime[currentProcess] - 1;
+                i += burstTime[currentProcess];
                 currentProcess++;
                 units++;
             }
@@ -124,92 +114,50 @@ void Process::handlePriority()
     {
         // handling preemptive priority
         unsigned int noOfProcess = numOfProcesses;
-        int waitingProcess = -1;
         QString processInexecution = "NULL";
-        for(unsigned int i = 0 ; i < Totalgaintcharttime; i++)
+        float i = 0;
+        while(i < Totalgaintcharttime)
         {
             //  handling idle process
             if(arrivalTime[currentProcess] > i && processInexecution == "NULL")
             {
-                time.append(arrivalTime[currentProcess] - i);
-                process_name.append("idle "+QString::number(idleNumber));
+                time.append(arrivalTime[currentProcess]);
+                process_name.append("idle");
                 Totalgaintcharttime += arrivalTime[currentProcess] - i;
-                i += arrivalTime[currentProcess] - i - 1;
-                idleNumber++;
+                i = arrivalTime[currentProcess];
                 units++;
             }
             // handling normal process
             else
             {
-                // check if it in first time in the schedual
-                if(processInexecution == "NULL")
+                int processTakes = processTakePriority(i + burstTime[currentProcess],currentProcess);
+                if(noOfProcess > 0 && processTakes != -1)
                 {
-                    if(noOfProcess > 1 && i == arrivalTime[currentProcess + 1] && arrivalTime[currentProcess + 1] != arrivalTime[currentProcess])
-                    {
-                        currentProcess++;
-                        time.append(1);
-                        process_name.append(processName[currentProcess]);
-                        burstTime[currentProcess]--;
-                        processInexecution = processName[currentProcess];
-                        units++;
-                    }
-                    else
-                    {
-                        time.append(1);
-                        process_name.append(processName[currentProcess]);
-                        burstTime[currentProcess]--;
-                        processInexecution = processName[currentProcess];
-                        units++;
-                        if(burstTime[currentProcess] == 0)
-                        {
-                            burstTime.removeAt(currentProcess);
-                            processName.removeAt(currentProcess);
-                            arrivalTime.removeAt(currentProcess);
-                            processInexecution = "NULL";
-                            currentProcess = 0;
-                            noOfProcess--;
-                            continue;
-                        }
-                    }
+                   float process_space = arrivalTime[processTakes] - i;
+                   if(process_space > 0)
+                   {
+                       time.append(process_space + i);
+                       process_name.append(processName[currentProcess]);
+                       burstTime[currentProcess] -= process_space;
+                       i += process_space;
+                       units++;
+                   }
+                   currentProcess = processTakes;
+                   processInexecution = processName[currentProcess];
                 }
                 else
                 {
-                    if(noOfProcess > 1 && processTakePriority(i,currentProcess) != -1)//arrivalTime[currentProcess + 1] && priority[currentProcess] > priority[currentProcess + 1])
-                    {
-                        waitingProcess = currentProcess;
-                        currentProcess = processTakePriority(i,currentProcess);
-                        time.append(1);
-                        process_name.append(processName[currentProcess]);
-                        burstTime[currentProcess]--;
-                        processInexecution = processName[currentProcess];
-                        units++;
-                        if(burstTime[currentProcess] == 0)
-                        {
-                            burstTime.removeAt(currentProcess);
-                            processName.removeAt(currentProcess);
-                            arrivalTime.removeAt(currentProcess);
-                            currentProcess = waitingProcess;
-                            processInexecution = "NULL";
-                            waitingProcess = -1;
-                            noOfProcess--;
-                        }
-                    }
-                    else
-                    {
-                        processInexecution = processName[currentProcess];
-                        time[units - 1]++;
-                        burstTime[currentProcess]--;
-                        if(burstTime[currentProcess] == 0)
-                        {
-                            burstTime.removeAt(currentProcess);
-                            processName.removeAt(currentProcess);
-                            arrivalTime.removeAt(currentProcess);
-                            processInexecution = "NULL";
-                            currentProcess = 0;
-                            noOfProcess--;
-                            continue;
-                        }
-                    }
+                    time.append(burstTime[currentProcess] + i);
+                    process_name.append(processName[currentProcess]);
+                    i += burstTime[currentProcess];
+                    units++;
+                    burstTime.removeAt(currentProcess);
+                    processName.removeAt(currentProcess);
+                    arrivalTime.removeAt(currentProcess);
+                    priority.removeAt(currentProcess);
+                    currentProcess = 0;
+                    processInexecution = "NUll";
+                    noOfProcess--;
                 }
             }
         }
@@ -218,6 +166,7 @@ void Process::handlePriority()
             qDebug() << process_name[i] << time[i] ;
         }
     }
+    //for(int i = 0 ; i < no)
 }
 
 void Process::handleFCFS()

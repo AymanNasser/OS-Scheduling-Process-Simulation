@@ -8,8 +8,8 @@ Window {
     // Window Proprties
     id: root
     visible: true
-    width: 500
-    height: 500
+    width: 1000
+    height: 1000
     title: qsTr("Simulation")
     color: "white"
 

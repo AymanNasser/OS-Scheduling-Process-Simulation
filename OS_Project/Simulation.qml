@@ -14,11 +14,12 @@ Item {
     Timer{
         id: drawTimer
         repeat: true
-        interval: 600
+        interval: 1000
         property int it: 0
         running: true
         onTriggered: {
         processRepeater.itemAt(it).visible = true;
+        processRepeater.itemAt(it).state = "red"
         it++;
         it == scheduledId.length ? drawTimer.running = false: drawTimer.running = true ;
         }
@@ -37,14 +38,25 @@ Item {
 
             Rectangle{
                 id: processRect
-
                 width: 100
                 height: 70
                 color: "steelblue"
                 border.color: "white"
                 radius: 10
                 antialiasing: true
-                visible: true
+                visible: false
+                states: State {
+                    name: "red"
+                    PropertyChanges {
+                        target: processRect
+                        color: "red"
+                    }
+                }
+                transitions: Transition {
+                    ColorAnimation {
+                        duration: 1000
+                    }
+                }
 
                 Text {
                     id: textIdLable
