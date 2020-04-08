@@ -19,7 +19,16 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+<<<<<<< HEAD
         QGuiApplication app(argc,argv);
+=======
+    QGuiApplication app(argc, argv);
+
+    QQmlApplicationEngine engine;
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+    Process p(3,"FCFS");
+>>>>>>> 2d81f8c5a25aa39d934c0066821ca16ce95e9e9e
 
         IDE ide(&app,argc,argv);
 
