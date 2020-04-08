@@ -47,7 +47,8 @@ signals:
     Q_INVOKABLE void readyToLoadSimulator();
 
 private slots:
-    void copyList();
+    void setGuiList();
+    void setSimulationList();
 
 };
 

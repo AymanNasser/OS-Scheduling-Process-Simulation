@@ -11,8 +11,10 @@ public:
 
 signals:
     void qmlGenerated();
+    void goToListReader();
 public slots:
     void callSimulator();
+    void emitListReader();
 
 };
 

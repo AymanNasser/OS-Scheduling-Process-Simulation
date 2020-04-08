@@ -26,57 +26,57 @@ Item {
     }
 
 
-    ToolBar{
-        id: movingToolBar
-        property int itr
+//    ToolBar{
+//        id: movingToolBar
+//        property int itr
 
-//        style: ToolBarStyle {
-//                background: Rectangle {
-//                    implicitWidth: 100
-//                    implicitHeight: 40
-//                    border.color: "#999"
-//                    gradient: Gradient {
-//                        GradientStop { position: 0 ; color: "#fff" }
-//                        GradientStop { position: 1 ; color: "#eee" }
-//                    }
-//                }
+////        style: ToolBarStyle {
+////                background: Rectangle {
+////                    implicitWidth: 100
+////                    implicitHeight: 40
+////                    border.color: "#999"
+////                    gradient: Gradient {
+////                        GradientStop { position: 0 ; color: "#fff" }
+////                        GradientStop { position: 1 ; color: "#eee" }
+////                    }
+////                }
+////            }
+//        ToolButton{
+//            id: stop
+
+//            text: "Stop"
+
+//            onClicked: {
+//                movingToolBar.itr= drawTimer.it; drawTimer.stop();
 //            }
-        ToolButton{
-            id: stop
+//        }
 
-            text: "Stop"
+//        ToolButton{
+//            id: back
+//            anchors.left: stop.right
+//            text: "Back"
+//            iconSource:   "~/Pictures/user-male.png"
 
-            onClicked: {
-                movingToolBar.itr= drawTimer.it; drawTimer.stop();
-            }
-        }
+//            onClicked: {
+//                processRepeater.itemAt(movingToolBar.itr-1).state = "original"
+//                movingToolBar.itr--;
 
-        ToolButton{
-            id: back
-            anchors.left: stop.right
-            text: "Back"
-            iconSource:   "~/Pictures/user-male.png"
+//            }
+//        }
 
-            onClicked: {
-                processRepeater.itemAt(movingToolBar.itr-1).state = "original"
-                movingToolBar.itr--;
+//        ToolButton{
+//            id: front
+//            anchors.left: back.right
+//            text: "Front"
+//            //iconSource: "user-male.png"
+//            onClicked: {
+//                movingToolBar.itr
+//                processRepeater.itemAt(movingToolBar.itr).state = "faded"
+//                movingToolBar.itr++
+//            }
+//        }
 
-            }
-        }
-
-        ToolButton{
-            id: front
-            anchors.left: back.right
-            text: "Front"
-            //iconSource: "user-male.png"
-            onClicked: {
-                movingToolBar.itr
-                processRepeater.itemAt(movingToolBar.itr).state = "faded"
-                movingToolBar.itr++
-            }
-        }
-
-    }
+//    }
 
     Row{
         id: rowId

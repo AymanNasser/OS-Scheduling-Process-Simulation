@@ -1,5 +1,6 @@
 #include "ide.h"
 #include "notifier.h"
+#include "process.h"
 #include <QQuickWindow>
 
 extern Notifier notify;
@@ -16,6 +17,7 @@ IDE::IDE(QGuiApplication* mainApp,int argc, char *argv[],QObject* parent) : QObj
     interfaceEngine->load(urlInterface);
 
     connect(&notify,SIGNAL(qmlGenerated()),this,SLOT(loadSimulator()));
+    connect(this,SIGNAL(loadSimulatorData()),&notify,SLOT(emitListReader()));
 }
 
 void IDE::loadSimulator()
@@ -23,6 +25,8 @@ void IDE::loadSimulator()
     if(simulatorEngine == nullptr)
     {
         simulatorEngine = new QQmlApplicationEngine;
+        emit loadSimulatorData();
+        Process process;
         const QUrl urlSimulator(QStringLiteral("qrc:/main_simulator.qml"));
         simulatorEngine->load(urlSimulator);
     }

@@ -11,22 +11,17 @@
 
 class Process : public QObject
 {
-
+    Q_OBJECT
 private:
     unsigned int numOfProcesses;
     unsigned int timeQuantum;
     QString algorithmType;
     bool preemptive;
 
-<<<<<<< HEAD
     QList <unsigned int> burstTime = {8,4,9,5};
     QList <unsigned int> arrivalTime = {0,1,2,3};
     QList <QString> processName;
-=======
-    QList <unsigned int> burstTime = {24,3,3};
-    QList <unsigned int> arrivalTime = {0,0,0};
 
->>>>>>> 2d81f8c5a25aa39d934c0066821ca16ce95e9e9e
     QList <unsigned int> priority;
 
     /* Temp list for SJF algorithm processes indexing */
@@ -35,11 +30,9 @@ private:
 
     /* QML simulation lists */
     QList <QString> toQmlScheduledId;
-    QList <unsigned int> toQmlScheduledTime;
-    QList <unsigned int> toQmlwaitingTimePerProcess;
+    QList <float> toQmlScheduledTime;
+    QList <float> toQmlwaitingTimePerProcess;
 
-
-    Q_OBJECT
 
 private:
     void handleFCFS();
@@ -57,13 +50,13 @@ private:
 
 
 public:
-    Process(unsigned int a_processesNum, QString a_type);
+    Process();
 
     QString getAlgorithmType();
 
     QList <QString> getScheduledProcessId();
-    QList <unsigned int> getScheduledProcessBurstTime();
-    QList <unsigned int> getSchduledProcessWaitingTime();
+    QList <float> getScheduledProcessBurstTime();
+    QList <float> getSchduledProcessWaitingTime();
 
 
     qreal calcOverAllAverageWaitingTime();

@@ -7,6 +7,9 @@ extern Notifier notify;
 extern QList<float> BurstTime;
 extern QList<float> ArrivalTime;
 extern QList<float> Priority;
+extern QList <QString> ScheduledId;
+extern QList <float> ScheduledTime;
+extern QList <float> WaitingTimePerProcess;
 extern QString ProcessType;
 extern bool isPreemptive;
 extern int NUmberOfProcess;
@@ -15,13 +18,19 @@ extern int TimeQuantum;
 
 ListReader::ListReader(QObject *parent) : QObject(parent)
 {
-    connect(this,SIGNAL(configrationGenerated()),this,SLOT(copyList()));
+    connect(this,SIGNAL(configrationGenerated()),this,SLOT(setGuiList()));
     connect(this,SIGNAL(readyToLoadSimulator()),&notify,SLOT(callSimulator()));
+    connect(&notify,SIGNAL(goToListReader()),this,SLOT(setSimulationList()));
 }
 
-void ListReader::setIDs(QVariantList)
+void ListReader::setIDs(QVariantList list)
 {
-
+    QVariant list_var(list);
+    processid.clear();
+    foreach(QVariant v, list_var.value<QVariantList>())
+    {
+        processid.append(v.value<float>());
+    }
 }
 
 QVariantList ListReader::readIDs()
@@ -34,9 +43,14 @@ QVariantList ListReader::readTimes()
     return processid;
 }
 
-void ListReader::setAverage(QVariantList)
+void ListReader::setAverage(QVariantList list)
 {
-
+    QVariant list_var(list);
+    processaverage.clear();
+    foreach(QVariant v, list_var.value<QVariantList>())
+    {
+        processaverage.append(v.value<float>());
+    }
 }
 
 QVariantList ListReader::readAverage()
@@ -102,10 +116,15 @@ void ListReader::setConfigrations(QString processtype, int numbers, int rrTime, 
 
 void ListReader::setTimes(QVariantList timeList)
 {
-
+    QVariant list_var(timeList);
+    processtime.clear();
+    foreach(QVariant v, list_var.value<QVariantList>())
+    {
+        processtime.append(v.value<float>());
+    }
 }
 
-void ListReader::copyList()
+void ListReader::setGuiList()
 {
     QVariant list(arrivaltime);
     ArrivalTime.clear();
@@ -137,4 +156,19 @@ void ListReader::copyList()
         TimeQuantum = this->timeQuantum;
     }
     emit readyToLoadSimulator();
+}
+
+void ListReader::setSimulationList()
+{
+    processid.clear();
+    processtime.clear();
+    processaverage.clear();
+    for(int i = 0 ; i < ScheduledId.size(); i++)
+    {
+        qDebug() << "entered";
+        processid.append(ScheduledId[i]);
+        processtime.append(ScheduledTime[i]);
+        processaverage.append(WaitingTimePerProcess[i]);
+        qDebug() << processid[i] << processtime[i];
+    }
 }

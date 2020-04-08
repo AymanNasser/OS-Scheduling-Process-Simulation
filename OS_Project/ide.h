@@ -22,6 +22,8 @@ private:
 
 private slots:
     void loadSimulator();
+signals:
+    void loadSimulatorData();
 
 };
 

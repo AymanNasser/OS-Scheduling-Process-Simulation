@@ -1,21 +1,38 @@
 #include "process.h"
 #include <QDebug>
 
+extern QList<float> BurstTime;
+extern QList<float> ArrivalTime;
+extern QList<float> Priority;
+extern QList <QString> ScheduledId;
+extern QList <float> ScheduledTime;
+extern QList <float> WaitingTimePerProcess;
+extern QString ProcessType;
+extern bool isPreemptive;
+extern int NUmberOfProcess;
+extern int TimeQuantum;
 
-Process::Process(unsigned int a_processesNum, QString a_type)
+Process::Process()
 {
-    this->numOfProcesses = a_processesNum;
-    this->algorithmType = a_type;
-
+    this->numOfProcesses = NUmberOfProcess;
+    this->algorithmType = ProcessType;
+    this->preemptive = isPreemptive;
+    this->timeQuantum = TimeQuantum;
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         processName.append("P"+QString::number(var));
-        index.append(var);
         toQmlwaitingTimePerProcess.append(0);
+        index.append(var);
+        burstTime.append(BurstTime[var]);
+        arrivalTime.append(ArrivalTime[var]);
     }
-
-    this->preemptive = 1;
-    this->timeQuantum = 4;
+    if(algorithmType == "Priority")
+    {
+        for (unsigned int var = 0; var < this->numOfProcesses ; ++var)
+        {
+            priority.append(Priority[var]);
+        }
+    }
     handleScheduling();
 }
 
@@ -201,12 +218,12 @@ QString Process::getAlgorithmType()
     return  this->algorithmType;
 }
 
-QList<unsigned int> Process::getScheduledProcessBurstTime()
+QList<float> Process::getScheduledProcessBurstTime()
 {
     return this->toQmlScheduledTime;
 }
 
-QList<unsigned int> Process::getSchduledProcessWaitingTime()
+QList<float> Process::getSchduledProcessWaitingTime()
 {
     return this->toQmlwaitingTimePerProcess;
 }
@@ -221,17 +238,13 @@ void Process::handleScheduling()
     if(this-> algorithmType == "FCFS")
     {
          handleFCFS();
-
-         for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] << toQmlwaitingTimePerProcess[var];
-         }
     }
     else if(this-> algorithmType == "SJF")
     {
          handleSJF();
 
     }
-    else if(this->algorithmType == "RR")
+    else if(this->algorithmType == "Round Robin")
     {
         handleRoundRobin();
 
@@ -240,7 +253,15 @@ void Process::handleScheduling()
     {
         handlePriority();
     }
-    else{}
+    ScheduledId.clear();
+    ScheduledTime.clear();
+    WaitingTimePerProcess.clear();
+    for(int i = 0; i < toQmlScheduledId.size();i++)
+    {
+        ScheduledId.append(toQmlScheduledId[i]);
+        ScheduledTime.append((toQmlScheduledTime[i]));
+        WaitingTimePerProcess.append(toQmlwaitingTimePerProcess[i]);
+    }
 }
 
 void Process::handleFCFS()

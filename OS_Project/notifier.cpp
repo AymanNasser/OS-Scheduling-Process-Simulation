@@ -9,3 +9,8 @@ void Notifier::callSimulator()
 {
     emit qmlGenerated();
 }
+
+void Notifier::emitListReader()
+{
+    emit goToListReader();
+}
