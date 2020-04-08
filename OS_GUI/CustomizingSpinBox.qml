@@ -4,7 +4,7 @@ import QtQuick.Controls 2.12
 
 SpinBox {
     id: control
-    value: 50
+    value: 0
     editable: true
     from: 1
     contentItem: TextInput {

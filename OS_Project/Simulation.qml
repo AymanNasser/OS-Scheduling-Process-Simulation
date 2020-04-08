@@ -17,8 +17,13 @@ Item {
         property int it: 0
         running: true
         onTriggered: {
+<<<<<<< HEAD
         processRepeater.itemAt(it).visible = true
         processRepeater.itemAt(it).state = "faded"
+=======
+        processRepeater.itemAt(it).visible = true;
+        processRepeater.itemAt(it).state = "red"
+>>>>>>> 3186afb204c9d9ef90c40c553db6851cc7f64515
         it++;
         it == scheduledId.length ? drawTimer.running = false: drawTimer.running = true ;
         }
@@ -38,24 +43,34 @@ Item {
 
             Rectangle{
                 id: processRect
+<<<<<<< HEAD
                 width: index != 0 ? (ganttChart[index] - ganttChart[index-1])*process.width*0.08 :
                                     (ganttChart[index+1]- ganttChart[index]) *process.width*0.08
+=======
+                width: 100
+>>>>>>> 3186afb204c9d9ef90c40c553db6851cc7f64515
                 height: 70
                 color: "steelblue"
                 border.color: "white"
                 radius: 10
                 antialiasing: true
                 visible: false
+<<<<<<< HEAD
 
                 states:
                     State {
                     name: "faded"
+=======
+                states: State {
+                    name: "red"
+>>>>>>> 3186afb204c9d9ef90c40c553db6851cc7f64515
                     PropertyChanges {
                         target: processRect
                         color: "red"
                     }
                 }
                 transitions: Transition {
+<<<<<<< HEAD
                     ParallelAnimation{
                     ColorAnimation {
                         duration: drawTimer.interval*0.5
@@ -81,6 +96,12 @@ Item {
                     anchors.left: processRect.left
                 }
 
+=======
+                    ColorAnimation {
+                        duration: 1000
+                    }
+                }
+>>>>>>> 3186afb204c9d9ef90c40c553db6851cc7f64515
 
                 Text {
                     id: textIdLable

@@ -5,38 +5,34 @@ Process::Process(unsigned int a_processesNum, QString a_type)
 {
     this->numOfProcesses = a_processesNum;
     this->algorithmType = a_type;
-    //    for(unsigned int i = 0;i<numOfProcesses;i++)
-    //    {
-    //        processName.append("P"+QString(i));
-    //    }
+
     //Just for Test Print The Arrival List to check the Behavior
     for(unsigned int i = 0;i<numOfProcesses;i++)
     {
         processName.append("P"+QString::number(i));
-        // just for Test
         arrivalTime.append(rand()%20);
         burstTime.append(rand()%20);
         priority.append(rand()%20);
     }
-    arrivalTime[0] = 2;
+    arrivalTime[0] = 3;
     arrivalTime[1] = 3;
-    arrivalTime[2] = 10;
-    arrivalTime[3] = 10;
-    burstTime[0] = 5;
-    burstTime[1] = 1;
+    arrivalTime[2] = 4;
+    arrivalTime[3] = 8;
+    arrivalTime[4] = 9;
+    arrivalTime[5] = 9;
+    burstTime[0] = 3;
+    burstTime[1] = 2;
     burstTime[2] = 2;
-    burstTime[3] = 8;
-    priority[0] = 1;
-    priority[1] = 0;
-    priority[2] = 3;
-    priority[3] = 2;
-    preemptive = false;
-    //Just for Test Print The Arrival List to check the Behavior
-    qDebug()<<"print Arrival List";
-    for (unsigned int i=0; i < this->numOfProcesses; i++)
-    {
-        qDebug() << arrivalTime[i];
-    }
+    burstTime[3] = 3;
+    burstTime[4] = 2;
+    burstTime[5] = 3;
+    priority[0] = 4;
+    priority[1] = 1;
+    priority[2] = 0;
+    priority[3] = 3;
+    priority[4] = 5;
+    priority[5] = 2;
+    preemptive = true;
 }
 
 void Process::prioritySorting()
@@ -56,9 +52,9 @@ void Process::prioritySorting()
     }
 }
 
-unsigned int Process::sumBusttime()
+float Process::sumBusttime()
 {
-    unsigned int Totalburstsum = 0;
+    float Totalburstsum = 0;
     for(unsigned int i = 0 ; i < numOfProcesses ; i++)
     {
         Totalburstsum += burstTime[i];
@@ -66,56 +62,111 @@ unsigned int Process::sumBusttime()
     return Totalburstsum;
 }
 
+int Process::processTakePriority(float time, unsigned int currentProcess)
+{
+    for(int i = currentProcess + 1; i < arrivalTime.size();i++)
+    {
+        if(time >= arrivalTime[i] && priority[currentProcess] > priority[i])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void Process::handlePriority()
 {
+    float Totalgaintcharttime = sumBusttime();
+    prioritySorting();
+    unsigned int currentProcess = 0;
+    unsigned int units = 0;
     // handling non-preemptive priority
     if(!preemptive)
     {
-        unsigned int Totalgaintcharttime = sumBusttime();
-        prioritySorting();
-        unsigned int currentProcess = 0;
-        unsigned int idleNumber = 0;
-        for(unsigned int i = 0 ; i < Totalgaintcharttime; i++)
+        float i = 0;
+        while(i < Totalgaintcharttime)
         {
             //  handling idle process
             if(arrivalTime[currentProcess] > i)
             {
-                scheduledProcesses.insert("idle "+QString::number(idleNumber),arrivalTime[currentProcess] - i);
+                time.append(arrivalTime[currentProcess]);
+                process_name.append("idle");
                 Totalgaintcharttime += arrivalTime[currentProcess] - i;
-                i += arrivalTime[currentProcess] - i - 1;
-                idleNumber++;
+                i = arrivalTime[currentProcess];
+                units++;
             }
             // handling normal process
             else
             {
-                scheduledProcesses.insert(processName[currentProcess],burstTime[currentProcess]);
-                i += burstTime[currentProcess] - 1;
+                time.append(burstTime[currentProcess] + i);
+                process_name.append(processName[currentProcess]);
+                i += burstTime[currentProcess];
                 currentProcess++;
+                units++;
             }
         }
-        QList <QString> keys = scheduledProcesses.keys();
-        for (int i=0; i < scheduledProcesses.size(); i++)
+        for (unsigned int i=0; i < units; i++)
         {
-            qDebug() << keys[i] << scheduledProcesses[keys[i]] ;
+            qDebug() << process_name[i] << time[i] ;
         }
     }
     else
     {
-        unsigned int Totalburstsum = sumBusttime();
-        prioritySorting();
-        bool processINprogress = false;
-        for(unsigned int i = 0 ; i < Totalburstsum ; i++)
+        // handling preemptive priority
+        unsigned int noOfProcess = numOfProcesses;
+        QString processInexecution = "NULL";
+        float i = 0;
+        while(i < Totalgaintcharttime)
         {
-            if(i == arrivalTime[i])
+            //  handling idle process
+            if(arrivalTime[currentProcess] > i && processInexecution == "NULL")
             {
-                processINprogress = true;
-                for(unsigned j = 0; j < numOfProcesses ; j++)
+                time.append(arrivalTime[currentProcess]);
+                process_name.append("idle");
+                Totalgaintcharttime += arrivalTime[currentProcess] - i;
+                i = arrivalTime[currentProcess];
+                units++;
+            }
+            // handling normal process
+            else
+            {
+                int processTakes = processTakePriority(i + burstTime[currentProcess],currentProcess);
+                if(noOfProcess > 0 && processTakes != -1)
                 {
-                    
+                   float process_space = arrivalTime[processTakes] - i;
+                   if(process_space > 0)
+                   {
+                       time.append(process_space + i);
+                       process_name.append(processName[currentProcess]);
+                       burstTime[currentProcess] -= process_space;
+                       i += process_space;
+                       units++;
+                   }
+                   currentProcess = processTakes;
+                   processInexecution = processName[currentProcess];
+                }
+                else
+                {
+                    time.append(burstTime[currentProcess] + i);
+                    process_name.append(processName[currentProcess]);
+                    i += burstTime[currentProcess];
+                    units++;
+                    burstTime.removeAt(currentProcess);
+                    processName.removeAt(currentProcess);
+                    arrivalTime.removeAt(currentProcess);
+                    priority.removeAt(currentProcess);
+                    currentProcess = 0;
+                    processInexecution = "NUll";
+                    noOfProcess--;
                 }
             }
         }
+        for (unsigned int i=0; i < units; i++)
+        {
+            qDebug() << process_name[i] << time[i] ;
+        }
     }
+    //for(int i = 0 ; i < no)
 }
 
 void Process::handleFCFS()
