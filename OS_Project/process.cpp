@@ -79,7 +79,7 @@ void Process::SJF_nonPreemptiveOperation(){
         if(unMatchedProcessPerTick)
         {
             tick++;
-            toQmlScheduledId.append("IDEAL");
+            toQmlScheduledId.append("ideal");
             toQmlScheduledTime.append(tick);
         }
     }
@@ -138,7 +138,7 @@ void Process::SJF_preemptiveOperation()
         if(unMatchedProccessPerTick == toQmlScheduledId.size())
         {
             tick++;
-            toQmlScheduledId.append("IDEAL");
+            toQmlScheduledId.append("ideal");
             toQmlScheduledTime.append(tick);
         }
         else
@@ -151,7 +151,8 @@ void Process::SJF_preemptiveOperation()
 
 void Process::RR_operation()
 {
-        unsigned int tick = 0, overAllBurstTime = 0 ;
+    unsigned int tick = 0, overAllBurstTime = 0 ;
+    bool unMatchedProcessPerTick = false;
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
     }
@@ -165,8 +166,7 @@ void Process::RR_operation()
                 toQmlScheduledTime.append(tick);
 
                 burstTime[ite] -= this->timeQuantum;
-
-
+                unMatchedProcessPerTick = false;
             }
             else if (arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] < this->timeQuantum)
             {
@@ -174,7 +174,17 @@ void Process::RR_operation()
                 toQmlScheduledId.append(QString("P" + QString(index[ite])));
                 toQmlScheduledTime.append(tick);
                 burstTime[ite] = 0;
+                unMatchedProcessPerTick = false;
             }
+            else {
+                unMatchedProcessPerTick = true;
+            }
+        }
+        if(unMatchedProcessPerTick)
+        {
+            tick++;
+            toQmlScheduledId.append("ideal");
+            toQmlScheduledTime.append(tick);
         }
 
     }
@@ -255,7 +265,7 @@ void Process::handleSJF()
 //        }
 
         for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-           // qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
+            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var] ;
         }
 
     }

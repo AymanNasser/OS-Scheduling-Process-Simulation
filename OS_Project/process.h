@@ -18,8 +18,8 @@ private:
     QString algorithmType;
     bool preemptive;
 
-    QList <unsigned int> burstTime = {3,1,1,3,2};
-    QList <unsigned int> arrivalTime = {1,3,5,6,7};
+    QList <unsigned int> burstTime = {8,4,9,5};
+    QList <unsigned int> arrivalTime = {0,1,2,3};
 
     QList <unsigned int> priority;
 
