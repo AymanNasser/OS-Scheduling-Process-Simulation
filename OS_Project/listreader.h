@@ -9,14 +9,14 @@ class ListReader : public QObject
     Q_OBJECT
 public:
     explicit ListReader(QObject *parent = nullptr);
-    Q_PROPERTY(QVariantList ProcessID READ readIDs WRITE setIDs)
-    Q_PROPERTY(QVariantList ProcessTime READ readTimes WRITE setTimes)
+    Q_PROPERTY(QVariantList ProcessID READ readIDs WRITE setIDs NOTIFY listNotifier)
+    Q_PROPERTY(QVariantList ProcessTime READ readTimes WRITE setTimes NOTIFY listNotifier)
     Q_PROPERTY(QVariantList AverageTime READ readAverage WRITE setAverage)
     Q_PROPERTY(QVariantList BurstTime READ readBurst WRITE setBurst)
     Q_PROPERTY(QVariantList ArrivalTime READ readArrival WRITE setArrival)
     Q_PROPERTY(QVariantList Priority READ readPriority WRITE setPriority)
     Q_INVOKABLE void setIDs(QVariantList);
-    QVariantList readIDs();
+    Q_INVOKABLE QVariantList readIDs();
     Q_INVOKABLE void setTimes(QVariantList);
     QVariantList readTimes();
     Q_INVOKABLE void setAverage(QVariantList);
@@ -44,6 +44,7 @@ private:
     int timeQuantum;
 signals:
     void configrationGenerated();
+    void listNotifier();
     Q_INVOKABLE void readyToLoadSimulator();
 
 private slots:

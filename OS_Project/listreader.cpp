@@ -4,12 +4,12 @@
 
 extern Notifier notify;
 
-extern QList<float> BurstTime;
-extern QList<float> ArrivalTime;
-extern QList<float> Priority;
+extern QList<qreal> BurstTime;
+extern QList<qreal> ArrivalTime;
+extern QList<unsigned int> Priority;
 extern QList <QString> ScheduledId;
-extern QList <float> ScheduledTime;
-extern QList <float> WaitingTimePerProcess;
+extern QList <qreal> ScheduledTime;
+extern QList <qreal> WaitingTimePerProcess;
 extern QString ProcessType;
 extern bool isPreemptive;
 extern int NUmberOfProcess;
@@ -29,7 +29,7 @@ void ListReader::setIDs(QVariantList list)
     processid.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        processid.append(v.value<float>());
+        processid.append(v.value<QString>());
     }
 }
 
@@ -49,7 +49,7 @@ void ListReader::setAverage(QVariantList list)
     processaverage.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        processaverage.append(v.value<float>());
+        processaverage.append(v.value<qreal>());
     }
 }
 
@@ -64,7 +64,7 @@ void ListReader::setArrival(QVariantList list)
     arrivaltime.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        arrivaltime.append(v.value<float>());
+        arrivaltime.append(v.value<qreal>());
     }
 }
 
@@ -79,7 +79,7 @@ void ListReader::setBurst(QVariantList list)
     bursttime.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        bursttime.append(v.value<float>());
+        bursttime.append(v.value<qreal>());
     }
 }
 
@@ -94,7 +94,7 @@ void ListReader::setPriority(QVariantList list)
     priority.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        priority.append(v.value<float>());
+        priority.append(v.value<unsigned int>());
     }
 }
 
@@ -120,31 +120,31 @@ void ListReader::setTimes(QVariantList timeList)
     processtime.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        processtime.append(v.value<float>());
+        processtime.append(v.value<qreal>());
     }
 }
 
 void ListReader::setGuiList()
 {
-    QVariant list(arrivaltime);
+    QVariant list_arrival(arrivaltime);
     ArrivalTime.clear();
     BurstTime.clear();
-    foreach(QVariant v, list.value<QVariantList>())
+    foreach(QVariant v, list_arrival.value<QVariantList>())
     {
-        ArrivalTime.append(v.value<float>());
+        ArrivalTime.append(v.value<qreal>());
     }
-    list = bursttime;
-    foreach(QVariant v, list.value<QVariantList>())
+    QVariant list_burst(bursttime);
+    foreach(QVariant v, list_burst.value<QVariantList>())
     {
-        BurstTime.append(v.value<float>());
+        BurstTime.append(v.value<qreal>());
     }
     if(this->processType == "Priority")
     {
-        list = priority;
+        QVariant list_priority(priority);
         Priority.clear();
-        foreach(QVariant v, list.value<QVariantList>())
+        foreach(QVariant v, list_priority.value<QVariantList>())
         {
-            Priority.append(v.value<float>());
+            Priority.append(v.value<unsigned int>());
         }
     }
     if(this->processType == "Priority" || this->processType == "SJF")
@@ -155,6 +155,8 @@ void ListReader::setGuiList()
     {
         TimeQuantum = this->timeQuantum;
     }
+    ProcessType = this->processType;
+    NUmberOfProcess = this->numberOfprocess;
     emit readyToLoadSimulator();
 }
 
@@ -165,10 +167,9 @@ void ListReader::setSimulationList()
     processaverage.clear();
     for(int i = 0 ; i < ScheduledId.size(); i++)
     {
-        qDebug() << "entered";
         processid.append(ScheduledId[i]);
         processtime.append(ScheduledTime[i]);
-        processaverage.append(WaitingTimePerProcess[i]);
-        qDebug() << processid[i] << processtime[i];
+        //processaverage.append(WaitingTimePerProcess[i]);
     }
+    emit listNotifier();
 }

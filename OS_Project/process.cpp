@@ -1,12 +1,12 @@
 #include "process.h"
 #include <QDebug>
 
-extern QList<float> BurstTime;
-extern QList<float> ArrivalTime;
-extern QList<float> Priority;
+extern QList<qreal> BurstTime;
+extern QList<qreal> ArrivalTime;
+extern QList<unsigned int> Priority;
 extern QList <QString> ScheduledId;
-extern QList <float> ScheduledTime;
-extern QList <float> WaitingTimePerProcess;
+extern QList <qreal> ScheduledTime;
+extern QList <qreal> WaitingTimePerProcess;
 extern QString ProcessType;
 extern bool isPreemptive;
 extern int NUmberOfProcess;
@@ -18,8 +18,8 @@ Process::Process()
     this->algorithmType = ProcessType;
     this->preemptive = isPreemptive;
     this->timeQuantum = TimeQuantum;
-
-    for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
+    for (unsigned int var = 0; var < this->numOfProcesses ; var++)
+    {
         processName.append("P"+QString::number(var));
         toQmlwaitingTimePerProcess.append(0);
         index.append(var);
@@ -28,7 +28,7 @@ Process::Process()
     }
     if(algorithmType == "Priority")
     {
-        for (unsigned int var = 0; var < this->numOfProcesses ; ++var)
+        for (unsigned int var = 0; var < this->numOfProcesses ; var++)
         {
             priority.append(Priority[var]);
         }
@@ -218,12 +218,12 @@ QString Process::getAlgorithmType()
     return  this->algorithmType;
 }
 
-QList<float> Process::getScheduledProcessBurstTime()
+QList<qreal> Process::getScheduledProcessBurstTime()
 {
     return this->toQmlScheduledTime;
 }
 
-QList<float> Process::getSchduledProcessWaitingTime()
+QList<qreal> Process::getSchduledProcessWaitingTime()
 {
     return this->toQmlwaitingTimePerProcess;
 }
@@ -260,7 +260,7 @@ void Process::handleScheduling()
     {
         ScheduledId.append(toQmlScheduledId[i]);
         ScheduledTime.append((toQmlScheduledTime[i]));
-        WaitingTimePerProcess.append(toQmlwaitingTimePerProcess[i]);
+        //WaitingTimePerProcess.append(toQmlwaitingTimePerProcess[i]);
     }
 }
 
@@ -360,7 +360,7 @@ void Process::prioritySorting()
     }
 }
 
-float Process::sumBusttime()
+qreal Process::sumBusttime()
 {
     float Totalburstsum = 0;
     for(unsigned int i = 0 ; i < numOfProcesses ; i++)
@@ -370,7 +370,7 @@ float Process::sumBusttime()
     return Totalburstsum;
 }
 
-int Process::processTakePriority(float time, unsigned int currentProcess)
+int Process::processTakePriority(qreal time, unsigned int currentProcess)
 {
     for(int i = currentProcess + 1; i < arrivalTime.size();i++)
     {
@@ -474,7 +474,6 @@ void Process::handlePriority()
             qDebug() << toQmlScheduledId[i] << toQmlScheduledTime[i] ;
         }
     }
-    //for(int i = 0 ; i < no)
 }
 
 qreal Process::calcOverAllAverageWaitingTime()

@@ -5,8 +5,8 @@
         <file>CustomizingComboBox.qml</file>
         <file>CustomizingRadioButton.qml</file>
         <file>CustomizingSpinBox.qml</file>
-        <file>CustomizingButton.qml</file>
         <file>main_interface.qml</file>
+        <file>CustomizingButton.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>icons/back.png</file>

@@ -24,20 +24,22 @@ void IDE::loadSimulator()
 {
     if(simulatorEngine == nullptr)
     {
+        Process process;
         simulatorEngine = new QQmlApplicationEngine;
         emit loadSimulatorData();
-        Process process;
         const QUrl urlSimulator(QStringLiteral("qrc:/main_simulator.qml"));
         simulatorEngine->load(urlSimulator);
     }
     else if(simulatorEngine != nullptr)
     {
+        Process process;
         for(int i = 0; i < simulatorEngine->rootObjects().size();i++)
         {
             QObject* object = simulatorEngine->rootObjects()[i];
             QQuickWindow* runningEditor = qobject_cast<QQuickWindow*>(object);
             runningEditor->close();
         }
+        emit loadSimulatorData();
         const QUrl urlSimulator(QStringLiteral("qrc:/main_simulator.qml"));
         simulatorEngine->load(urlSimulator);
     }

@@ -18,8 +18,8 @@ private:
     QString algorithmType;
     bool preemptive;
 
-    QList <unsigned int> burstTime = {8,4,9,5};
-    QList <unsigned int> arrivalTime = {0,1,2,3};
+    QList <qreal> burstTime ;
+    QList <qreal> arrivalTime ;
     QList <QString> processName;
 
     QList <unsigned int> priority;
@@ -30,8 +30,8 @@ private:
 
     /* QML simulation lists */
     QList <QString> toQmlScheduledId;
-    QList <float> toQmlScheduledTime;
-    QList <float> toQmlwaitingTimePerProcess;
+    QList <qreal> toQmlScheduledTime;
+    QList <qreal> toQmlwaitingTimePerProcess;
 
 
 private:
@@ -45,8 +45,8 @@ private:
     void SJF_preemptiveOperation();
     void RR_operation();
     void prioritySorting();
-    float sumBusttime();
-    int processTakePriority(float time, unsigned int currentProcess);
+    qreal sumBusttime();
+    int processTakePriority(qreal time, unsigned int currentProcess);
 
 
 public:
@@ -55,8 +55,8 @@ public:
     QString getAlgorithmType();
 
     QList <QString> getScheduledProcessId();
-    QList <float> getScheduledProcessBurstTime();
-    QList <float> getSchduledProcessWaitingTime();
+    QList <qreal> getScheduledProcessBurstTime();
+    QList <qreal> getSchduledProcessWaitingTime();
 
 
     qreal calcOverAllAverageWaitingTime();

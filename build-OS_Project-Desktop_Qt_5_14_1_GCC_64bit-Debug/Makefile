@@ -71,8 +71,7 @@ OBJECTS       = ide.o \
 		moc_listreader.o \
 		moc_notifier.o \
 		moc_process.o
-DIST          = ../OS_Project/CustomizingButton.qml \
-		../OS_Project/simulation.qml \
+DIST          = ../OS_Project/simulation.qml \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/common/unix.conf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/common/linux.conf \
@@ -1256,10 +1255,31 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		../OS_Project/notifier.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickwindow.h \
+		../OS_Project/process.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickItem \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qfont.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qaccessible.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickwindow.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsgrendererinterface.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsgnode.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsggeometry.h \
@@ -1268,14 +1288,12 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qopengles2ext.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qopenglext.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QRectF \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/QMatrix4x4 \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qmatrix4x4.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector3d.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector4d.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qquaternion.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qgenericmatrix.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindow.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QEvent \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMargins \
@@ -1285,24 +1303,14 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qicon.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixmap.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qimage.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixelformat.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtransform.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qmatrix.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpolygon.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qline.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpainterpath.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcursor.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcursor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ide.o ../OS_Project/ide.cpp
 
 listreader.o: ../OS_Project/listreader.cpp ../OS_Project/listreader.h \

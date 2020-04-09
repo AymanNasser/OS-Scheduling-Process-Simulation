@@ -7,12 +7,12 @@
 
 Notifier notify;
 
-QList<float> BurstTime;
-QList<float> ArrivalTime;
-QList<float> Priority;
+QList<qreal> BurstTime;
+QList<qreal> ArrivalTime;
+QList<unsigned int> Priority;
 QList <QString> ScheduledId;
-QList <float> ScheduledTime;
-QList <float> WaitingTimePerProcess;
+QList <qreal> ScheduledTime;
+QList <qreal> WaitingTimePerProcess;
 QString ProcessType;
 bool isPreemptive;
 int NUmberOfProcess;

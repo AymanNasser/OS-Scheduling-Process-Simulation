@@ -8,8 +8,8 @@ import QList 1.0
 Window {
     id: gui
     visible: true
-    width: 800
-    height: 600
+    width: 1000
+    height: 800
     title: qsTr("OS GUI")
     color: "black"
 
@@ -61,6 +61,8 @@ Window {
                     back_text.color = "orange"
                 }
                 onClicked: {
+                    processlist.clear()
+                    processdata.clear()
                     back_rec.visible = false
                     basicsconfigration.visible = true
                     lastconfigration.visible = false
@@ -69,7 +71,6 @@ Window {
                     processname.visible = false
                     noofprocess.visible = false
                     ispreemptive.visible = false
-                    processlist.clear()
                 }
             }
         }

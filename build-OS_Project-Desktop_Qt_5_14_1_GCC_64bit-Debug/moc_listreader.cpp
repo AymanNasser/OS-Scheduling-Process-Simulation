@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ListReader_t {
-    QByteArrayData data[23];
-    char stringdata0[263];
+    QByteArrayData data[25];
+    char stringdata0[284];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,36 +35,38 @@ static const qt_meta_stringdata_ListReader_t qt_meta_stringdata_ListReader = {
 QT_MOC_LITERAL(0, 0, 10), // "ListReader"
 QT_MOC_LITERAL(1, 11, 21), // "configrationGenerated"
 QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 20), // "readyToLoadSimulator"
-QT_MOC_LITERAL(4, 55, 10), // "setGuiList"
-QT_MOC_LITERAL(5, 66, 17), // "setSimulationList"
-QT_MOC_LITERAL(6, 84, 6), // "setIDs"
-QT_MOC_LITERAL(7, 91, 8), // "setTimes"
-QT_MOC_LITERAL(8, 100, 10), // "setAverage"
-QT_MOC_LITERAL(9, 111, 10), // "setArrival"
-QT_MOC_LITERAL(10, 122, 8), // "setBurst"
-QT_MOC_LITERAL(11, 131, 11), // "setPriority"
-QT_MOC_LITERAL(12, 143, 16), // "setConfigrations"
-QT_MOC_LITERAL(13, 160, 11), // "processtype"
-QT_MOC_LITERAL(14, 172, 7), // "numbers"
-QT_MOC_LITERAL(15, 180, 6), // "rrTime"
-QT_MOC_LITERAL(16, 187, 10), // "preemptive"
-QT_MOC_LITERAL(17, 198, 9), // "ProcessID"
-QT_MOC_LITERAL(18, 208, 11), // "ProcessTime"
-QT_MOC_LITERAL(19, 220, 11), // "AverageTime"
-QT_MOC_LITERAL(20, 232, 9), // "BurstTime"
-QT_MOC_LITERAL(21, 242, 11), // "ArrivalTime"
-QT_MOC_LITERAL(22, 254, 8) // "Priority"
+QT_MOC_LITERAL(3, 34, 12), // "listNotifier"
+QT_MOC_LITERAL(4, 47, 20), // "readyToLoadSimulator"
+QT_MOC_LITERAL(5, 68, 10), // "setGuiList"
+QT_MOC_LITERAL(6, 79, 17), // "setSimulationList"
+QT_MOC_LITERAL(7, 97, 6), // "setIDs"
+QT_MOC_LITERAL(8, 104, 7), // "readIDs"
+QT_MOC_LITERAL(9, 112, 8), // "setTimes"
+QT_MOC_LITERAL(10, 121, 10), // "setAverage"
+QT_MOC_LITERAL(11, 132, 10), // "setArrival"
+QT_MOC_LITERAL(12, 143, 8), // "setBurst"
+QT_MOC_LITERAL(13, 152, 11), // "setPriority"
+QT_MOC_LITERAL(14, 164, 16), // "setConfigrations"
+QT_MOC_LITERAL(15, 181, 11), // "processtype"
+QT_MOC_LITERAL(16, 193, 7), // "numbers"
+QT_MOC_LITERAL(17, 201, 6), // "rrTime"
+QT_MOC_LITERAL(18, 208, 10), // "preemptive"
+QT_MOC_LITERAL(19, 219, 9), // "ProcessID"
+QT_MOC_LITERAL(20, 229, 11), // "ProcessTime"
+QT_MOC_LITERAL(21, 241, 11), // "AverageTime"
+QT_MOC_LITERAL(22, 253, 9), // "BurstTime"
+QT_MOC_LITERAL(23, 263, 11), // "ArrivalTime"
+QT_MOC_LITERAL(24, 275, 8) // "Priority"
 
     },
     "ListReader\0configrationGenerated\0\0"
-    "readyToLoadSimulator\0setGuiList\0"
-    "setSimulationList\0setIDs\0setTimes\0"
-    "setAverage\0setArrival\0setBurst\0"
-    "setPriority\0setConfigrations\0processtype\0"
-    "numbers\0rrTime\0preemptive\0ProcessID\0"
-    "ProcessTime\0AverageTime\0BurstTime\0"
-    "ArrivalTime\0Priority"
+    "listNotifier\0readyToLoadSimulator\0"
+    "setGuiList\0setSimulationList\0setIDs\0"
+    "readIDs\0setTimes\0setAverage\0setArrival\0"
+    "setBurst\0setPriority\0setConfigrations\0"
+    "processtype\0numbers\0rrTime\0preemptive\0"
+    "ProcessID\0ProcessTime\0AverageTime\0"
+    "BurstTime\0ArrivalTime\0Priority"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,31 +76,34 @@ static const uint qt_meta_data_ListReader[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
-       6,  100, // properties
+      13,   14, // methods
+       6,  112, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x06 /* Public */,
-       3,    0,   70,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
+       3,    0,   80,    2, 0x06 /* Public */,
+       4,    0,   81,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   71,    2, 0x08 /* Private */,
-       5,    0,   72,    2, 0x08 /* Private */,
+       5,    0,   82,    2, 0x08 /* Private */,
+       6,    0,   83,    2, 0x08 /* Private */,
 
  // methods: name, argc, parameters, tag, flags
-       6,    1,   73,    2, 0x02 /* Public */,
-       7,    1,   76,    2, 0x02 /* Public */,
-       8,    1,   79,    2, 0x02 /* Public */,
-       9,    1,   82,    2, 0x02 /* Public */,
-      10,    1,   85,    2, 0x02 /* Public */,
-      11,    1,   88,    2, 0x02 /* Public */,
-      12,    4,   91,    2, 0x02 /* Public */,
+       7,    1,   84,    2, 0x02 /* Public */,
+       8,    0,   87,    2, 0x02 /* Public */,
+       9,    1,   88,    2, 0x02 /* Public */,
+      10,    1,   91,    2, 0x02 /* Public */,
+      11,    1,   94,    2, 0x02 /* Public */,
+      12,    1,   97,    2, 0x02 /* Public */,
+      13,    1,  100,    2, 0x02 /* Public */,
+      14,    4,  103,    2, 0x02 /* Public */,
 
  // signals: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -108,20 +113,29 @@ static const uint qt_meta_data_ListReader[] = {
 
  // methods: parameters
     QMetaType::Void, QMetaType::QVariantList,    2,
+    QMetaType::QVariantList,
     QMetaType::Void, QMetaType::QVariantList,    2,
     QMetaType::Void, QMetaType::QVariantList,    2,
     QMetaType::Void, QMetaType::QVariantList,    2,
     QMetaType::Void, QMetaType::QVariantList,    2,
     QMetaType::Void, QMetaType::QVariantList,    2,
-    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::Int, QMetaType::Bool,   13,   14,   15,   16,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::Int, QMetaType::Bool,   15,   16,   17,   18,
 
  // properties: name, type, flags
-      17, QMetaType::QVariantList, 0x00095003,
-      18, QMetaType::QVariantList, 0x00095003,
-      19, QMetaType::QVariantList, 0x00095003,
-      20, QMetaType::QVariantList, 0x00095003,
+      19, QMetaType::QVariantList, 0x00495003,
+      20, QMetaType::QVariantList, 0x00495003,
       21, QMetaType::QVariantList, 0x00095003,
-      22, QMetaType::QVariantList, 0x00095103,
+      22, QMetaType::QVariantList, 0x00095003,
+      23, QMetaType::QVariantList, 0x00095003,
+      24, QMetaType::QVariantList, 0x00095103,
+
+ // properties: notify_signal_id
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
 
        0        // eod
 };
@@ -133,16 +147,19 @@ void ListReader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->configrationGenerated(); break;
-        case 1: _t->readyToLoadSimulator(); break;
-        case 2: _t->setGuiList(); break;
-        case 3: _t->setSimulationList(); break;
-        case 4: _t->setIDs((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 5: _t->setTimes((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 6: _t->setAverage((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 7: _t->setArrival((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 8: _t->setBurst((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 9: _t->setPriority((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
-        case 10: _t->setConfigrations((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
+        case 1: _t->listNotifier(); break;
+        case 2: _t->readyToLoadSimulator(); break;
+        case 3: _t->setGuiList(); break;
+        case 4: _t->setSimulationList(); break;
+        case 5: _t->setIDs((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 6: { QVariantList _r = _t->readIDs();
+            if (_a[0]) *reinterpret_cast< QVariantList*>(_a[0]) = std::move(_r); }  break;
+        case 7: _t->setTimes((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 8: _t->setAverage((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 9: _t->setArrival((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 10: _t->setBurst((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 11: _t->setPriority((*reinterpret_cast< QVariantList(*)>(_a[1]))); break;
+        case 12: _t->setConfigrations((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -156,8 +173,15 @@ void ListReader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         }
         {
             using _t = void (ListReader::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ListReader::readyToLoadSimulator)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ListReader::listNotifier)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (ListReader::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ListReader::readyToLoadSimulator)) {
+                *result = 2;
                 return;
             }
         }
@@ -223,13 +247,13 @@ int ListReader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 13;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -258,9 +282,15 @@ void ListReader::configrationGenerated()
 }
 
 // SIGNAL 1
-void ListReader::readyToLoadSimulator()
+void ListReader::listNotifier()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void ListReader::readyToLoadSimulator()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
