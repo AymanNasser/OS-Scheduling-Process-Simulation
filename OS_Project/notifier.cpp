@@ -14,3 +14,8 @@ void Notifier::emitListReader()
 {
     emit goToListReader();
 }
+
+void Notifier::listcopyglobaldata()
+{
+    emit allowIDEtogenerateQML();
+}

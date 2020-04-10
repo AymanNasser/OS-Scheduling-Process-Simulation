@@ -3,38 +3,49 @@
 
 #include <QObject>
 #include <QVariantList>
+#include <QList>
 
 class ListReader : public QObject
 {
     Q_OBJECT
 public:
     explicit ListReader(QObject *parent = nullptr);
-    Q_PROPERTY(QVariantList ProcessID READ readIDs WRITE setIDs NOTIFY listNotifier)
-    Q_PROPERTY(QVariantList ProcessTime READ readTimes WRITE setTimes NOTIFY listNotifier)
-    Q_PROPERTY(QVariantList AverageTime READ readAverage WRITE setAverage)
+
+    Q_PROPERTY(QVariantList ProcessID READ readIDs WRITE setIDs)
+    Q_PROPERTY(QVariantList ProcessTime READ readTimes WRITE setTimes)
+    Q_PROPERTY(QList<qreal> AverageTime READ readAverage WRITE setAverage)
+
     Q_PROPERTY(QVariantList BurstTime READ readBurst WRITE setBurst)
     Q_PROPERTY(QVariantList ArrivalTime READ readArrival WRITE setArrival)
     Q_PROPERTY(QVariantList Priority READ readPriority WRITE setPriority)
+
     Q_INVOKABLE void setIDs(QVariantList);
-    Q_INVOKABLE QVariantList readIDs();
+    QVariantList readIDs();
     Q_INVOKABLE void setTimes(QVariantList);
     QVariantList readTimes();
-    Q_INVOKABLE void setAverage(QVariantList);
-    QVariantList readAverage();
+    void setAverage(QList<qreal>);
+    QList<qreal> readAverage();
+
+    Q_INVOKABLE int idsLength();
+    Q_INVOKABLE QString readIDitem(int);
+    Q_INVOKABLE int timeLength();
+    Q_INVOKABLE qreal readTimeitem(int);
+    Q_INVOKABLE int averageLength();
+    Q_INVOKABLE qreal readAverageitem(int);
 
     Q_INVOKABLE void setArrival(QVariantList);
-    QVariantList readArrival();
+    Q_INVOKABLE QVariantList readArrival();
     Q_INVOKABLE void setBurst(QVariantList);
-    QVariantList readBurst();
+    Q_INVOKABLE QVariantList readBurst();
     Q_INVOKABLE void setPriority(QVariantList);
-    QVariantList readPriority();
+    Q_INVOKABLE QVariantList readPriority();
 
     Q_INVOKABLE void setConfigrations(QString processtype,int numbers,int rrTime,bool preemptive);
 
 private:
     QVariantList processid;
     QVariantList processtime;
-    QVariantList processaverage;
+    QList<qreal> processaverage;
     QVariantList bursttime;
     QVariantList arrivaltime;
     QVariantList priority;
@@ -44,7 +55,7 @@ private:
     int timeQuantum;
 signals:
     void configrationGenerated();
-    void listNotifier();
+    void allProcessfinished();
     Q_INVOKABLE void readyToLoadSimulator();
 
 private slots:

@@ -12,22 +12,30 @@ Window {
     height: 1000
     title: qsTr("Simulation")
     color: "white"
+    function setLists(list_id,list_time)
+    {
+        simulator_lists.setIDs(list_id)
+        simulator_lists.setTimes(list_time)
+        simulator.scheduledId = simulator_lists.ProcessID
+        simulator.ganttChart = simulator_lists.ProcessTime
+        console.log(simulator.scheduledId[0],simulator.scheduledId.length,simulator.ganttChart.length)
+    }
     ListQML {
         id: simulator_lists
+//        Component.onCompleted: {
+//            simulator.scheduledId = ProcessID
+//            console.log("hello",ProcessID.length,ProcessID[0],simulator.scheduledId[0])
+//            for(var i = 0 ; i < idsLength();i++)
+//            {
+//                simulator.scheduledId.push(readIDitem(i))
+//                simulator.ganttChart.push(readTimeitem(i))
+//            }
+//        }
     }
     Simulation{
-        scheduledId: simulator_lists.readIDs()//["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3"]
-        ganttChart: simulator_lists.ProcessTime//[1,2,3,4,5,6,7,9,11]
-        Component.onCompleted: {
-           for(var i ; i < scheduledId.length;i++)
-           {
-               console.log(scheduledId[i],ganttChart[i])
-           }
-           for(var j ; j < simulator_lists.ProcessID.length;j++)
-           {
-               console.log(simulator_lists.ProcessID[j],simulator_lists.ProcessTime[j])
-           }
-        }
+        id: simulator
+        //scheduledId: simulator_lists.ProcessID//["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3"]
+        //ganttChart: simulator_lists.ProcessTime//[1,2,3,4,5,6,7,9,11]
         width: parent.width
     }
 }

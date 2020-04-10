@@ -6,9 +6,9 @@ import QtQuick.Controls.Styles 1.4
 Item {
     id: process
     anchors.centerIn: parent
-    property var scheduledId: []
-    property var ganttChart: []
-    property var waitingTime: []
+    property var scheduledId
+    property var ganttChart
+    property var waitingTime
 
     Timer{
         id: drawTimer

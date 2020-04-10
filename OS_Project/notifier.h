@@ -12,9 +12,11 @@ public:
 signals:
     void qmlGenerated();
     void goToListReader();
+    void allowIDEtogenerateQML();
 public slots:
     void callSimulator();
     void emitListReader();
+    void listcopyglobaldata();
 
 };
 
