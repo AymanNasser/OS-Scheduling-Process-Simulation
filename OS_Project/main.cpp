@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QList>
+#include <QIcon>
 #include "listreader.h"
 #include "notifier.h"
 #include "ide.h"
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc,argv);
+    app.setWindowIcon(QIcon(":/images/icons/process_manager.png"));
 
     IDE ide(&app,argc,argv);
 

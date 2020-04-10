@@ -779,6 +779,7 @@ qrc_qml.cpp: ../OS_Project/qml.qrc \
 		../OS_Project/CustomizingSpinBox.qml \
 		../OS_Project/CustomizingButton.qml \
 		../OS_Project/CustomizingRadioButton.qml \
+		../OS_Project/icons/process_manager.png \
 		../OS_Project/icons/back.png
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/rcc -name qml ../OS_Project/qml.qrc -o qrc_qml.cpp
 
@@ -962,6 +963,7 @@ moc_listreader.cpp: ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/listreader.h -o moc_listreader.cpp
@@ -1380,6 +1382,7 @@ listreader.o: ../OS_Project/listreader.cpp ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		../OS_Project/notifier.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listreader.o ../OS_Project/listreader.cpp
@@ -1480,6 +1483,23 @@ main.o: ../OS_Project/main.cpp /home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmetaobject.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlerror.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/QIcon \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qicon.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixmap.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qimage.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixelformat.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtransform.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qmatrix.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpolygon.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qline.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpainterpath.h \
 		../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \

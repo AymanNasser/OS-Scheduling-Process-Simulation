@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/"/>
+    <qresource prefix="/images">
+        <file alias="icons/back.png">../OS_Project/icons/back.png</file>
+        <file alias="icons/process_manager.png">../OS_Project/icons/process_manager.png</file>
+    </qresource>
+</RCC>
