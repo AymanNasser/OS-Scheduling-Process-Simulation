@@ -25,6 +25,25 @@ IDE::IDE(QGuiApplication* mainApp,int argc, char *argv[],QObject* parent) : QObj
     connect(this,SIGNAL(loadSimulatorData()),&notify,SLOT(emitListReader()));
 }
 
+void IDE::setSimulatorList()
+{
+    QQmlComponent component(simulatorEngine, QUrl(QStringLiteral("qrc:/Simulation.qml")));
+    QObject *object = component.create();
+    QVariantList list_id,list_time;
+    for(int i = 0 ; i < ScheduledId.size(); i++)
+    {
+        list_id.append(ScheduledId[i]);
+    }
+    for(int i = 0 ; i < ScheduledTime.size(); i++)
+    {
+        list_time.append(ScheduledTime[i]);
+    }
+    QVariant id(list_id),schedualtime(list_time);
+    QMetaObject::invokeMethod(object, "setLists",Q_ARG(QVariant, id),Q_ARG(QVariant, schedualtime));
+
+    delete object;
+}
+
 void IDE::loadSimulator()
 {
     if(simulatorEngine == nullptr)
@@ -50,21 +69,7 @@ void IDE::loadSimulator()
 
 void IDE::loadSimulatorWindow()
 {
-    QQmlComponent component(simulatorEngine, QUrl(QStringLiteral("qrc:/main_simulator.qml")));
-    QObject *object = component.create();
-    QVariantList list_id,list_time;
-    for(int i = 0 ; i < ScheduledId.size(); i++)
-    {
-        list_id.append(ScheduledId[i]);
-    }
-    for(int i = 0 ; i < ScheduledTime.size(); i++)
-    {
-        list_time.append(ScheduledTime[i]);
-    }
-    QVariant id(list_id),schedualtime(list_time);
-    QMetaObject::invokeMethod(object, "setLists",Q_ARG(QVariant, id),Q_ARG(QVariant, schedualtime));
-
-    delete object;
+    this->setSimulatorList();
     const QUrl urlSimulator(QStringLiteral("qrc:/main_simulator.qml"));
     simulatorEngine->load(urlSimulator);
 }

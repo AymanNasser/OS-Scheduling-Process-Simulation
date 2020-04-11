@@ -779,8 +779,10 @@ qrc_qml.cpp: ../OS_Project/qml.qrc \
 		../OS_Project/CustomizingSpinBox.qml \
 		../OS_Project/CustomizingButton.qml \
 		../OS_Project/CustomizingRadioButton.qml \
+		../OS_Project/icons/user-male.png \
 		../OS_Project/icons/process_manager.png \
-		../OS_Project/icons/back.png
+		../OS_Project/icons/back.png \
+		../OS_Project/icons/comp.png
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/rcc -name qml ../OS_Project/qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

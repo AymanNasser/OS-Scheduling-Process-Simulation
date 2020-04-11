@@ -11,5 +11,7 @@
     <qresource prefix="/images">
         <file>icons/back.png</file>
         <file>icons/process_manager.png</file>
+        <file>icons/comp.png</file>
+        <file>icons/user-male.png</file>
     </qresource>
 </RCC>

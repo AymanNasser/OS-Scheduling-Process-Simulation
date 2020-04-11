@@ -19,6 +19,7 @@ private:
     QQmlApplicationEngine* interfaceEngine;
     QQmlApplicationEngine* simulatorEngine = nullptr;
     QGuiApplication* app;
+    void setSimulatorList();
 
 private slots:
     void loadSimulator();

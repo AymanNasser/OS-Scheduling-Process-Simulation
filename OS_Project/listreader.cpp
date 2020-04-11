@@ -203,5 +203,5 @@ void ListReader::setSimulationList()
         processtime.append(ScheduledTime[i]);
         //processaverage.append(WaitingTimePerProcess[i]);
     }
-    emit allProcessfinished();
+    //emit allProcessfinished();
 }
