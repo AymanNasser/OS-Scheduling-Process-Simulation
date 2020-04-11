@@ -32,8 +32,8 @@ Window {
     }
     Simulation{
         id: simulator
-        scheduledId:["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3"]
-        ganttChart: [1,2,3,4,5,6,7,9,11]
+        scheduledId:["IDEAL","P0","P0","P1","P0","P2","P3","P4","P3","P5","P6","P9","P12"]
+        ganttChart: [1,2,3,4,5,6,7,9,11,15,19,21,25]
         anchors.fill: parent
         onDataIsLoaded: {
             loading_simulation.sourceComponent = rect

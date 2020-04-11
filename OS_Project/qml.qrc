@@ -11,7 +11,9 @@
     <qresource prefix="/images">
         <file>icons/back.png</file>
         <file>icons/process_manager.png</file>
-        <file>icons/comp.png</file>
-        <file>icons/user-male.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/play.png</file>
+        <file>icons/play_backward.png</file>
+        <file>icons/play_forward.png</file>
     </qresource>
 </RCC>
