@@ -85,6 +85,7 @@ Item {
                 drawTimer.stop()
                 buttons.itr = drawTimer.it - 1
                 play_rec.played = false
+                attention.visible = false
             }
             else
             {
@@ -169,12 +170,10 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            back_rec.width = 75
-                            back_rec.height = 75
+                            back_rec.color = "#001bc4"
                         }
                         onExited: {
-                            back_rec.width = 50
-                            back_rec.height = 50
+                            back_rec.color = "white"
                         }
                         onClicked: {
                             if(!play_rec.played)
@@ -225,12 +224,10 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            play_rec.width = 85
-                            play_rec.height = 85
+                            play_rec.color = "#001bc4"
                         }
                         onExited: {
-                            play_rec.width = 60
-                            play_rec.height = 60
+                            play_rec.color = "white"
                         }
                         onClicked: {
                             if(play_rec.played)
@@ -239,6 +236,7 @@ Item {
                                 drawTimer.stop()
                                 buttons.itr = drawTimer.it - 1
                                 play_rec.played = false
+                                attention.visible = false
                             }
                             else
                             {
@@ -270,12 +268,10 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            front_rec.width = 75
-                            front_rec.height = 75
+                            front_rec.color = "#001bc4"
                         }
                         onExited: {
-                            front_rec.width = 50
-                            front_rec.height = 50
+                            front_rec.color = "white"
                         }
                         onClicked: {
                             if(!play_rec.played)

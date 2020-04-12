@@ -894,8 +894,6 @@ moc_ide.cpp: ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qinputmethod.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant \
@@ -972,7 +970,6 @@ moc_listreader.cpp: ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/listreader.h -o moc_listreader.cpp
@@ -1089,64 +1086,9 @@ moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvarlengtharray.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontainerfwd.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qobject_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickItem \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qtqmlglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qtqml-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtgui-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqml.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlprivate.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvariant.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmap.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdebug.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qhash.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qtextstream.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qiodevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qlocale.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qshareddata.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qset.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qurl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qurlquery.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qpointer.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlparserstatus.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmllist.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmetaobject.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlerror.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qjsvalue.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qfont.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qaccessible.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qeventloop.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/process.h -o moc_process.cpp
@@ -1263,8 +1205,6 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qinputmethod.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant \
@@ -1272,29 +1212,12 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		../OS_Project/notifier.h \
 		../OS_Project/process.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickItem \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qfont.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qaccessible.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickwindow.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsgrendererinterface.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsgnode.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qsggeometry.h \
@@ -1303,12 +1226,14 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qopengles2ext.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qopenglext.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QRectF \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/QMatrix4x4 \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qmatrix4x4.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector3d.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector4d.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qquaternion.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qgenericmatrix.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindow.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QEvent \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMargins \
@@ -1318,14 +1243,29 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qicon.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixmap.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qimage.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpixelformat.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtransform.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qmatrix.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpolygon.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qline.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qpainterpath.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcursor.h
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcursor.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickItem \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qfont.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qaccessible.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ide.o ../OS_Project/ide.cpp
 
 listreader.o: ../OS_Project/listreader.cpp ../OS_Project/listreader.h \
@@ -1395,7 +1335,6 @@ listreader.o: ../OS_Project/listreader.cpp ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		../OS_Project/notifier.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listreader.o ../OS_Project/listreader.cpp
 
@@ -1517,8 +1456,6 @@ main.o: ../OS_Project/main.cpp /home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		../OS_Project/notifier.h \
 		../OS_Project/ide.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../OS_Project/main.cpp
 
@@ -1632,64 +1569,9 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvarlengtharray.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontainerfwd.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qobject_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickItem \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qtqmlglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qtqml-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtguiglobal.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtgui-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqml.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlprivate.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvariant.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmap.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdebug.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qhash.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qtextstream.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qiodevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qlocale.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qshareddata.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qset.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qurl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qurlquery.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qpointer.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlparserstatus.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmllist.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmetaobject.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlerror.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qjsvalue.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdatastream.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfile.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qvector2d.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qfont.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qaccessible.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qeventloop.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qcolor.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgb.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 
 qrc_qml.o: qrc_qml.cpp 

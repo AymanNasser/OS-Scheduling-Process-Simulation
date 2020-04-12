@@ -10,9 +10,9 @@
     </qresource>
     <qresource prefix="/images">
         <file>icons/back.png</file>
-        <file>icons/process_manager.png</file>
         <file>icons/pause.png</file>
         <file>icons/play.png</file>
         <file>icons/play_forward.png</file>
+        <file>icons/process_manager.png</file>
     </qresource>
 </RCC>

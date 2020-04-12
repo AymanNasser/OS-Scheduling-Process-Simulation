@@ -70,7 +70,7 @@ void Process::SJF_nonPreemptiveOperation(){
         for (ite = 0; ite < this->numOfProcesses ; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] !=0 )
             {
-                toQmlScheduledId.append(QString("P" + QString(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
 
                 toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
                 tick+= burstTime[ite];
@@ -94,7 +94,7 @@ void Process::SJF_nonPreemptiveOperation(){
         if(unMatchedProcessPerTick)
         {
             tick++;
-            toQmlScheduledId.append("ideal");
+            toQmlScheduledId.append("idle");
             toQmlScheduledTime.append(tick);
         }
     }
@@ -120,7 +120,7 @@ void Process::SJF_preemptiveOperation()
         for (ite = 0; ite < this->burstTime.size() ; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] <= minJobArrivedInQueue)
             {
-                toQmlScheduledId.append(QString("P" + QString(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
 
                 tick += burstTime[ite];
                 toQmlScheduledTime.append(tick);
@@ -137,7 +137,7 @@ void Process::SJF_preemptiveOperation()
             else if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
             {
                 burstTime[ite]--;
-                toQmlScheduledId.append(QString("P" + QString(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
                 tick++;
                 toQmlScheduledTime.append(tick);
                 toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
@@ -153,7 +153,7 @@ void Process::SJF_preemptiveOperation()
         if(unMatchedProccessPerTick == toQmlScheduledId.size())
         {
             tick++;
-            toQmlScheduledId.append("ideal");
+            toQmlScheduledId.append("idle");
             toQmlScheduledTime.append(tick);
         }
         else
@@ -177,7 +177,7 @@ void Process::RR_operation()
             if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] >= this->timeQuantum)
             {
                 tick += this->timeQuantum;
-                toQmlScheduledId.append(QString("P" + QString(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
                 toQmlScheduledTime.append(tick);
 
                 burstTime[ite] -= this->timeQuantum;
@@ -186,7 +186,7 @@ void Process::RR_operation()
             else if (arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] < this->timeQuantum)
             {
                 tick += burstTime[ite];
-                toQmlScheduledId.append(QString("P" + QString(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
                 toQmlScheduledTime.append(tick);
                 burstTime[ite] = 0;
                 unMatchedProcessPerTick = false;
@@ -198,7 +198,7 @@ void Process::RR_operation()
         if(unMatchedProcessPerTick)
         {
             tick++;
-            toQmlScheduledId.append("ideal");
+            toQmlScheduledId.append("idle");
             toQmlScheduledTime.append(tick);
         }
 
@@ -290,7 +290,7 @@ void Process::handleFCFS()
                 toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
                 tick += burstTime[ite];
                 burstTime[ite] = 0;
-                toQmlScheduledId.append("P" + QString(index[ite]));
+                toQmlScheduledId.append("P" + QString::number(index[ite]));
                 toQmlScheduledTime.append(tick);
 
                 unMatchedProcessPerTick = false;
@@ -304,7 +304,7 @@ void Process::handleFCFS()
         if(unMatchedProcessPerTick)
         {
             tick++;
-            toQmlScheduledId.append("ideal");
+            toQmlScheduledId.append("idle");
             toQmlScheduledTime.append(tick);
         }
     }

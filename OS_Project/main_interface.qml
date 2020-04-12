@@ -150,6 +150,7 @@ Window {
         }
         CustomizingSpinBox {
             id: processnumber
+            from: 1
             Layout.column: 1
             Layout.row: 1
         }
