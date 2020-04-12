@@ -1,43 +1,33 @@
 import QtQuick 2.11
 import QtQuick.Window 2.11
-import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.3
-import QList 1.0
+
 
 Item {
     id: process
     property var scheduledId
     property var ganttChart
     property var waitingTime
-    signal dataIsLoaded()
-    function setLists(list_id,list_time)
+    function setModel(model)
     {
-        simulator_lists.setIDs(list_id)
-        simulator_lists.setTimes(list_time)
-        scheduledId = simulator_lists.ProcessID
-        ganttChart = simulator_lists.ProcessTime
-        dataIsLoaded()
-        console.log(scheduledId[0],scheduledId.length,ganttChart.length)
+        processRepeater.model = model
+        processRepeater.setProcesses()
     }
     function stateFaded(index)
     {
         processRepeater.itemAt(index).state = "faded"
         drawTimer.it = index
-        console.log(drawTimer.it)
     }
     function stateDefault(index)
     {
         processRepeater.itemAt(index).state = "original"
     }
-
     Timer{
         id: drawTimer
         repeat: true
-        interval: 2000
+        interval: 1000
         property int it: 0
-        running: true
         onTriggered: {
             if(it != 0)
             {
@@ -45,11 +35,8 @@ Item {
             }
             processRepeater.itemAt(it).state = "faded"
             it++
-            it == scheduledId.length ? drawTimer.running = false: drawTimer.running = true
+            it === scheduledId.length ? drawTimer.running = false: drawTimer.running = true
         }
-    }
-    ListQML {
-        id: simulator_lists
     }
     Rectangle {
         id: cotainer
@@ -73,8 +60,9 @@ Item {
                 border.width: 2
                 Image {
                     id: back
-                    source: "images/icons/play_backward.png"
+                    source: "images/icons/play_forward.png"
                     anchors.fill: parent
+                    mirror: true
                     mipmap: true
                     scale: 0.5
                     MouseArea {
@@ -112,7 +100,7 @@ Item {
                 property bool played: true
                 Image {
                     id: play
-                    source: "images/icons/pause.png"
+                    source: "images/icons/play.png"
                     anchors.fill: parent
                     mipmap: true
                     scale: 0.5
@@ -194,27 +182,48 @@ Item {
                 id: rowId
                 anchors.centerIn: parent
                 antialiasing: true
-
                 Repeater{
                     id: processRepeater
-                    model: process.scheduledId
-
-
+                    signal widthAlarm()
+                    function setProcesses()
+                    {
+                        for(var i = 0 ; i < model.length; i++)
+                        {
+                            widthAlarm()
+                            itemAt(i).setTexts()
+                        }
+                    }
                     Rectangle{
                         id: processRect
-
-                        width: index != 0 ? (ganttChart[index] - ganttChart[index-1])*process.width*0.08 :
-                                            (ganttChart[index+1]- ganttChart[index]) *process.width*0.08
                         height: 70
                         color: "#001bc4"
                         border.color: "white"
                         radius: 10
-                        antialiasing: true
-
+                        function setWidth()
+                        {
+                            if(index == 0)
+                            {
+                                width = process.ganttChart[index]*process.width*0.08
+                            }
+                            else
+                            {
+                                width =  (process.ganttChart[index] - process.ganttChart[index-1])*process.width*0.08
+                            }
+                        }
+                        function setTexts()
+                        {
+                            textIdLable.text = process.scheduledId[index]
+                            textIdBurstTime.text = process.ganttChart[index]
+                        }
+                        Connections {
+                            target: processRepeater
+                            onWidthAlarm: {
+                                processRect.setWidth()
+                            }
+                        }
                         states: [
                             State {
                                 name: "faded"
-
                                 PropertyChanges {
                                     target: processRect
                                     color: "gray"
@@ -229,42 +238,30 @@ Item {
                             }
                         ]
                         transitions: Transition {
-                            ParallelAnimation{
-                                ColorAnimation {
-                                    duration: drawTimer.interval
-                                }
+                            ColorAnimation {
+                                duration: 500
                             }
                         }
-
                         Text {
                             id: zeros
                             text: "0"
-                            antialiasing: true
                             color: "black"
                             font.pixelSize: 16
-
                             visible: index == 0 ? true : false
                             font.family: "Helvetica"
                             font.bold: true
                             anchors.top: processRect.bottom
                             anchors.left: processRect.left
                         }
-
                         Text {
                             id: textIdLable
-                            text: scheduledId[index]
-                            antialiasing: true
                             color: "white"
                             font.pixelSize: process.width*0.015
                             font.bold: true
                             anchors.centerIn: parent
                         }
-
                         Text{
                             id: textIdBurstTime
-
-                            text: ganttChart[index]
-                            antialiasing: true
                             color: "black"
                             font.pixelSize: 16
                             font.family: "Helvetica"
@@ -272,68 +269,9 @@ Item {
                             anchors.top: processRect.bottom
                             anchors.right: processRect.right
                         }
-
                     }
-
                 }
-
             }
         }
-
-        //    ToolBar{
-        //        id: movingToolBar
-        //        property int itr
-        //        style: ToolBarStyle {
-        //            background: Rectangle {
-        //                implicitWidth: 100
-        //                implicitHeight: 40
-        //                border.color: "#999"
-        //                gradient: Gradient {
-        //                    GradientStop { position: 0 ; color: "#fff" }
-        //                    GradientStop { position: 1 ; color: "#eee" }
-        //                }
-        //            }
-        //        }
-        //        RowLayout {
-        //            anchors.top: processRepeater.bottom
-        //            anchors.topMargin: 20
-        //            ToolButton{
-        //                id: stop
-
-        //                text: "Stop"
-
-        //                onClicked: {
-        //                    movingToolBar.itr= drawTimer.it; drawTimer.stop();
-        //                }
-        //            }
-
-        //            ToolButton{
-        //                id: back
-        //                anchors.left: stop.right
-        //                text: "Back"
-        //                //iconSource:   "~/Pictures/user-male.png"
-
-        //                onClicked: {
-        //                    processRepeater.itemAt(movingToolBar.itr-1).state = "original"
-        //                    movingToolBar.itr--;
-
-        //                }
-        //            }
-
-        //            ToolButton{
-        //                id: front
-        //                anchors.left: back.right
-        //                text: "Front"
-        //                //iconSource: "user-male.png"
-        //                onClicked: {
-        //                    movingToolBar.itr
-        //                    processRepeater.itemAt(movingToolBar.itr).state = "faded"
-        //                    movingToolBar.itr++
-        //                }
-        //            }
-
-        //        }
-
-        //    }
     }
 }

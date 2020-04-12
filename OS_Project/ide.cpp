@@ -2,6 +2,7 @@
 #include "notifier.h"
 #include "process.h"
 #include <QQuickWindow>
+#include <QQuickItem>
 
 extern Notifier notify;
 
@@ -21,14 +22,11 @@ IDE::IDE(QGuiApplication* mainApp,int argc, char *argv[],QObject* parent) : QObj
     interfaceEngine->load(urlInterface);
 
     connect(&notify,SIGNAL(qmlGenerated()),this,SLOT(loadSimulator()));
-    //connect(&notify,SIGNAL(allowIDEtogenerateQML()),this,SLOT(loadSimulatorWindow()));
     connect(this,SIGNAL(loadSimulatorData()),&notify,SLOT(emitListReader()));
 }
 
 void IDE::setSimulatorList()
 {
-    QQmlComponent component(simulatorEngine, QUrl(QStringLiteral("qrc:/Simulation.qml")));
-    QObject *object = component.create();
     QVariantList list_id,list_time;
     for(int i = 0 ; i < ScheduledId.size(); i++)
     {
@@ -39,7 +37,11 @@ void IDE::setSimulatorList()
         list_time.append(ScheduledTime[i]);
     }
     QVariant id(list_id),schedualtime(list_time);
-    QMetaObject::invokeMethod(object, "setLists",Q_ARG(QVariant, id),Q_ARG(QVariant, schedualtime));
+    QQmlComponent component(simulatorEngine, QUrl(QStringLiteral("qrc:/main_simulator.qml")));
+    QObject *object = component.create();
+    //QMetaObject::invokeMethod(object, "setLists",Q_ARG(QVariant, id),Q_ARG(QVariant, schedualtime));
+    object->setProperty("schedulIds",id);
+    object->setProperty("gaintchart",schedualtime);
 
     delete object;
 }
@@ -50,7 +52,6 @@ void IDE::loadSimulator()
     {
         Process process;
         simulatorEngine = new QQmlApplicationEngine;
-        emit loadSimulatorData();
         this->loadSimulatorWindow();
     }
     else if(simulatorEngine != nullptr)
@@ -62,14 +63,34 @@ void IDE::loadSimulator()
             QQuickWindow* runningEditor = qobject_cast<QQuickWindow*>(object);
             runningEditor->close();
         }
-        emit loadSimulatorData();
+        delete  simulatorEngine;
+        simulatorEngine = new QQmlApplicationEngine;
         this->loadSimulatorWindow();
     }
 }
 
 void IDE::loadSimulatorWindow()
 {
-    this->setSimulatorList();
-    const QUrl urlSimulator(QStringLiteral("qrc:/main_simulator.qml"));
-    simulatorEngine->load(urlSimulator);
+    const QUrl urlInterface(QStringLiteral("qrc:/main_simulator.qml"));
+    simulatorEngine->load(urlInterface);
+
+    QQuickItem *item = simulatorEngine->rootObjects().at(0)->findChild<QQuickItem*>("SimulationLists");
+
+    QVariantList list_id,list_time;
+    for(int i = 0 ; i < ScheduledId.size(); i++)
+    {
+        list_id.append(ScheduledId[i]);
+        qDebug() << list_id[i];
+    }
+    for(int i = 0 ; i < ScheduledTime.size(); i++)
+    {
+        list_time.append(ScheduledTime[i]);
+        qDebug() << list_time[i];
+    }
+    QVariant id(list_id),schedualtime(list_time);
+    if(item)
+    {
+        item->setProperty("scheduledId",id);
+        item->setProperty("ganttChart",schedualtime);
+    }
 }

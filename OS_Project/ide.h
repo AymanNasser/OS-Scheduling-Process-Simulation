@@ -3,8 +3,10 @@
 
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
+#include <QQmlComponent>
 #include <QObject>
 #include <QList>
+#include <QVariant>
 #include "qqml.h"
 #include "listreader.h"
 
@@ -19,11 +21,14 @@ private:
     QQmlApplicationEngine* interfaceEngine;
     QQmlApplicationEngine* simulatorEngine = nullptr;
     QGuiApplication* app;
+    QQmlComponent* simulationComponent = nullptr;
+    QObject* simulationObject;
     void setSimulatorList();
+    void loadSimulatorWindow();
 
 private slots:
     void loadSimulator();
-    void loadSimulatorWindow();
+
 signals:
     void loadSimulatorData();
 

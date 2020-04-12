@@ -1,5 +1,4 @@
 #include "process.h"
-#include <QDebug>
 
 extern QList<qreal> BurstTime;
 extern QList<qreal> ArrivalTime;
@@ -413,10 +412,6 @@ void Process::handlePriority()
                 units++;
             }
         }
-        for (unsigned int i=0; i < units; i++)
-        {
-            qDebug() << toQmlScheduledId[i] << toQmlScheduledTime[i] ;
-        }
     }
     else
     {
@@ -468,10 +463,6 @@ void Process::handlePriority()
                     noOfProcess--;
                 }
             }
-        }
-        for (unsigned int i=0; i < units; i++)
-        {
-            qDebug() << toQmlScheduledId[i] << toQmlScheduledTime[i] ;
         }
     }
 }

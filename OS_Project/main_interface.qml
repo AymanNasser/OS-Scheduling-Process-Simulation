@@ -8,10 +8,12 @@ import QList 1.0
 Window {
     id: gui
     visible: true
-    width: 1000
-    height: 800
+    width: 800
+    height: 600
     title: qsTr("OS GUI")
     color: "black"
+    minimumHeight: 600
+    minimumWidth: 800
 
     property var processName: []
     property var arrivalTime: []
@@ -332,10 +334,11 @@ Window {
     TableView {
         id:id_table
         width: parent.width/2.5
-        height: parent.height/2
+        height: parent.height*0.4
         anchors.top: lastconfigration.bottom
         anchors.left: lastconfigration.left
         anchors.topMargin: parent.height/15
+        anchors.bottomMargin: parent.height/15
         focus: true
         model: processdata
         visible: false
@@ -343,7 +346,7 @@ Window {
             height: textrow.implicitHeight * 1.2
             width: textrow.implicitWidth
             color: {
-                if((styleData.row)< lastconfigration.processnumber && processdata.get(styleData.row)["Initial"] === "Inialized")
+                if(styleData.row < lastconfigration.processnumber && processdata.get(styleData.row)["Initial"] === "Inialized")
                 {
                     return "gray"
                 }
@@ -428,7 +431,7 @@ Window {
         anchors.horizontalCenter: processname.horizontalCenter
         text: "Start scheduling"
         visible: false
-        onClicked: {
+        onPressed: {
             logicSimulation.setConfigrations(gui.algorithmType,gui.numberofprocess,gui.timequantum,gui.preemptive)
             logicSimulation.setBurst(gui.burstTime)
             logicSimulation.setArrival(gui.arrivalTime)

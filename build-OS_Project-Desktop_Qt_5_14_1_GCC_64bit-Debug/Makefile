@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../OS_Project -I. -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../OS_Project -I. -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = OS_Project1.0.0
 DISTDIR = /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/.tmp/OS_Project1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/ahmedmoamen/Qt/5.14.1/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Quick.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Gui.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5QmlModels.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Qml.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Network.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Quick.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Widgets.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Gui.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5QmlModels.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Qml.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Network.so /home/ahmedmoamen/Qt/5.14.1/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -275,6 +275,7 @@ DIST          = ../OS_Project/simulation.qml \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/resources.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/moc.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/opengl.prf \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/uic.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/thread.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/qmake_use.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/file_copies.prf \
@@ -504,6 +505,7 @@ Makefile: ../OS_Project/OS_Project.pro /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspec
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/resources.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/moc.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/opengl.prf \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/uic.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/thread.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/qmake_use.prf \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/file_copies.prf \
@@ -717,6 +719,7 @@ Makefile: ../OS_Project/OS_Project.pro /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspec
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/resources.prf:
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/moc.prf:
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/opengl.prf:
+/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/uic.prf:
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/unix/thread.prf:
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/qmake_use.prf:
 /home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/features/file_copies.prf:
@@ -783,7 +786,6 @@ qrc_qml.cpp: ../OS_Project/qml.qrc \
 		../OS_Project/icons/process_manager.png \
 		../OS_Project/icons/back.png \
 		../OS_Project/icons/play_forward.png \
-		../OS_Project/icons/play_backward.png \
 		../OS_Project/icons/pause.png
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/rcc -name qml ../OS_Project/qml.qrc -o qrc_qml.cpp
 
@@ -892,13 +894,16 @@ moc_ide.cpp: ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qinputmethod.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant \
 		../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
-	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/ide.h -o moc_ide.cpp
+	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/ide.h -o moc_ide.cpp
 
 moc_listreader.cpp: ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
@@ -970,7 +975,7 @@ moc_listreader.cpp: ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
-	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/listreader.h -o moc_listreader.cpp
+	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/listreader.h -o moc_listreader.cpp
 
 moc_notifier.cpp: ../OS_Project/notifier.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
@@ -1028,7 +1033,7 @@ moc_notifier.cpp: ../OS_Project/notifier.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qobject_impl.h \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
-	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/notifier.h -o moc_notifier.cpp
+	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/notifier.h -o moc_notifier.cpp
 
 moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
@@ -1144,12 +1149,14 @@ moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
-	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/process.h -o moc_process.cpp
+	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/process.h -o moc_process.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
+compiler_uic_make_all:
+compiler_uic_clean:
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -1256,8 +1263,11 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qinputmethod.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsize.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmargins.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant \
 		../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		../OS_Project/notifier.h \
@@ -1266,7 +1276,6 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickitem.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquick-config.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qevent.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qregion.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qrect.h \
@@ -1387,8 +1396,7 @@ listreader.o: ../OS_Project/listreader.cpp ../OS_Project/listreader.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
-		../OS_Project/notifier.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug
+		../OS_Project/notifier.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listreader.o ../OS_Project/listreader.cpp
 
 main.o: ../OS_Project/main.cpp /home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/QGuiApplication \
@@ -1508,7 +1516,10 @@ main.o: ../OS_Project/main.cpp /home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QObject \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariantList \
 		../OS_Project/notifier.h \
-		../OS_Project/ide.h
+		../OS_Project/ide.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/QQmlComponent \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml/qqmlcomponent.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVariant
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../OS_Project/main.cpp
 
 notifier.o: ../OS_Project/notifier.cpp ../OS_Project/notifier.h \
@@ -1678,8 +1689,7 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui/qrgba64.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QVector
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 
 qrc_qml.o: qrc_qml.cpp 

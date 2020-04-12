@@ -13,7 +13,6 @@
         <file>icons/process_manager.png</file>
         <file>icons/pause.png</file>
         <file>icons/play.png</file>
-        <file>icons/play_backward.png</file>
         <file>icons/play_forward.png</file>
     </qresource>
 </RCC>

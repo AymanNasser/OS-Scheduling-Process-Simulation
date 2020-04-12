@@ -1,6 +1,5 @@
 #include "listreader.h"
 #include "notifier.h"
-#include <QDebug>
 
 extern Notifier notify;
 
@@ -21,7 +20,7 @@ ListReader::ListReader(QObject *parent) : QObject(parent)
     connect(this,SIGNAL(configrationGenerated()),this,SLOT(setGuiList()));
     connect(this,SIGNAL(readyToLoadSimulator()),&notify,SLOT(callSimulator()));
     connect(this,SIGNAL(allProcessfinished()),&notify,SLOT(listcopyglobaldata()));
-    connect(&notify,SIGNAL(goToListReader()),this,SLOT(setSimulationList()));
+    //connect(&notify,SIGNAL(goToListReader()),this,SLOT(setSimulationList()));
 }
 
 void ListReader::setIDs(QVariantList list)
