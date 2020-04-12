@@ -1,7 +1,7 @@
 #include "process.h"
 
 extern QList<qreal> BurstTime;
-extern QList<qreal> ArrivalTime;
+extern QList<unsigned int> ArrivalTime;
 extern QList<unsigned int> Priority;
 extern QList <QString> ScheduledId;
 extern QList <qreal> ScheduledTime;
@@ -203,14 +203,7 @@ void Process::RR_operation()
         }
 
     }
-
-
-
-
 }
-
-
-
 
 QString Process::getAlgorithmType()
 {
@@ -331,15 +324,12 @@ void Process::handleSJF()
     {
         SJF_swapLists();
         SJF_preemptiveOperation();
-
-
     }
 }
 
 void Process::handleRoundRobin()
 {
    RR_operation();
-
 }
 
 void Process::prioritySorting()

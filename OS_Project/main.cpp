@@ -9,7 +9,7 @@
 Notifier notify;
 
 QList<qreal> BurstTime;
-QList<qreal> ArrivalTime;
+QList<unsigned int> ArrivalTime;
 QList<unsigned int> Priority;
 QList <QString> ScheduledId;
 QList <qreal> ScheduledTime;

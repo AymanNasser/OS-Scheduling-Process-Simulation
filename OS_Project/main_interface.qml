@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Dialogs 1.3
 import QList 1.0
 
 Window {
@@ -320,7 +321,8 @@ Window {
     }
     ListModel {
         id: processdata
-        function initialzieList() {
+        function initialzieList()
+        {
             for(var i = 0;i<lastconfigration.processnumber;i++)
             {
                 processdata.append({"ProcessName":"P"+i,
@@ -346,7 +348,7 @@ Window {
             height: textrow.implicitHeight * 1.2
             width: textrow.implicitWidth
             color: {
-                if(styleData.row < lastconfigration.processnumber && processdata.get(styleData.row)["Initial"] === "Inialized")
+                if(styleData.row < lastconfigration.processnumber && processdata.get(styleData.row).Initial === "Inialized")
                 {
                     return "gray"
                 }
@@ -424,6 +426,13 @@ Window {
             title: "Initialization"
         }
     }
+    MessageDialog {
+        id: processnotfinished
+        title: "Process Initialization"
+        text: "Not All Processes are initialized, Please check and initialize them"
+        icon: StandardIcon.Information
+        standardButtons: StandardButton.Ok
+    }
     CustomizingButton {
         id: scheduling
         anchors.bottom: parent.bottom
@@ -431,13 +440,28 @@ Window {
         anchors.horizontalCenter: processname.horizontalCenter
         text: "Start scheduling"
         visible: false
-        onPressed: {
+        function start()
+        {
             logicSimulation.setConfigrations(gui.algorithmType,gui.numberofprocess,gui.timequantum,gui.preemptive)
             logicSimulation.setBurst(gui.burstTime)
             logicSimulation.setArrival(gui.arrivalTime)
             if(gui.algorithmType == "Priority")
                 logicSimulation.setPriority(gui.priority)
             logicSimulation.configrationGenerated()
+        }
+        onPressed: {
+            for(var i = 0 ; i < processdata.count; i++)
+            {
+                if(processdata.get(i).Initial === "Not Inialized")
+                {
+                    processnotfinished.open()
+                    break
+                }
+                if(i === processdata.count - 1)
+                {
+                    start()
+                }
+            }
         }
     }
     Rectangle{

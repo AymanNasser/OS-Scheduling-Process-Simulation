@@ -4,11 +4,8 @@
 extern Notifier notify;
 
 extern QList<qreal> BurstTime;
-extern QList<qreal> ArrivalTime;
+extern QList<unsigned int> ArrivalTime;
 extern QList<unsigned int> Priority;
-extern QList <QString> ScheduledId;
-extern QList <qreal> ScheduledTime;
-extern QList <qreal> WaitingTimePerProcess;
 extern QString ProcessType;
 extern bool isPreemptive;
 extern int NUmberOfProcess;
@@ -19,85 +16,6 @@ ListReader::ListReader(QObject *parent) : QObject(parent)
 {
     connect(this,SIGNAL(configrationGenerated()),this,SLOT(setGuiList()));
     connect(this,SIGNAL(readyToLoadSimulator()),&notify,SLOT(callSimulator()));
-    connect(this,SIGNAL(allProcessfinished()),&notify,SLOT(listcopyglobaldata()));
-    //connect(&notify,SIGNAL(goToListReader()),this,SLOT(setSimulationList()));
-}
-
-void ListReader::setIDs(QVariantList list)
-{
-    QVariant list_var(list);
-    processid.clear();
-    foreach(QVariant v, list_var.value<QVariantList>())
-    {
-        processid.append(v.value<QString>());
-    }
-}
-
-QVariantList ListReader::readIDs()
-{
-    return processid;
-}
-
-void ListReader::setTimes(QVariantList list)
-{
-    QVariant list_var(list);
-    processtime.clear();
-    foreach(QVariant v, list_var.value<QVariantList>())
-    {
-        processtime.append(v.value<qreal>());
-    }
-}
-
-QVariantList ListReader::readTimes()
-{
-    return processtime;
-}
-
-void ListReader::setAverage(QList<qreal> list)
-{
-    for(int i = 0;i < list.size();i++)
-    {
-         processaverage.append(list[i]);
-    }
-}
-
-QList<qreal> ListReader::readAverage()
-{
-    return processaverage;
-}
-
-int ListReader::idsLength()
-{
-    return processid.size();
-}
-
-QString ListReader::readIDitem(int index)
-{
-    QVariant list_var(processid);
-    QString process = list_var.toList()[index].toString();
-    return process;
-}
-
-int ListReader::timeLength()
-{
-    return processtime.size();
-}
-
-qreal ListReader::readTimeitem(int index)
-{
-    QVariant list_var(processid);
-    qreal time = list_var.toList()[index].toReal();
-    return time;
-}
-
-int ListReader::averageLength()
-{
-    return processaverage.size();
-}
-
-qreal ListReader::readAverageitem(int index)
-{
-    return processaverage[index];
 }
 
 void ListReader::setArrival(QVariantList list)
@@ -191,16 +109,4 @@ void ListReader::setGuiList()
     emit readyToLoadSimulator();
 }
 
-void ListReader::setSimulationList()
-{
-    processid.clear();
-    processtime.clear();
-    processaverage.clear();
-    for(int i = 0 ; i < ScheduledId.size(); i++)
-    {
-        processid.append(ScheduledId[i]);
-        processtime.append(ScheduledTime[i]);
-        //processaverage.append(WaitingTimePerProcess[i]);
-    }
-    //emit allProcessfinished();
-}
+

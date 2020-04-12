@@ -6,6 +6,7 @@ import QtQuick.Controls.Styles 1.4
 
 Item {
     id: process
+    focus: true
     property var scheduledId
     property var ganttChart
     property var waitingTime
@@ -23,6 +24,76 @@ Item {
     {
         processRepeater.itemAt(index).state = "original"
     }
+    Keys.onPressed: {
+        if(event.key === Qt.Key_Right)
+        {
+            if(!play_rec.played)
+            {
+                if(buttons.itr < process.scheduledId.length - 1 && buttons.itr >= 0)
+                {
+                    attention.visible = false
+                    process.stateDefault(buttons.itr)
+                    buttons.itr++
+                    process.stateFaded(buttons.itr)
+                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                }
+                else
+                {
+                    attention.visible = false
+                    process.stateDefault(process.scheduledId.length - 1)
+                    buttons.itr = 0
+                    process.stateFaded(buttons.itr)
+                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                }
+            }
+            else
+            {
+                attention.visible = true
+            }
+        }
+        else if(event.key === Qt.Key_Left)
+        {
+            if(!play_rec.played)
+            {
+                if(buttons.itr > 0)
+                {
+                    attention.visible = false
+                    process.stateDefault(buttons.itr)
+                    buttons.itr--
+                    process.stateFaded(buttons.itr)
+                   processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                }
+                else
+                {
+                    attention.visible = false
+                    process.stateDefault(0)
+                    buttons.itr = process.scheduledId.length - 1
+                    process.stateFaded(buttons.itr)
+                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                }
+            }
+            else
+            {
+                attention.visible = true
+            }
+        }
+        else if(event.key === Qt.Key_Enter - 1)
+        {
+            if(play_rec.played)
+            {
+                play.source = "images/icons/play.png"
+                drawTimer.stop()
+                buttons.itr = drawTimer.it - 1
+                play_rec.played = false
+            }
+            else
+            {
+                play.source = "images/icons/pause.png"
+                drawTimer.start()
+                play_rec.played = true
+            }
+        }
+    }
     Timer{
         id: drawTimer
         repeat: true
@@ -33,22 +104,50 @@ Item {
             {
                 processRepeater.itemAt(it-1).state = "original"
             }
+            else
+            {
+                processRepeater.itemAt(scheduledId.length - 1).state = "original"
+            }
             processRepeater.itemAt(it).state = "faded"
+            processSelected.text = "Current Process is : " + scheduledId[it]
             it++
-            it === scheduledId.length ? drawTimer.running = false: drawTimer.running = true
+            if(it === scheduledId.length)
+            {
+                it = 0
+            }
         }
     }
     Rectangle {
         id: cotainer
         anchors.fill: parent
         color: "orange"
+        Text {
+            id: attention
+            color: "black"
+            font.pixelSize: 20
+            text: "Please press Pause button first !"
+            font.bold: true
+            anchors.bottom: buttons.top
+            anchors.horizontalCenter: buttons.horizontalCenter
+            anchors.bottomMargin: 10
+            visible: false
+        }
+        Text {
+            id: processSelected
+            color: "black"
+            font.pixelSize: 20
+            font.bold: true
+            anchors.top: parent.top
+            anchors.topMargin: 25
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
         Row {
             id: buttons
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: 50
             spacing: 5
-            property int itr
+            property int itr: 0
             Rectangle {
                 id: back_rec
                 height: 50
@@ -78,11 +177,28 @@ Item {
                             back_rec.height = 50
                         }
                         onClicked: {
-                            if(buttons.itr != 0 && !play_rec.played)
+                            if(!play_rec.played)
                             {
-                                process.stateDefault(buttons.itr)
-                                buttons.itr--
-                                process.stateFaded(buttons.itr)
+                                if(buttons.itr > 0)
+                                {
+                                    attention.visible = false
+                                    process.stateDefault(buttons.itr)
+                                    buttons.itr--
+                                    process.stateFaded(buttons.itr)
+                                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                                }
+                                else
+                                {
+                                    attention.visible = false
+                                    process.stateDefault(0)
+                                    buttons.itr = process.scheduledId.length - 1
+                                    process.stateFaded(buttons.itr)
+                                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                                }
+                            }
+                            else
+                            {
+                                attention.visible = true
                             }
                         }
                     }
@@ -97,7 +213,7 @@ Item {
                 radius: width/2
                 border.color: "black"
                 border.width: 2
-                property bool played: true
+                property bool played: false
                 Image {
                     id: play
                     source: "images/icons/play.png"
@@ -162,11 +278,28 @@ Item {
                             front_rec.height = 50
                         }
                         onClicked: {
-                            if(buttons.itr != process.scheduledId.length - 1 && !play_rec.played)
+                            if(!play_rec.played)
                             {
-                                process.stateDefault(buttons.itr)
-                                buttons.itr++
-                                process.stateFaded(buttons.itr)
+                                if(buttons.itr < process.scheduledId.length - 1 && buttons.itr >= 0)
+                                {
+                                    attention.visible = false
+                                    process.stateDefault(buttons.itr)
+                                    buttons.itr++
+                                    process.stateFaded(buttons.itr)
+                                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                                }
+                                else
+                                {
+                                    attention.visible = false
+                                    process.stateDefault(process.scheduledId.length - 1)
+                                    buttons.itr = 0
+                                    process.stateFaded(buttons.itr)
+                                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                                }
+                            }
+                            else
+                            {
+                                attention.visible = true
                             }
                         }
                     }

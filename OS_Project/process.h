@@ -2,12 +2,9 @@
 #define PROCESS_H
 
 #include <QObject>
-#include <QQuickItem>
 #include <QString>
 #include <QList>
-
 #include <QtAlgorithms>
-#include <QVector>
 
 class Process : public QObject
 {
@@ -19,7 +16,7 @@ private:
     bool preemptive;
 
     QList <qreal> burstTime ;
-    QList <qreal> arrivalTime ;
+    QList <unsigned int> arrivalTime ;
     QList <QString> processName;
 
     QList <unsigned int> priority;
