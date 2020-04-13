@@ -167,7 +167,7 @@ void Process::SJF_preemptiveOperation()
 void Process::RR_operation()
 {
     QQueue<unsigned int> readyQueue;
-    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx;
+    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx, idealCounter = 0;;
     bool unMatchedProcessPerTick = false;
 
 
@@ -188,17 +188,14 @@ void Process::RR_operation()
         qSwap(burstTime[i],burstTime[min_idx]);
         qSwap(index[i],index[min_idx]);
     }
-    // initalze temp Burst time
-//    for (int var = 0; var < burstTime.size(); ++var) {
-//         originalBurstTime.app
-//    }
+
         QList <qreal> originalBurstTime = burstTime;
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
     }
 
-    while(tick < overAllBurstTime){
+    while(tick < (overAllBurstTime + idealCounter)){
 
         for (int ite = tick; ite <= timeQuantum + tick; ++ite) {
             unsigned int itr = lastCountedProcess;
@@ -211,6 +208,12 @@ void Process::RR_operation()
                 }
                 itr++;
             }
+            if(readyQueue.size() == 0) {
+                toQmlScheduledId.append("ideal");
+                tick++;
+                toQmlScheduledTime.append(tick);
+                idealCounter++;
+            }
 
         }
 
@@ -218,9 +221,7 @@ void Process::RR_operation()
         {
             RR_queueProcessing(readyQueue,this->timeQuantum,tick,originalBurstTime);
         }
-        else {
-            // Ideal case
-        }
+
 
 
     }
@@ -559,7 +560,8 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
 
         a_readyQueue.pop_back();
         a_tick += a_timeQuantum;
-        toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
+        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex])));
+
         burstTime[tempIndex] -= a_timeQuantum;
         toQmlScheduledTime.append(a_tick);
         a_readyQueue.push_front(tempIndex);
@@ -569,10 +571,11 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
     else {
         a_readyQueue.pop_back();
         a_tick += burstTime[tempIndex];
-        toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
+        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex])));
         toQmlScheduledTime.append(a_tick);
-        toQmlwaitingTimePerProcess[tempIndex] = ((a_tick - arrivalTime[tempIndex]) - originalBurstTime[tempIndex]);
-        qDebug() << a_tick << originalBurstTime[tempIndex];
+        toQmlwaitingTimePerProcess[index[tempIndex]] = ((a_tick - arrivalTime[tempIndex])
+               - originalBurstTime[tempIndex]);
+        qDebug() << index[tempIndex] << a_tick << arrivalTime[index[tempIndex]] ;
     }
 
 
