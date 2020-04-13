@@ -219,7 +219,7 @@ Window {
         anchors.top: parent.top
         anchors.topMargin: parent.height*0.1
         anchors.leftMargin: parent.width*0.1
-        columns: 2
+        columns: 3
         rows: 5
         columnSpacing: 20
         rowSpacing: 10
@@ -271,6 +271,16 @@ Window {
             visible: false
             color: "orange"
         }
+        Text {
+            id: burstwarning
+            text: "Please enter a correct positive number !"
+            font.bold: true
+            font.family: "Comic Sans MS"
+            Layout.row: 1
+            Layout.column: 2
+            visible: false
+            color: "orange"
+        }
         CustomizingComboBox {
             id: processnumbers
             model: processlist
@@ -302,16 +312,25 @@ Window {
             onClicked: {
                 if(processnumbers.currentIndex >= 0)
                 {
-                    warning.visible = false
-                    processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
-                                        "ArrivalTime":arrivaltime.value,
-                                        "BurstTime":parseFloat(bursttime.text),
-                                        "Priority":priority.value,
-                                        "Initial":"Inialized"})
-                    gui.processName[processnumbers.currentIndex] = processnumbers.currentText
-                    gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
-                    gui.burstTime[processnumbers.currentIndex] = parseFloat(bursttime.text)
-                    gui.priority[processnumbers.currentIndex] = priority.value
+                    var floatburst = Number(bursttime.text)
+                    if(floatburst)
+                    {
+                        warning.visible = false
+                        burstwarning.visible = false
+                        processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
+                                            "ArrivalTime":arrivaltime.value,
+                                            "BurstTime":Number(floatburst.toPrecision(5)),
+                                            "Priority":priority.value,
+                                            "Initial":"Inialized"})
+                        gui.processName[processnumbers.currentIndex] = processnumbers.currentText
+                        gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
+                        gui.burstTime[processnumbers.currentIndex] = Number(floatburst.toPrecision(5))
+                        gui.priority[processnumbers.currentIndex] = priority.value
+                    }
+                    else
+                    {
+                        burstwarning.visible = true
+                    }
                 }
                 else
                 {
@@ -431,7 +450,7 @@ Window {
     MessageDialog {
         id: processnotfinished
         title: "Process Initialization"
-        text: "Not All Processes are initialized, Please check and initialize them"
+        text: "Not All Processes are initialized or there is a wrong Burst Time Number, Please check and initialize them"
         icon: StandardIcon.Information
         standardButtons: StandardButton.Ok
     }
@@ -451,10 +470,10 @@ Window {
                 logicSimulation.setPriority(gui.priority)
             logicSimulation.configrationGenerated()
         }
-        onPressed: {
+        onClicked: {
             for(var i = 0 ; i < processdata.count; i++)
             {
-                if(processdata.get(i).Initial === "Not Inialized")
+                if(processdata.get(i).Initial === "Not Inialized" || burstwarning.visible)
                 {
                     processnotfinished.open()
                     break
