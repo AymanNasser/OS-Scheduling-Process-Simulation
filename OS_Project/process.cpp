@@ -166,9 +166,33 @@ void Process::SJF_preemptiveOperation()
 
 void Process::RR_operation()
 {
+
+
+
+
     QQueue<unsigned int> readyQueue;
-    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0;
+    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx;
     bool unMatchedProcessPerTick = false;
+
+    for (unsigned int i=0; i < this->numOfProcesses-1; i++)
+    {
+        // Find the minimum element in unsorted array
+        min_idx = i;
+        for (unsigned int j=i+1; j < this->numOfProcesses; j++)
+        {
+            if(arrivalTime[j]<arrivalTime[min_idx])
+            {
+                // update The Minmum index
+                min_idx = j;
+            }
+        }
+        // Making The Swap for 3 lists ("ArrivalTime,burstTime.)
+        qSwap(arrivalTime[i],arrivalTime[min_idx]);
+        qSwap(burstTime[i],burstTime[min_idx]);
+        qSwap(index[i],index[min_idx]);
+    }
+
+
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
     }
@@ -273,8 +297,8 @@ void Process::handleScheduling()
     else if(this->algorithmType == "Round Robin")
     {
         handleRoundRobin();
-        for (int var = 0; var < toQmlwaitingTimePerProcess.size(); ++var) {
-            qDebug() << toQmlwaitingTimePerProcess[var];
+        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
+            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
         }
 
     }
