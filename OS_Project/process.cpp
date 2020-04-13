@@ -586,7 +586,6 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
         qDebug() << toQmlScheduledId.back() +   " is Finished" ;
         toQmlScheduledTime.append(a_tick);
 
-        RR_queueProcessing(a_readyQueue,a_timeQuantum - burstTime[tempIndex], a_tick);
     }
 
 
