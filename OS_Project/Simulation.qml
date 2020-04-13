@@ -456,7 +456,7 @@ Item {
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 clip: true
-                //ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 Column{
                     id: columnId
                     anchors.centerIn: parent
@@ -470,7 +470,7 @@ Item {
                                 itemAt(i).setText()
                                 sum += waitingTime[i]
                             }
-                            totalaveragetext.text = "Total Average time = " + sum/model.length
+                            totalaveragetext.text = "Total Average time = " + Number(sum/model.length).toPrecision(5)
                         }
                         Text{
                             id: processaverage
@@ -480,7 +480,7 @@ Item {
                             font.bold: true
                             function setText()
                             {
-                                text = "Average waiting time P" + (index+1) + " : " + waitingTime[index]
+                                text = "Average waiting time P" + (index+1) + " : " + Number(waitingTime[index]).toPrecision(5)
                             }
                         }
                     }
