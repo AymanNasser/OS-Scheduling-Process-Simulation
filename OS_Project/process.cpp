@@ -229,11 +229,11 @@ void Process::handleScheduling()
 {
     if(this-> algorithmType == "FCFS")
     {
-         handleFCFS();
+        handleFCFS();
     }
     else if(this-> algorithmType == "SJF")
     {
-         handleSJF();
+        handleSJF();
 
     }
     else if(this->algorithmType == "Round Robin")
@@ -252,7 +252,10 @@ void Process::handleScheduling()
     {
         ScheduledId.append(toQmlScheduledId[i]);
         ScheduledTime.append((toQmlScheduledTime[i]));
-        //WaitingTimePerProcess.append(toQmlwaitingTimePerProcess[i]);
+    }
+    for(int i = 0; i < toQmlwaitingTimePerProcess.size();i++)
+    {
+        WaitingTimePerProcess.append(toQmlwaitingTimePerProcess[i]);
     }
 }
 
@@ -329,7 +332,7 @@ void Process::handleSJF()
 
 void Process::handleRoundRobin()
 {
-   RR_operation();
+    RR_operation();
 }
 
 void Process::prioritySorting()
@@ -377,6 +380,20 @@ void Process::handlePriority()
     prioritySorting();
     unsigned int currentProcess = 0;
     unsigned int units = 0;
+
+    QList <qreal> temp_burstTime ;
+    QList <unsigned int> temp_arrivalTime ;
+    for(unsigned int i = 0 ; i < this->numOfProcesses ; i++)
+    {
+        temp_burstTime.append(burstTime[i]);
+        temp_arrivalTime.append(arrivalTime[i]);
+    }
+    QMap<QString,qreal> process_burst;
+    for(unsigned int j = 0; j < this->numOfProcesses ; j++)
+    {
+        process_burst[processName[j]] = burstTime[j];
+    }
+
     // handling non-preemptive priority
     if(!preemptive)
     {
@@ -426,17 +443,17 @@ void Process::handlePriority()
                 int processTakes = processTakePriority(i + burstTime[currentProcess],currentProcess);
                 if(noOfProcess > 0 && processTakes != -1)
                 {
-                   float process_space = arrivalTime[processTakes] - i;
-                   if(process_space > 0)
-                   {
-                       toQmlScheduledTime.append(process_space + i);
-                       toQmlScheduledId.append(processName[currentProcess]);
-                       burstTime[currentProcess] -= process_space;
-                       i += process_space;
-                       units++;
-                   }
-                   currentProcess = processTakes;
-                   processInexecution = processName[currentProcess];
+                    float process_space = arrivalTime[processTakes] - i;
+                    if(process_space > 0)
+                    {
+                        toQmlScheduledTime.append(process_space + i);
+                        toQmlScheduledId.append(processName[currentProcess]);
+                        burstTime[currentProcess] -= process_space;
+                        i += process_space;
+                        units++;
+                    }
+                    currentProcess = processTakes;
+                    processInexecution = processName[currentProcess];
                 }
                 else
                 {
@@ -451,6 +468,42 @@ void Process::handlePriority()
                     currentProcess = 0;
                     processInexecution = "NUll";
                     noOfProcess--;
+                }
+            }
+        }
+    }
+    QList<bool> process_arrived;
+    for(int i = 0 ; i < temp_arrivalTime.size() ; i++)
+    {
+        process_arrived.append(false);
+        QString process = "P" + QString::number(i);
+        qreal processtime = temp_arrivalTime[i];
+        for(int j = 0 ; j < toQmlScheduledTime.size();j++)
+        {
+            if(toQmlScheduledTime[j] > processtime && process == toQmlScheduledId[j] && process_burst[process] > 0)
+            {
+                process_arrived[i] = true;
+                if(j != 0)
+                    process_burst[process] -= toQmlScheduledTime[j] - toQmlScheduledTime[j-1];
+                else
+                    process_burst[process] -= toQmlScheduledTime[j];
+            }
+            else if (toQmlScheduledTime[j] > processtime && process != toQmlScheduledId[j] && process_burst[process] > 0)
+            {
+                if(process_arrived[i])
+                {
+                    if(j != 0)
+                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - toQmlScheduledTime[j-1];
+                    else
+                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j];
+                }
+                else
+                {
+                    process_arrived[i] = true;
+                    if(j != 0)
+                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - temp_arrivalTime[i];
+                    else
+                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j];
                 }
             }
         }

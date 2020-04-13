@@ -16,7 +16,7 @@ Window {
             anchors.fill: parent
             objectName: "SimulationLists"
             onWidthChanged: {
-                setModel(scheduledId)
+                setModel()
             }
         }
     }

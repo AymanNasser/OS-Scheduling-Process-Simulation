@@ -2,6 +2,8 @@ import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
+import QtQml 2.14
+
 
 
 Item {
@@ -10,10 +12,12 @@ Item {
     property var scheduledId
     property var ganttChart
     property var waitingTime
-    function setModel(model)
+    function setModel()
     {
-        processRepeater.model = model
+        processRepeater.model = scheduledId
+        averagerepeater.model = waitingTime
         processRepeater.setProcesses()
+        averagerepeater.setAverage()
     }
     function stateFaded(index)
     {
@@ -61,7 +65,7 @@ Item {
                     process.stateDefault(buttons.itr)
                     buttons.itr--
                     process.stateFaded(buttons.itr)
-                   processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
+                    processSelected.text = "Current Process is : " + process.scheduledId[buttons.itr]
                 }
                 else
                 {
@@ -302,15 +306,27 @@ Item {
                 }
             }
         }
-        ScrollView{
+        Text{
+            id: charttext
+            color: "black"
+            text: "Gantt chart"
+            font.pixelSize: 20
+            font.family: "Helvetica"
+            font.bold: true
+            anchors.top: chartscroll.bottom
+            anchors.topMargin: 15
+            anchors.horizontalCenter: chartscroll.horizontalCenter
+        }
+        ScrollView {
+            id: chartscroll
             width: parent.width*0.9
             height: 100
             anchors.centerIn: parent
             clip: true
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOff
             Row{
                 id: rowId
                 anchors.centerIn: parent
-                antialiasing: true
                 Repeater{
                     id: processRepeater
                     signal widthAlarm()
@@ -346,7 +362,8 @@ Item {
                         }
                         Connections {
                             target: processRepeater
-                            onWidthAlarm: {
+                            function onWidthAlarm()
+                            {
                                 processRect.setWidth()
                             }
                         }
@@ -397,6 +414,75 @@ Item {
                             font.bold: true
                             anchors.top: processRect.bottom
                             anchors.right: processRect.right
+                        }
+                    }
+                }
+            }
+        }
+        Rectangle {
+            id: averageContainer
+            color: "#001bc4"
+            width: parent.width*0.4
+            height: parent.height*0.4
+            anchors.horizontalCenter: parent.horizontalCenter
+            radius: 5
+            border.color: "black"
+            border.width: 2
+            Text{
+                id: averagetext
+                color: "black"
+                text: "Processes Average time"
+                font.pixelSize: 16
+                font.family: "Helvetica"
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 5
+            }
+            Text{
+                id: totalaveragetext
+                color: "black"
+                font.pixelSize: 15
+                font.family: "Helvetica"
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: averagetext.bottom
+                anchors.topMargin: 5
+            }
+            ScrollView {
+                id: averagescroll
+                width: parent.width*0.9
+                height: parent.height*0.8
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                clip: true
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                Column{
+                    id: columnId
+                    anchors.centerIn: parent
+                    Repeater{
+                        id: averagerepeater
+                        function setAverage()
+                        {
+                            var sum = 0
+                            for(var i = 0 ; i < model.length; i++)
+                            {
+                                itemAt(i).setText()
+                                sum += waitingTime[i]
+                            }
+                            totalaveragetext.text = "Total Average time = " + sum/model.length
+                        }
+                        Text{
+                            id: processaverage
+                            color: "black"
+                            font.family: "Helvetica"
+                            font.pixelSize: 14
+                            font.bold: true
+                            function setText()
+                            {
+                                text = "Average waiting time P" + index + " : " + waitingTime[index]
+                            }
                         }
                     }
                 }

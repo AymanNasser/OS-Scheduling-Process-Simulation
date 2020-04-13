@@ -54,7 +54,7 @@ void IDE::loadSimulatorWindow()
 
     QQuickItem *item = simulatorEngine->rootObjects().at(0)->findChild<QQuickItem*>("SimulationLists");
 
-    QVariantList list_id,list_time;
+    QVariantList list_id,list_time,list_average;
     for(int i = 0 ; i < ScheduledId.size(); i++)
     {
         list_id.append(ScheduledId[i]);
@@ -63,10 +63,15 @@ void IDE::loadSimulatorWindow()
     {
         list_time.append(ScheduledTime[i]);
     }
-    QVariant id(list_id),schedualtime(list_time);
+    for(int i = 0 ; i < WaitingTimePerProcess.size(); i++)
+    {
+        list_average.append(WaitingTimePerProcess[i]);
+    }
+    QVariant id(list_id),schedualtime(list_time),averagetime(list_average);
     if(item)
     {
         item->setProperty("scheduledId",id);
         item->setProperty("ganttChart",schedualtime);
+        item->setProperty("waitingTime",averagetime);
     }
 }
