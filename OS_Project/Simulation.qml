@@ -2,7 +2,7 @@ import QtQuick 2.11
 import QtQuick.Window 2.11
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
-import QtQml 2.14
+//import QtQml 2.14
 
 
 

@@ -166,41 +166,75 @@ void Process::SJF_preemptiveOperation()
 
 void Process::RR_operation()
 {
-    unsigned int tick = 0, overAllBurstTime = 0 ;
+    QQueue<unsigned int> readyQueue;
+    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0;
     bool unMatchedProcessPerTick = false;
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
     }
 
     while(tick < overAllBurstTime){
-        for (unsigned int ite = 0; ite < this->numOfProcesses ; ++ite) {
-            if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] >= this->timeQuantum)
-            {
-                tick += this->timeQuantum;
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
-                toQmlScheduledTime.append(tick);
 
-                burstTime[ite] -= this->timeQuantum;
-                unMatchedProcessPerTick = false;
-            }
-            else if (arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] < this->timeQuantum)
+        for (int ite = tick; ite <= timeQuantum + tick; ++ite) {
+            unsigned int itr = lastCountedProcess;
+            while(itr < this->numOfProcesses)
             {
-                tick += burstTime[ite];
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
-                toQmlScheduledTime.append(tick);
-                burstTime[ite] = 0;
-                unMatchedProcessPerTick = false;
+                if(arrivalTime[itr] <= ite)
+                {
+                    readyQueue.push_front(itr);
+                    lastCountedProcess++;
+                }
+                itr++;
             }
-            else {
-                unMatchedProcessPerTick = true;
-            }
+
         }
-        if(unMatchedProcessPerTick)
+
+        if(readyQueue.size() != 0)
         {
-            tick++;
-            toQmlScheduledId.append("idle");
-            toQmlScheduledTime.append(tick);
+            RR_queueProcessing(readyQueue,this->timeQuantum,tick);
         }
+        else {
+            // Ideal case
+        }
+
+//        for (unsigned int ite = 0; ite < this->burstTime.size() ; ++ite) {
+
+//            if(arrivalTime[ite] <= tick)
+//                // queue.push
+//                // burstTime[queue.back()]
+
+//            if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] >= this->timeQuantum)
+//            {
+//                tick += this->timeQuantum;
+//                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
+//                toQmlScheduledTime.append(tick);
+//                burstTime[ite] -= this->timeQuantum;
+//                unMatchedProcessPerTick = false;
+//            }
+//            else if (arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] < this->timeQuantum)
+//            {
+//                tick += burstTime[ite];
+//                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
+//                toQmlwaitingTimePerProcess[ite] = (tick - arrivalTime[ite]);
+//                toQmlScheduledTime.append(tick);
+//                burstTime[ite] = 0;
+//                unMatchedProcessPerTick = false;
+
+//                arrivalTime.removeAt(ite);
+//                burstTime.removeAt(ite);
+//                index.removeAt(ite);
+
+//            }
+//            else {
+//                unMatchedProcessPerTick = true;
+//            }
+//        }
+//        if(unMatchedProcessPerTick)
+//        {
+//            tick++;
+//            toQmlScheduledId.append("idle");
+//            toQmlScheduledTime.append(tick);
+//        }
 
     }
 }
@@ -239,6 +273,9 @@ void Process::handleScheduling()
     else if(this->algorithmType == "Round Robin")
     {
         handleRoundRobin();
+        for (int var = 0; var < toQmlwaitingTimePerProcess.size(); ++var) {
+            qDebug() << toQmlwaitingTimePerProcess[var];
+        }
 
     }
     else if(this->algorithmType == "Priority")
@@ -517,4 +554,40 @@ qreal Process::calcOverAllAverageWaitingTime()
         temp += toQmlwaitingTimePerProcess[var];
     }
     return  temp / this->numOfProcesses;
+}
+
+
+void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned int a_timeQuantum, unsigned int &a_tick){
+
+
+
+    if(a_timeQuantum <= 0 && a_readyQueue.empty() == true)
+        return ;
+
+    unsigned int tempIndex = a_readyQueue.back();
+
+    if(burstTime[a_readyQueue.back()] > this->timeQuantum)
+    {
+
+        a_readyQueue.pop_back();
+        a_tick += a_timeQuantum;
+        toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
+        qDebug() << burstTime[tempIndex] ;
+        burstTime[tempIndex] -= a_timeQuantum;
+        toQmlScheduledTime.append(a_tick);
+        a_readyQueue.push_front(tempIndex);
+        qDebug() << toQmlScheduledId.back() << burstTime[tempIndex];
+        return ;
+    }
+    else {
+        a_readyQueue.pop_back();
+        a_tick += burstTime[tempIndex];
+        toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
+        qDebug() << toQmlScheduledId.back() +   " is Finished" ;
+        toQmlScheduledTime.append(a_tick);
+
+        RR_queueProcessing(a_readyQueue,a_timeQuantum - burstTime[tempIndex], a_tick);
+    }
+
+
 }
