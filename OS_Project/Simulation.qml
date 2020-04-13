@@ -442,7 +442,7 @@ Item {
             Text{
                 id: totalaveragetext
                 color: "black"
-                font.pixelSize: 15
+                font.pixelSize: 14
                 font.family: "Helvetica"
                 font.bold: true
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -456,7 +456,7 @@ Item {
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 clip: true
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                //ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 Column{
                     id: columnId
                     anchors.centerIn: parent
@@ -480,7 +480,7 @@ Item {
                             font.bold: true
                             function setText()
                             {
-                                text = "Average waiting time P" + index + " : " + waitingTime[index]
+                                text = "Average waiting time P" + (index+1) + " : " + waitingTime[index]
                             }
                         }
                     }

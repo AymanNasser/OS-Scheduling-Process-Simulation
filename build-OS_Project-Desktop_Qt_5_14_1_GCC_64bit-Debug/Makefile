@@ -1103,6 +1103,9 @@ moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
 	/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc $(DEFINES) --include /media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/build-OS_Project-Desktop_Qt_5_14_1_GCC_64bit-Debug/moc_predefs.h -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/mkspecs/linux-g++ -I/media/ahmedmoamen/46BA7CAEBA7C9BDD/project/OS_Project/OS-Scheduling-Process-Simulation/OS_Project -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtWidgets -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtGui -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQmlModels -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQml -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtNetwork -I/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../OS_Project/process.h -o moc_process.cpp
@@ -1229,6 +1232,9 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMap \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickwindow.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qtquickglobal.h \
@@ -1599,7 +1605,10 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 
 qrc_qml.o: qrc_qml.cpp 

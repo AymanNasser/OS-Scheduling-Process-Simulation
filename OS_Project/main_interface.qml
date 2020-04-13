@@ -192,7 +192,7 @@ Window {
                 gui.numberofprocess = lastconfigration.processnumber
                 for(var i = 0;i < processnumber.value;i++)
                 {
-                    processlist.append({"name":"P"+i})
+                    processlist.append({"name":"P"+(i+1)})
                 }
                 processdata.initialzieList()
                 scheduling.visible = true
@@ -326,7 +326,8 @@ Window {
         {
             for(var i = 0;i<lastconfigration.processnumber;i++)
             {
-                processdata.append({"ProcessName":"P"+i,
+
+                processdata.append({"ProcessName":"P"+(i+1),
                                        "ArrivalTime":0,
                                        "BurstTime":0,
                                        "Priority":0,

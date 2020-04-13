@@ -6,7 +6,6 @@
 #include <QList>
 #include <QMap>
 #include <QtAlgorithms>
-#include <QDebug>
 #include <QQueue>
 
 class Process : public QObject
@@ -45,7 +44,7 @@ private:
     void SJF_preemptiveOperation();
     void RR_operation();
     void prioritySorting();
-    qreal sumBusttime();
+    qreal sumBursttime();
     int processTakePriority(qreal time, unsigned int currentProcess);
     void RR_queueProcessing(QQueue <unsigned int> &, unsigned int , unsigned int &, QList <qreal> &);
 

@@ -19,7 +19,7 @@ Process::Process()
     this->timeQuantum = TimeQuantum;
     for (unsigned int var = 0; var < this->numOfProcesses ; var++)
     {
-        processName.append("P"+QString::number(var));
+        processName.append("P"+QString::number(var+1));
         toQmlwaitingTimePerProcess.append(0);
         index.append(var);
         burstTime.append(BurstTime[var]);
@@ -70,7 +70,7 @@ void Process::SJF_nonPreemptiveOperation(){
         for (ite = 0; ite < this->numOfProcesses ; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] !=0 )
             {
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
 
                 toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
                 tick+= burstTime[ite];
@@ -120,7 +120,7 @@ void Process::SJF_preemptiveOperation()
         for (ite = 0; ite < this->burstTime.size() ; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] <= minJobArrivedInQueue)
             {
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
 
                 tick += burstTime[ite];
                 toQmlScheduledTime.append(tick);
@@ -137,7 +137,7 @@ void Process::SJF_preemptiveOperation()
             else if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
             {
                 burstTime[ite]--;
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
+                toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
                 tick++;
                 toQmlScheduledTime.append(tick);
                 toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
@@ -168,8 +168,6 @@ void Process::RR_operation()
 {
     QQueue<unsigned int> readyQueue;
     unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx, idealCounter = 0;;
-    bool unMatchedProcessPerTick = false;
-
 
     for (unsigned int i=0; i < this->numOfProcesses-1; i++)
     {
@@ -209,21 +207,17 @@ void Process::RR_operation()
                 itr++;
             }
             if(readyQueue.size() == 0) {
-                toQmlScheduledId.append("ideal");
+                toQmlScheduledId.append("idle");
                 tick++;
                 toQmlScheduledTime.append(tick);
                 idealCounter++;
             }
 
         }
-
         if(readyQueue.size() != 0)
         {
             RR_queueProcessing(readyQueue,this->timeQuantum,tick,originalBurstTime);
         }
-
-
-
     }
 }
 
@@ -252,9 +246,6 @@ void Process::handleScheduling()
     if(this-> algorithmType == "FCFS")
     {
         handleFCFS();
-        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
-        }
     }
     else if(this-> algorithmType == "SJF")
     {
@@ -319,7 +310,7 @@ void Process::handleFCFS()
                 toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
                 tick += burstTime[ite];
                 burstTime[ite] = 0;
-                toQmlScheduledId.append("P" + QString::number(index[ite]));
+                toQmlScheduledId.append("P" + QString::number(index[ite]+1));
                 toQmlScheduledTime.append(tick);
                 unMatchedProcessPerTick = false;
 
@@ -378,9 +369,9 @@ void Process::prioritySorting()
     }
 }
 
-qreal Process::sumBusttime()
+qreal Process::sumBursttime()
 {
-    float Totalburstsum = 0;
+    qreal Totalburstsum = 0;
     for(unsigned int i = 0 ; i < numOfProcesses ; i++)
     {
         Totalburstsum += burstTime[i];
@@ -402,7 +393,7 @@ int Process::processTakePriority(qreal time, unsigned int currentProcess)
 
 void Process::handlePriority()
 {
-    float Totalgaintcharttime = sumBusttime();
+    qreal Totalgaintcharttime = sumBursttime();
     prioritySorting();
     unsigned int currentProcess = 0;
     unsigned int units = 0;
@@ -423,7 +414,7 @@ void Process::handlePriority()
     // handling non-preemptive priority
     if(!preemptive)
     {
-        float i = 0;
+        qreal i = 0;
         while(i < Totalgaintcharttime)
         {
             //  handling idle process
@@ -451,7 +442,7 @@ void Process::handlePriority()
         // handling preemptive priority
         unsigned int noOfProcess = numOfProcesses;
         QString processInexecution = "NULL";
-        float i = 0;
+        qreal i = 0;
         while(i < Totalgaintcharttime)
         {
             //  handling idle process
@@ -492,7 +483,7 @@ void Process::handlePriority()
                     arrivalTime.removeAt(currentProcess);
                     priority.removeAt(currentProcess);
                     currentProcess = 0;
-                    processInexecution = "NUll";
+                    processInexecution = "NULL";
                     noOfProcess--;
                 }
             }
@@ -502,7 +493,7 @@ void Process::handlePriority()
     for(int i = 0 ; i < temp_arrivalTime.size() ; i++)
     {
         process_arrived.append(false);
-        QString process = "P" + QString::number(i);
+        QString process = "P" + QString::number(i+1);
         qreal processtime = temp_arrivalTime[i];
         for(int j = 0 ; j < toQmlScheduledTime.size();j++)
         {
@@ -561,7 +552,7 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
 
         a_readyQueue.pop_back();
         a_tick += a_timeQuantum;
-        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex])));
+        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex]+1)));
 
         burstTime[tempIndex] -= a_timeQuantum;
         toQmlScheduledTime.append(a_tick);
@@ -572,11 +563,10 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
     else {
         a_readyQueue.pop_back();
         a_tick += burstTime[tempIndex];
-        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex])));
+        toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex]+1)));
         toQmlScheduledTime.append(a_tick);
         toQmlwaitingTimePerProcess[index[tempIndex]] = ((a_tick - arrivalTime[tempIndex])
                - originalBurstTime[tempIndex]);
-        qDebug() << index[tempIndex] << a_tick << arrivalTime[index[tempIndex]] ;
     }
 
 
