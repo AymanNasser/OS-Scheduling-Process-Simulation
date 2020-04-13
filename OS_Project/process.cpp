@@ -252,6 +252,9 @@ void Process::handleScheduling()
     if(this-> algorithmType == "FCFS")
     {
         handleFCFS();
+        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
+            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
+        }
     }
     else if(this-> algorithmType == "SJF")
     {
@@ -261,9 +264,7 @@ void Process::handleScheduling()
     else if(this->algorithmType == "Round Robin")
     {
         handleRoundRobin();
-        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
-        }
+
 
     }
     else if(this->algorithmType == "Priority")
@@ -287,7 +288,7 @@ void Process::handleScheduling()
 void Process::handleFCFS()
 {
     //1. Selection Sorting The List According To Arrival Time
-    unsigned int i=0 , j=0 ,min_idx, overAllBurstTime = 0,tick = 0;
+    unsigned int i=0 , j=0 ,min_idx, overAllBurstTime = 0,tick = 0, idealCounter = 0;
     bool unMatchedProcessPerTick = false;
     for (i=0; i < this->numOfProcesses-1; i++)
     {
@@ -311,7 +312,7 @@ void Process::handleFCFS()
         overAllBurstTime+= burstTime[var];
     }
 
-    while(tick < overAllBurstTime){
+    while(tick < (overAllBurstTime + idealCounter )){
         for (unsigned int ite = 0; ite < this->numOfProcesses; ++ite) {
             if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
             {
@@ -320,7 +321,6 @@ void Process::handleFCFS()
                 burstTime[ite] = 0;
                 toQmlScheduledId.append("P" + QString::number(index[ite]));
                 toQmlScheduledTime.append(tick);
-
                 unMatchedProcessPerTick = false;
 
             }
@@ -334,6 +334,7 @@ void Process::handleFCFS()
             tick++;
             toQmlScheduledId.append("idle");
             toQmlScheduledTime.append(tick);
+            idealCounter++;
         }
     }
 
