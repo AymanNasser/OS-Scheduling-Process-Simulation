@@ -7,6 +7,7 @@
         <file>CustomizingSpinBox.qml</file>
         <file>main_interface.qml</file>
         <file>CustomizingButton.qml</file>
+        <file>CustomizingTextField.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>icons/back.png</file>

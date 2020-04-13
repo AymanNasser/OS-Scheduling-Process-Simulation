@@ -278,7 +278,7 @@ Window {
             Layout.row: 0
             focus: true
         }
-        CustomizingSpinBox {
+        CustomizingTextField {
             id: bursttime
             Layout.column: 1
             Layout.row: 1
@@ -305,12 +305,12 @@ Window {
                     warning.visible = false
                     processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
                                         "ArrivalTime":arrivaltime.value,
-                                        "BurstTime":bursttime.value,
+                                        "BurstTime":parseFloat(bursttime.text),
                                         "Priority":priority.value,
                                         "Initial":"Inialized"})
                     gui.processName[processnumbers.currentIndex] = processnumbers.currentText
                     gui.arrivalTime[processnumbers.currentIndex] = arrivaltime.value
-                    gui.burstTime[processnumbers.currentIndex] = bursttime.value
+                    gui.burstTime[processnumbers.currentIndex] = parseFloat(bursttime.text)
                     gui.priority[processnumbers.currentIndex] = priority.value
                 }
                 else

@@ -777,6 +777,7 @@ qrc_qml.cpp: ../OS_Project/qml.qrc \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/rcc \
 		../OS_Project/main_interface.qml \
 		../OS_Project/CustomizingComboBox.qml \
+		../OS_Project/CustomizingTextField.qml \
 		../OS_Project/Simulation.qml \
 		../OS_Project/main_simulator.qml \
 		../OS_Project/CustomizingSpinBox.qml \
@@ -1088,6 +1089,19 @@ moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qobject_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMap \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmap.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdebug.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qhash.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qtextstream.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qiodevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qlocale.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvariant.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qshareddata.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qset.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
 		moc_predefs.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/bin/moc
@@ -1213,6 +1227,7 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		../OS_Project/notifier.h \
 		../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMap \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/qquickwindow.h \
@@ -1571,6 +1586,19 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qobject_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QList \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMap \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmap.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qdebug.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qhash.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qtextstream.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qiodevice.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qlocale.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qvariant.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qshareddata.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qset.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 

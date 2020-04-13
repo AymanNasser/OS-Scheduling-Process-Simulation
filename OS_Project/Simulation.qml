@@ -142,8 +142,8 @@ Item {
             color: "black"
             font.pixelSize: 20
             font.bold: true
-            anchors.top: parent.top
-            anchors.topMargin: 25
+            anchors.bottom: attention.top
+            anchors.bottomMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Row {
@@ -152,7 +152,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: 50
             spacing: 5
-            property int itr: 0
+            property alias itr: drawTimer.it
             Rectangle {
                 id: back_rec
                 height: 50
@@ -454,8 +454,7 @@ Item {
                 width: parent.width*0.9
                 height: parent.height*0.8
                 anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.horizontalCenter: parent.horizontalCenter
                 clip: true
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 Column{
