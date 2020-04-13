@@ -166,13 +166,10 @@ void Process::SJF_preemptiveOperation()
 
 void Process::RR_operation()
 {
-
-
-
-
     QQueue<unsigned int> readyQueue;
     unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx;
     bool unMatchedProcessPerTick = false;
+
 
     for (unsigned int i=0; i < this->numOfProcesses-1; i++)
     {
@@ -191,7 +188,11 @@ void Process::RR_operation()
         qSwap(burstTime[i],burstTime[min_idx]);
         qSwap(index[i],index[min_idx]);
     }
-
+    // initalze temp Burst time
+//    for (int var = 0; var < burstTime.size(); ++var) {
+//         originalBurstTime.app
+//    }
+        QList <qreal> originalBurstTime = burstTime;
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
@@ -215,50 +216,12 @@ void Process::RR_operation()
 
         if(readyQueue.size() != 0)
         {
-            RR_queueProcessing(readyQueue,this->timeQuantum,tick);
+            RR_queueProcessing(readyQueue,this->timeQuantum,tick,originalBurstTime);
         }
         else {
             // Ideal case
         }
 
-//        for (unsigned int ite = 0; ite < this->burstTime.size() ; ++ite) {
-
-//            if(arrivalTime[ite] <= tick)
-//                // queue.push
-//                // burstTime[queue.back()]
-
-//            if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] >= this->timeQuantum)
-//            {
-//                tick += this->timeQuantum;
-//                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
-//                toQmlScheduledTime.append(tick);
-//                burstTime[ite] -= this->timeQuantum;
-//                unMatchedProcessPerTick = false;
-//            }
-//            else if (arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] < this->timeQuantum)
-//            {
-//                tick += burstTime[ite];
-//                toQmlScheduledId.append(QString("P" + QString::number(index[ite])));
-//                toQmlwaitingTimePerProcess[ite] = (tick - arrivalTime[ite]);
-//                toQmlScheduledTime.append(tick);
-//                burstTime[ite] = 0;
-//                unMatchedProcessPerTick = false;
-
-//                arrivalTime.removeAt(ite);
-//                burstTime.removeAt(ite);
-//                index.removeAt(ite);
-
-//            }
-//            else {
-//                unMatchedProcessPerTick = true;
-//            }
-//        }
-//        if(unMatchedProcessPerTick)
-//        {
-//            tick++;
-//            toQmlScheduledId.append("idle");
-//            toQmlScheduledTime.append(tick);
-//        }
 
     }
 }
@@ -581,7 +544,8 @@ qreal Process::calcOverAllAverageWaitingTime()
 }
 
 
-void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned int a_timeQuantum, unsigned int &a_tick){
+void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned int a_timeQuantum, unsigned int &a_tick,
+                                 QList <qreal> &originalBurstTime ){
 
 
 
@@ -596,20 +560,19 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
         a_readyQueue.pop_back();
         a_tick += a_timeQuantum;
         toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
-        qDebug() << burstTime[tempIndex] ;
         burstTime[tempIndex] -= a_timeQuantum;
         toQmlScheduledTime.append(a_tick);
         a_readyQueue.push_front(tempIndex);
-        qDebug() << toQmlScheduledId.back() << burstTime[tempIndex];
+
         return ;
     }
     else {
         a_readyQueue.pop_back();
         a_tick += burstTime[tempIndex];
         toQmlScheduledId.append(QString("P" + QString::number(tempIndex)));
-        qDebug() << toQmlScheduledId.back() +   " is Finished" ;
         toQmlScheduledTime.append(a_tick);
-
+        toQmlwaitingTimePerProcess[tempIndex] = ((a_tick - arrivalTime[tempIndex]) - originalBurstTime[tempIndex]);
+        qDebug() << a_tick << originalBurstTime[tempIndex];
     }
 
 
