@@ -117,70 +117,6 @@ void Process::SJF_nonPreemptiveOperation(){
 
 }
 
-void Process::SJF_preemptiveOperation()
-{
-    /* Calculating processes terminating time == > overAllBurstTime then
-     * sorting the processes burst time in ascending order according to
-     * SJF algorithm
-    */
-    unsigned int tick = 0 ,ite,minJobArrivedInQueue,unMatchedProccessPerTick = 0;
-    unsigned int overAllBurstTime = 0;
-
-    for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
-        overAllBurstTime+= burstTime[var];
-    }
-    minJobArrivedInQueue = burstTime[0] ;
-
-    /* Didn't support if the arrival time is more than the total processes burst time */
-    while(tick < overAllBurstTime){
-        for (ite = 0; ite < this->burstTime.size() ; ++ite) {
-            if(arrivalTime[ite] <= tick && burstTime[ite] != 0 && burstTime[ite] <= minJobArrivedInQueue)
-            {
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
-
-                tick += burstTime[ite];
-                toQmlScheduledTime.append(tick);
-                toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
-                burstTime.removeAt(ite);
-                arrivalTime.removeAt(ite);
-                numOfProcesses--;
-                index.removeAt(ite);
-
-                if(burstTime.size() != 0)
-                    minJobArrivedInQueue = burstTime[0];
-                break;
-            }
-            else if(arrivalTime[ite] <= tick && burstTime[ite] != 0)
-            {
-                burstTime[ite]--;
-                toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
-                tick++;
-                toQmlScheduledTime.append(tick);
-                toQmlwaitingTimePerProcess.append(tick - arrivalTime[ite]);
-
-                if(burstTime[ite] == 0)
-                {
-                    arrivalTime.removeAt(ite);
-                    burstTime.removeAt(ite);
-                    numOfProcesses--;
-                    index.removeAt(ite);
-                }
-            }
-        }
-        if(unMatchedProccessPerTick == toQmlScheduledId.size())
-        {
-            tick++;
-            toQmlScheduledId.append("idle");
-            toQmlScheduledTime.append(tick);
-        }
-        else
-        {
-            unMatchedProccessPerTick = toQmlScheduledId.size();
-        }
-    }
-
-}
-
 void Process::RR_operation()
 {
     QQueue<unsigned int> readyQueue;
@@ -267,7 +203,6 @@ void Process::handleScheduling()
     {
         handleSJF();
         for (int var = 0; var < toQmlScheduledId.size(); ++var) {
-            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
         }
     }
     else if(this->algorithmType == "Round Robin")
@@ -359,7 +294,6 @@ void Process::handleSJF()
     {
         SJF_swapListsNonPreemptive();
         SJF_nonPreemptiveOperation();
-        //qSort(toQmlwaitingTimePerProcess);
     }
 
     else

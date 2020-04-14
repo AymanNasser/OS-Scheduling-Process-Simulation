@@ -7,7 +7,6 @@
 #include <QMap>
 #include <QtAlgorithms>
 #include <QQueue>
-#include <QDebug>
 
 class Process : public QObject
 {
@@ -43,7 +42,6 @@ private:
     void SJF_swapListsNonPreemptive();
     void handleScheduling();
     void SJF_nonPreemptiveOperation();
-    void SJF_preemptiveOperation();
     void RR_operation();
     void prioritySorting();
     qreal sumBursttime();
