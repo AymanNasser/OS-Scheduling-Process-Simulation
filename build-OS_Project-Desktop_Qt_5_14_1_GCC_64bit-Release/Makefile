@@ -1658,7 +1658,9 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtMath \
+		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 
 main_interface_qml.o: main_interface_qml.cpp 
