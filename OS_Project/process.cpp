@@ -405,10 +405,7 @@ void Process::handleSJF()
                 else
                 {
                     process_arrived[i] = true;
-                    if(j != 0)
-                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - temp_arrivalTime[i];
-                    else
-                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j];
+                    toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - temp_arrivalTime[i];
                 }
             }
         }
