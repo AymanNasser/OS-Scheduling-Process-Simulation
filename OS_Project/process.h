@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QtAlgorithms>
 #include <QQueue>
+#include <QDebug>
 
 class Process : public QObject
 {
@@ -39,6 +40,7 @@ private:
     void handleRoundRobin();
     void handlePriority();
     void SJF_swapLists();
+    void SJF_swapListsNonPreemptive();
     void handleScheduling();
     void SJF_nonPreemptiveOperation();
     void SJF_preemptiveOperation();

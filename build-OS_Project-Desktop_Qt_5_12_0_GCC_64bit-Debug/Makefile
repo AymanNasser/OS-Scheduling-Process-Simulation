@@ -1074,6 +1074,8 @@ moc_process.cpp: ../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QObject \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QMap \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QtAlgorithms \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QQueue \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/qqueue.h \
 		../OS_Project/process.h \
 		moc_predefs.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/bin/moc
@@ -1208,6 +1210,8 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QString \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QMap \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QtAlgorithms \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QQueue \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/qqueue.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtQuick/QQuickWindow \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtQuick/qquickwindow.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtQuick/qtquickglobal.h \
@@ -1586,7 +1590,11 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QMap \
-		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QtAlgorithms
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QtAlgorithms \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QQueue \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/QtMath \
+		../../../Qt5.12.0/5.12.0/gcc_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp
 
 qrc_qml.o: qrc_qml.cpp 
