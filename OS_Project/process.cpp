@@ -170,8 +170,8 @@ void Process::SJF_preemptiveOperation()
 void Process::RR_operation()
 {
     QQueue<unsigned int> readyQueue;
-    unsigned int tick = 0, overAllBurstTime = 0, lastCountedProcess = 0, min_idx, idealCounter = 0;;
-
+    unsigned int lastCountedProcess = 0, min_idx, idealCounter = 0;
+    qreal tick = 0, overAllBurstTime = 0;
     for (unsigned int i=0; i < this->numOfProcesses-1; i++)
     {
         // Find the minimum element in unsorted array
@@ -215,7 +215,6 @@ void Process::RR_operation()
                 toQmlScheduledTime.append(tick);
                 idealCounter++;
             }
-
         }
         if(readyQueue.size() != 0)
         {
@@ -282,7 +281,8 @@ void Process::handleScheduling()
 void Process::handleFCFS()
 {
     //1. Selection Sorting The List According To Arrival Time
-    unsigned int i=0 , j=0 ,min_idx, overAllBurstTime = 0,tick = 0, idealCounter = 0;
+    unsigned int i=0 , j=0 ,min_idx, idealCounter = 0;
+    qreal overAllBurstTime = 0,tick = 0;
     bool unMatchedProcessPerTick = false;
     for (i=0; i < this->numOfProcesses-1; i++)
     {
@@ -347,7 +347,6 @@ void Process::handleSJF()
     {
         process_burst[processName[j]] = burstTime[j];
     }
-
     if(! (this->preemptive) )
     {
         SJF_swapLists();
@@ -683,10 +682,8 @@ qreal Process::calcOverAllAverageWaitingTime()
 }
 
 
-void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned int a_timeQuantum, unsigned int &a_tick,
+void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned int a_timeQuantum, qreal &a_tick,
                                  QList <qreal> &originalBurstTime ){
-
-
 
     if(a_timeQuantum <= 0 && a_readyQueue.empty() == true)
         return ;
@@ -695,7 +692,6 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
 
     if(burstTime[a_readyQueue.back()] > this->timeQuantum)
     {
-
         a_readyQueue.pop_back();
         a_tick += a_timeQuantum;
         toQmlScheduledId.append(QString("P" + QString::number(index[tempIndex]+1)));
@@ -714,6 +710,4 @@ void Process::RR_queueProcessing(QQueue <unsigned int> &a_readyQueue, unsigned i
         toQmlwaitingTimePerProcess[index[tempIndex]] = ((a_tick - arrivalTime[tempIndex])
                                                         - originalBurstTime[tempIndex]);
     }
-
-
 }

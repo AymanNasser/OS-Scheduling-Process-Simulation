@@ -174,7 +174,7 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            back_rec.color = "#001bc4"
+                            back_rec.color = "green"
                         }
                         onExited: {
                             back_rec.color = "white"
@@ -228,7 +228,7 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            play_rec.color = "#001bc4"
+                            play_rec.color = "green"
                         }
                         onExited: {
                             play_rec.color = "white"
@@ -272,7 +272,7 @@ Item {
                         acceptedButtons: Qt.LeftButton
                         hoverEnabled: true
                         onEntered: {
-                            front_rec.color = "#001bc4"
+                            front_rec.color = "green"
                         }
                         onExited: {
                             front_rec.color = "white"
@@ -341,7 +341,7 @@ Item {
                     Rectangle{
                         id: processRect
                         height: 70
-                        color: "#001bc4"
+                        color: "black"
                         border.color: "white"
                         radius: 10
                         function setWidth()
@@ -379,7 +379,7 @@ Item {
                                 name: "original"
                                 PropertyChanges {
                                     target: processRect
-                                    color: "#001bc4"
+                                    color: "black"
                                 }
                             }
                         ]
@@ -421,7 +421,7 @@ Item {
         }
         Rectangle {
             id: averageContainer
-            color: "#001bc4"
+            color: "gray"
             width: parent.width*0.4
             height: parent.height*0.4
             anchors.horizontalCenter: parent.horizontalCenter

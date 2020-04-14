@@ -32,7 +32,7 @@ Window {
         anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.topMargin: 10
-        color: "blue"
+        color: "gray"
         radius: width/5
         visible: false
         Text {
@@ -57,10 +57,10 @@ Window {
                 hoverEnabled: true
                 onEntered: {
                     back_rec.color = "orange"
-                    back_text.color = "blue"
+                    back_text.color = "gray"
                 }
                 onExited: {
-                    back_rec.color = "blue"
+                    back_rec.color = "gray"
                     back_text.color = "orange"
                 }
                 onClicked: {
