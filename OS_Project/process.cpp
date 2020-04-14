@@ -355,11 +355,10 @@ void Process::handleSJF()
         qSort(toQmlwaitingTimePerProcess);
     }
 
-    //SJF_preemptiveOperation();
     else
     {
         SJF_swapLists();
-        // handling preemptive priority
+        // handling preemptive sjf
         qreal Totalgaintcharttime = sumBursttime();
         unsigned int currentProcess = 0;
         unsigned int units = 0;
@@ -531,7 +530,6 @@ int Process::processTakeSJF(qreal time, qreal gnttchart, unsigned int currentPro
 void Process::handlePriority()
 {
     qreal Totalgaintcharttime = sumBursttime();
-    prioritySorting();
     unsigned int currentProcess = 0;
     unsigned int units = 0;
 
@@ -547,6 +545,8 @@ void Process::handlePriority()
     {
         process_burst[processName[j]] = burstTime[j];
     }
+
+    prioritySorting();
 
     // handling non-preemptive priority
     if(!preemptive)
@@ -569,8 +569,20 @@ void Process::handlePriority()
                 toQmlScheduledTime.append(burstTime[currentProcess] + i);
                 toQmlScheduledId.append(processName[currentProcess]);
                 i += burstTime[currentProcess];
-                currentProcess++;
+                burstTime.removeAt(currentProcess);
+                processName.removeAt(currentProcess);
+                arrivalTime.removeAt(currentProcess);
+                priority.removeAt(currentProcess);
                 units++;
+                unsigned int min_priority = 0;
+                for(int j = 0; j < priority.size() ; j++)
+                {
+                    if(priority[j] < priority[min_priority] && arrivalTime[j] <= i)
+                    {
+                        min_priority = j;
+                    }
+                }
+                currentProcess = min_priority;
             }
         }
     }
@@ -597,7 +609,7 @@ void Process::handlePriority()
                 int processTakes = processTakePriority(i + burstTime[currentProcess],currentProcess);
                 if(noOfProcess > 0 && processTakes != -1)
                 {
-                    float process_space = arrivalTime[processTakes] - i;
+                    qreal process_space = arrivalTime[processTakes] - i;
                     if(process_space > 0)
                     {
                         toQmlScheduledTime.append(process_space + i);
@@ -654,10 +666,7 @@ void Process::handlePriority()
                 else
                 {
                     process_arrived[i] = true;
-                    if(j != 0)
-                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - temp_arrivalTime[i];
-                    else
-                        toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j];
+                    toQmlwaitingTimePerProcess[i] += toQmlScheduledTime[j] - temp_arrivalTime[i];
                 }
             }
         }

@@ -24,7 +24,7 @@ void ListReader::setArrival(QVariantList list)
     arrivaltime.clear();
     foreach(QVariant v, list_var.value<QVariantList>())
     {
-        arrivaltime.append(v.value<qreal>());
+        arrivaltime.append(v.value<unsigned int>());
     }
 }
 
@@ -80,7 +80,7 @@ void ListReader::setGuiList()
     BurstTime.clear();
     foreach(QVariant v, list_arrival.value<QVariantList>())
     {
-        ArrivalTime.append(v.value<qreal>());
+        ArrivalTime.append(v.value<unsigned int>());
     }
     QVariant list_burst(bursttime);
     foreach(QVariant v, list_burst.value<QVariantList>())

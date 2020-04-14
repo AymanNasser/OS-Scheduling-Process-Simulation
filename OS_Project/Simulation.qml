@@ -402,7 +402,7 @@ Item {
                         Text {
                             id: textIdLable
                             color: "white"
-                            font.pixelSize: process.width*0.015
+                            font.pixelSize: process.width*0.018
                             font.bold: true
                             anchors.centerIn: parent
                         }
