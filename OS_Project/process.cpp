@@ -36,6 +36,20 @@ Process::Process()
     handleScheduling();
 }
 
+void Process::SJF_swapListsNonPreemptive(){
+
+    for (unsigned int i = 0; i < this->numOfProcesses -1 ; ++i) {
+        for (unsigned int j = 0 ; j < this->numOfProcesses -1 - i; ++j) {
+            if(this->burstTime[j] > burstTime[j+1])
+            {
+                qSwap(arrivalTime[j],arrivalTime[j+1]);
+                qSwap(burstTime[j],burstTime[j+1]);
+                qSwap(index[j],index[j+1]);
+            }
+        }
+    }
+}
+
 
 void Process::SJF_swapLists(){
 
@@ -58,9 +72,10 @@ void Process::SJF_nonPreemptiveOperation(){
      * sorting the processes burst time in ascending order according to
      * SJF algorithm
     */
-    unsigned int tick = 0 ,ite;
+    unsigned int ite;
+    qreal tick = 0;
     bool unMatchedProcessPerTick = true;
-    unsigned int overAllBurstTime = 0;
+    qreal overAllBurstTime = 0;
 
     for (unsigned int var = 0; var < this->numOfProcesses ; ++var) {
         overAllBurstTime+= burstTime[var];
@@ -73,8 +88,7 @@ void Process::SJF_nonPreemptiveOperation(){
             if(arrivalTime[ite] <= tick && burstTime[ite] !=0 )
             {
                 toQmlScheduledId.append(QString("P" + QString::number(index[ite]+1)));
-
-                toQmlwaitingTimePerProcess[ite] = tick - arrivalTime[ite];
+                toQmlwaitingTimePerProcess[index[ite]] = (tick - arrivalTime[ite]);
                 tick+= burstTime[ite];
                 burstTime[ite] = 0;
                 /* This line changes the the appended time to list
@@ -252,7 +266,9 @@ void Process::handleScheduling()
     else if(this-> algorithmType == "SJF")
     {
         handleSJF();
-
+        for (int var = 0; var < toQmlScheduledId.size(); ++var) {
+            qDebug() << toQmlScheduledId[var] << toQmlScheduledTime[var];
+        }
     }
     else if(this->algorithmType == "Round Robin")
     {
@@ -337,25 +353,28 @@ void Process::handleSJF()
 {
     QList <qreal> temp_burstTime ;
     QList <unsigned int> temp_arrivalTime ;
-    for(unsigned int i = 0 ; i < this->numOfProcesses ; i++)
-    {
-        temp_burstTime.append(burstTime[i]);
-        temp_arrivalTime.append(arrivalTime[i]);
-    }
     QMap<QString,qreal> process_burst;
-    for(unsigned int j = 0; j < this->numOfProcesses ; j++)
-    {
-        process_burst[processName[j]] = burstTime[j];
-    }
+
     if(! (this->preemptive) )
     {
-        SJF_swapLists();
+        SJF_swapListsNonPreemptive();
         SJF_nonPreemptiveOperation();
-        qSort(toQmlwaitingTimePerProcess);
+        //qSort(toQmlwaitingTimePerProcess);
     }
 
     else
     {
+        for(unsigned int i = 0 ; i < this->numOfProcesses ; i++)
+        {
+            temp_burstTime.append(burstTime[i]);
+            temp_arrivalTime.append(arrivalTime[i]);
+        }
+
+        for(unsigned int j = 0; j < this->numOfProcesses ; j++)
+        {
+            process_burst[processName[j]] = burstTime[j];
+        }
+
         SJF_swapLists();
         // handling preemptive sjf
         qreal Totalgaintcharttime = sumBursttime();
