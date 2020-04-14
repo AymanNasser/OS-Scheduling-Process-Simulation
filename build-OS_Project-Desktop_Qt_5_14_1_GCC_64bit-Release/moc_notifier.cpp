@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../OS_Project/notifier.h"
+#include "../OS_Project/notifier.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

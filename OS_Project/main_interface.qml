@@ -156,6 +156,7 @@ Window {
         }
         CustomizingSpinBox {
             id: timequantum
+            from: 1
             Layout.column: 1
             Layout.row: 2
             visible: false
@@ -312,10 +313,10 @@ Window {
             onClicked: {
                 if(processnumbers.currentIndex >= 0)
                 {
+                    warning.visible = false
                     var floatburst = Number(bursttime.text)
                     if(floatburst)
                     {
-                        warning.visible = false
                         burstwarning.visible = false
                         processdata.set(processnumbers.currentIndex,{"ProcessName":processnumbers.currentText,
                                             "ArrivalTime":arrivaltime.value,

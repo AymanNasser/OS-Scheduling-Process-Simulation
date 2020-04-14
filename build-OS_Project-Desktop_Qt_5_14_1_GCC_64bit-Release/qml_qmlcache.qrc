@@ -3,6 +3,9 @@
     <qresource prefix="/"/>
     <qresource prefix="/images">
         <file alias="icons/back.png">../OS_Project/icons/back.png</file>
+        <file alias="icons/pause.png">../OS_Project/icons/pause.png</file>
+        <file alias="icons/play.png">../OS_Project/icons/play.png</file>
+        <file alias="icons/play_forward.png">../OS_Project/icons/play_forward.png</file>
         <file alias="icons/process_manager.png">../OS_Project/icons/process_manager.png</file>
     </qresource>
 </RCC>

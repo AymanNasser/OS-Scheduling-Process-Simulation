@@ -1103,7 +1103,6 @@ moc_process.cpp: ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h \
 		moc_predefs.h \
@@ -1232,7 +1231,6 @@ ide.o: ../OS_Project/ide.cpp ../OS_Project/ide.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QString \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QMap \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtQuick/QQuickWindow \
@@ -1606,7 +1604,6 @@ process.o: ../OS_Project/process.cpp ../OS_Project/process.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QtAlgorithms \
-		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QDebug \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/QQueue \
 		/home/ahmedmoamen/Qt/5.14.1/gcc_64/include/QtCore/qqueue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o process.o ../OS_Project/process.cpp

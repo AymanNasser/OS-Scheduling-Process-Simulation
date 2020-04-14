@@ -46,6 +46,7 @@ private:
     void prioritySorting();
     qreal sumBursttime();
     int processTakePriority(qreal time, unsigned int currentProcess);
+    int processTakeSJF(qreal time, qreal gnttchart,unsigned int currentProcess);
     void RR_queueProcessing(QQueue <unsigned int> &, unsigned int , unsigned int &, QList <qreal> &);
 
 
