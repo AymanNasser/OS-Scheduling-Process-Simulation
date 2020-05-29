@@ -487,5 +487,18 @@ Item {
                 }
             }
         }
+//        CustomizingButton {
+//            id: deleteprocess
+//            text: "Delete Process"
+//            anchors.top: parent.top
+//            anchors.left: parent.left
+//            anchors.topMargin: 20
+//            anchors.leftMargin: 20
+//            onClicked: {
+//                process.scheduledId.pop()//remove(process.scheduledId.length - 1)
+//                processRepeater.model = process.scheduledId
+//                console.log(processRepeater.model)
+//            }
+//        }
     }
 }

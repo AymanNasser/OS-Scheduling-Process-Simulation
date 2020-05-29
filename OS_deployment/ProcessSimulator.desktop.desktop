@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ProcessSimulator
+Comment=Simulate the sequence of the processes with repect to its type ant times
+Exec=ProcessSimulator
+Icon=process_manager
+Categories=Application;
+X-AppImage-Version=
